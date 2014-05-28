@@ -6,7 +6,7 @@ public class HelloTest {
 	@Test
 	public void hello() {
 		//你好
-		System.out.println("hello,world!");
+		System.out.println("hello,world!I am adu!");
 	}
 
 }
