@@ -9,8 +9,24 @@
 		</layout>
 	</appender>
 
+	<appender name="adrdAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="./logs/adrd.log" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+
+
+
+	<logger name="com.sohu.adrd" additivity="false">
+		<level value="info" />
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="adrdAppender" />
+	</logger>
+
 	<root>
-		<level value="debug" />
+		<level value="info" />
 		<appender-ref ref="consoleAppender" />
 	</root>
 </log4j:configuration>

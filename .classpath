@@ -31,4 +31,6 @@
       <attribute value="jar:file:/D:/maven-repository/org/jdom/jdom2/2.0.5/jdom2-2.0.5-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.2/commons-codec-1.2.jar"/>
 </classpath>

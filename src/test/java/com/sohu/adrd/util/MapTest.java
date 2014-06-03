@@ -2,6 +2,7 @@ package com.sohu.adrd.util;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,6 +21,30 @@ public class MapTest {
 		for (Map.Entry<Integer, String> entry : map.entrySet()) {
 			System.out.println(entry.getKey() + ":" + entry.getValue());
 		}
+	}
+
+	@Test
+	public void performance() {
+		Map<String, String> map = new HashMap<String, String>();
+		for (int i = 0; i < 10000000; i++) {
+			String key = generateRandString(20);
+			String value = generateRandString(20);
+			map.put(key, value);
+			if (i % 1000 == 0) {
+				logger.debug("i=" + i);
+			}
+		}
+
+	}
+
+	public String generateRandString(int count) {
+		final String s = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		String res = "";
+		Random random = new Random();
+		for (int i = 0; i < count; i++) {
+			res += "" + s.charAt(random.nextInt(s.length()));
+		}
+		return res;
 	}
 
 	@Test
