@@ -20,7 +20,7 @@
 
 
 	<logger name="com.sohu.adrd" additivity="false">
-		<level value="info" />
+		<level value="debug" />
 		<appender-ref ref="consoleAppender" />
 		<appender-ref ref="adrdAppender" />
 	</logger>

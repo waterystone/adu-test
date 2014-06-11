@@ -24,6 +24,13 @@ public class MapTest {
 	}
 
 	@Test
+	public void convert() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("1", "true");
+		logger.debug((Boolean) map.get("1"));
+	}
+
+	@Test
 	public void performance() {
 		Map<String, String> map = new HashMap<String, String>();
 		for (int i = 0; i < 10000000; i++) {
