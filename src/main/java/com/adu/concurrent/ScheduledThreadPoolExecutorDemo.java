@@ -1,4 +1,4 @@
-package com.sohu.adrd.concurrent;
+package com.adu.concurrent;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;

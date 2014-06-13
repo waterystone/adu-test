@@ -1,4 +1,4 @@
-package com.sohu.adrd.utils;
+package com.adu.utils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

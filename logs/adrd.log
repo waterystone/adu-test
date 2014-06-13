@@ -76,3 +76,47 @@ Caused by: org.apache.zookeeper.KeeperException$NoNodeException: KeeperErrorCode
 
 2014-06-11 11:33:50.594 DEBUG ZkClientTest:179 - newStat=391,463,1402455940497,1402457630547,10,11,0,0,81,3,413
 
+2014-06-11 18:30:48.124 ERROR ZkClientTest:29 - [ERROR-createPersistent]
+org.I0Itec.zkclient.exception.ZkNodeExistsException: org.apache.zookeeper.KeeperException$NodeExistsException: KeeperErrorCode = NodeExists for /adu/test
+	at org.I0Itec.zkclient.exception.ZkException.create(ZkException.java:55)
+	at org.I0Itec.zkclient.ZkClient.retryUntilConnected(ZkClient.java:685)
+	at org.I0Itec.zkclient.ZkClient.create(ZkClient.java:304)
+	at com.sohu.adrd.apache.zookeeper.ZkClientTest.createPersistent(ZkClientTest.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: org.apache.zookeeper.KeeperException$NodeExistsException: KeeperErrorCode = NodeExists for /adu/test
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:119)
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:51)
+	at org.apache.zookeeper.ZooKeeper.create(ZooKeeper.java:783)
+	at org.I0Itec.zkclient.ZkConnection.create(ZkConnection.java:87)
+	at org.I0Itec.zkclient.ZkClient$1.call(ZkClient.java:308)
+	at org.I0Itec.zkclient.ZkClient$1.call(ZkClient.java:304)
+	at org.I0Itec.zkclient.ZkClient.retryUntilConnected(ZkClient.java:675)
+	... 25 more
+2014-06-11 18:31:18.287 DEBUG ZkClientTest:27 - res=/adu/test
+2014-06-11 19:01:13.212 DEBUG ZooKeeperTest:47 - [watcher]event=WatchedEvent state:SyncConnected type:None path:null
+2014-06-11 19:03:11.128 DEBUG ZooKeeperTest:56 - [watcher]event=WatchedEvent state:SyncConnected type:None path:null
+2014-06-11 19:03:11.128 DEBUG ZooKeeperTest:40 - res=hello,world!
+2014-06-11 19:03:19.718 DEBUG ZooKeeperTest:56 - [watcher]event=WatchedEvent state:SyncConnected type:None path:null
+2014-06-11 19:03:19.728 DEBUG ZooKeeperTest:40 - res=�� ur [B���T�  xp   hello,world!

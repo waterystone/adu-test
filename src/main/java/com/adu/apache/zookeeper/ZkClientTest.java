@@ -1,4 +1,4 @@
-package com.sohu.adrd.apache.zookeeper;
+package com.adu.apache.zookeeper;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -131,7 +131,7 @@ public class ZkClientTest {
 	@Test
 	public void readData() {
 		init();
-		Object res = zkClient.readData("/adu");
+		Object res = zkClient.readData("/adu/test");
 		logger.debug("res=" + res);
 	}
 

@@ -1,4 +1,4 @@
-package com.sohu.adrd.util;
+package com.adu.util;
 
 import java.util.Arrays;
 import java.util.List;

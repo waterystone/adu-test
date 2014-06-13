@@ -1,4 +1,4 @@
-package com.sohu.adrd.utils;
+package com.adu.utils;
 
 public class MyStringUtil {
 	/**

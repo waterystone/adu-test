@@ -1,4 +1,4 @@
-package com.sohu.adrd.util.concurrent;
+package com.adu.util.concurrent;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -7,15 +7,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import com.sohu.adrd.concurrent.ScheduledThreadPoolExecutorDemo;
+import com.adu.concurrent.ScheduledThreadPoolExecutorDemo;
 
 public class ScheduledThreadPoolExecutorTest {
 
 	private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(
 			10);
 
-	private final Log logger = LogFactory
-			.getLog(ScheduledThreadPoolExecutorDemo.class);
+	private final Log logger = LogFactory.getLog(this.getClass());
 
 	@Test
 	public void schedule() {

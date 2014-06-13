@@ -1,4 +1,4 @@
-package com.sohu.adrd.util.concurrent;
+package com.adu.util.concurrent;
 
 import java.util.concurrent.TimeUnit;
 

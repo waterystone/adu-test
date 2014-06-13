@@ -1,4 +1,4 @@
-package com.sohu.adrd.utils;
+package com.adu.utils;
 
 import java.util.HashMap;
 import java.util.List;
