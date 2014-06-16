@@ -12,9 +12,13 @@ public class TimeUnitTest {
 	@Test
 	public void test() {
 		// 天转为毫秒
-		long millisOneDay = TimeUnit.DAYS.toMillis(1);
-		logger.debug(millisOneDay);
+		long day = TimeUnit.MILLISECONDS.toDays(10000000000l);
+		logger.debug(day);
 
+	}
+
+	@Test
+	public void sleep() {
 		try {
 			TimeUnit.SECONDS.sleep(10);
 		} catch (InterruptedException e) {
