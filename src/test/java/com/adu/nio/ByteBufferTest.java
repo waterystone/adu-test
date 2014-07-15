@@ -14,11 +14,15 @@ public class ByteBufferTest {
 	@Test
 	public void test() {
 		ByteBuffer buffer = ByteBuffer.allocate(8).put(
-				new byte[] { 1, -1, 0, 0 });
+				new byte[] { 1, 2, 0, 0 });
 
 		float x = 1f;
 		buffer.putFloat((float) x);
 		logger.debug("buffer=" + buffer);
+
+		buffer.flip();
+		logger.debug(String.format("0X%02xH", buffer.get(0)));
+
 		buffer.flip();
 		logger.debug(String.format("0X%016xH", buffer.getLong()));
 
