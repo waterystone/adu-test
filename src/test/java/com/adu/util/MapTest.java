@@ -24,6 +24,15 @@ public class MapTest {
 	}
 
 	@Test
+	public void test() {
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		map.put(1, 1);
+
+		int res = map.get(2);
+		logger.debug("res=" + res);
+	}
+
+	@Test
 	public void convert() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("1", "true");

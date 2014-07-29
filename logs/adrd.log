@@ -1,15 +1,6 @@
-2014-07-11 14:03:34.708 DEBUG ListTest:21 - buffer=java.nio.HeapByteBuffer[pos=8 lim=8 cap=8]
-2014-07-11 14:03:34.708 DEBUG ListTest:23 - 0X01ff00003f800000H
-2014-07-11 14:03:34.708 DEBUG ListTest:26 - 0X000001ffH
-2014-07-11 14:03:50.790 DEBUG ListTest:21 - buffer=java.nio.HeapByteBuffer[pos=8 lim=8 cap=8]
-2014-07-11 14:03:50.800 DEBUG ListTest:23 - 0X010200003f800000H
-2014-07-11 14:03:50.800 DEBUG ListTest:26 - 0X00000102H
-2014-07-11 15:01:43.670 DEBUG SimpleDateFormatUtilTest:16 - ret=2014-07-11 15:01:43
-2014-07-11 15:02:51.981 DEBUG SimpleDateFormatUtilTest:24 - ret=Mon Jun 30 22:07:39 CST 2014
-2014-07-11 15:03:02.398 DEBUG SimpleDateFormatUtilTest:24 - ret=1404137259000
-2014-07-11 16:42:34.616 DEBUG ListTest:21 - buffer=java.nio.HeapByteBuffer[pos=8 lim=8 cap=8]
-2014-07-11 16:42:34.621 DEBUG ListTest:24 - 0X00000002H
-2014-07-11 16:42:54.576 DEBUG ListTest:21 - buffer=java.nio.HeapByteBuffer[pos=8 lim=8 cap=8]
-2014-07-11 16:42:54.581 DEBUG ListTest:24 - 0X02H
-2014-07-11 16:43:03.106 DEBUG ListTest:21 - buffer=java.nio.HeapByteBuffer[pos=8 lim=8 cap=8]
-2014-07-11 16:43:03.110 DEBUG ListTest:24 - 0X01H
+2014-07-29 11:16:34.756 DEBUG SortedMapTest:37 - {Person [id=1, name=a]=1, Person [id=2, name=b]=2, Person [id=3, name=c]=3}
+2014-07-29 11:19:55.258 DEBUG SortedMapTest:39 - {Person [id=1, name=a]=1, Person [id=2, name=b]=2, Person [id=3, name=c]=3}
+2014-07-29 11:27:38.414 DEBUG SortedMapTest:39 - {Person [id=1, name=a]=1, Person [id=2, name=b]=2, Person [id=3, name=c]=3}
+2014-07-29 11:27:38.414 DEBUG SortedMapTest:40 - 3
+2014-07-29 13:22:33.133 DEBUG SortedMapTest:40 - {Person [id=1, name=a]=1, Person [id=2, name=b]=2, Person [id=3, name=c]=3}
+2014-07-29 13:22:33.133 DEBUG SortedMapTest:41 - 3
