@@ -17,7 +17,12 @@ public class MapTest {
 		map.put(1, "a");
 		map.put(2, "b");
 		map.put(3, "c");
-		map.remove(2);
+		for (Map.Entry<Integer, String> entry : map.entrySet()) {
+			map.remove(entry.getKey());
+			System.out.println(map);
+			break;
+		}
+
 		for (Map.Entry<Integer, String> entry : map.entrySet()) {
 			System.out.println(entry.getKey() + ":" + entry.getValue());
 		}

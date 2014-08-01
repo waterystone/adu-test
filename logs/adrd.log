@@ -1,6 +1,54 @@
-2014-07-29 11:16:34.756 DEBUG SortedMapTest:37 - {Person [id=1, name=a]=1, Person [id=2, name=b]=2, Person [id=3, name=c]=3}
-2014-07-29 11:19:55.258 DEBUG SortedMapTest:39 - {Person [id=1, name=a]=1, Person [id=2, name=b]=2, Person [id=3, name=c]=3}
-2014-07-29 11:27:38.414 DEBUG SortedMapTest:39 - {Person [id=1, name=a]=1, Person [id=2, name=b]=2, Person [id=3, name=c]=3}
-2014-07-29 11:27:38.414 DEBUG SortedMapTest:40 - 3
-2014-07-29 13:22:33.133 DEBUG SortedMapTest:40 - {Person [id=1, name=a]=1, Person [id=2, name=b]=2, Person [id=3, name=c]=3}
-2014-07-29 13:22:33.133 DEBUG SortedMapTest:41 - 3
+2014-08-01 14:33:18.431 DEBUG ListTest:16 - [1, 2, 3]
+2014-08-01 14:33:43.172 DEBUG ListTest:16 - [1, 2, 3]
+2014-08-01 18:13:31.090 DEBUG ExecutorServiceTest:17 - hello1
+2014-08-01 18:13:31.094 DEBUG ExecutorServiceTest:21 - hello
+2014-08-01 18:14:11.451 DEBUG ExecutorServiceTest:17 - hello1
+2014-08-01 18:16:17.190 DEBUG ExecutorServiceTest:18 - hello1
+2014-08-01 18:16:28.535 DEBUG ExecutorServiceTest:18 - hello1
+2014-08-01 18:17:09.294 DEBUG ExecutorServiceTest:18 - hello1
+2014-08-01 18:17:09.303 DEBUG ExecutorServiceTest:32 - end
+2014-08-01 18:17:15.171 DEBUG ExecutorServiceTest:18 - start
+2014-08-01 18:17:15.180 DEBUG ExecutorServiceTest:32 - end
+2014-08-01 18:18:42.836 DEBUG ExecutorServiceTest:18 - start
+2014-08-01 18:18:42.845 DEBUG ExecutorServiceTest:33 - end
+2014-08-01 18:20:24.401 DEBUG ExecutorServiceTest:18 - start
+2014-08-01 18:20:24.407 DEBUG ExecutorServiceTest:25 - hello
+2014-08-01 18:20:24.407 DEBUG ExecutorServiceTest:30 - end
+2014-08-01 18:20:40.598 DEBUG ExecutorServiceTest:18 - start
+2014-08-01 18:20:40.603 DEBUG ExecutorServiceTest:29 - wait
+2014-08-01 18:20:40.604 DEBUG ExecutorServiceTest:25 - hello
+2014-08-01 18:20:40.605 DEBUG ExecutorServiceTest:31 - end
+2014-08-01 18:20:51.351 DEBUG ExecutorServiceTest:18 - start
+2014-08-01 18:20:51.356 DEBUG ExecutorServiceTest:28 - wait
+2014-08-01 18:20:51.357 DEBUG ExecutorServiceTest:25 - hello
+2014-08-01 18:20:51.360 DEBUG ExecutorServiceTest:30 - end
+2014-08-01 18:21:46.836 DEBUG ExecutorServiceTest:19 - start
+2014-08-01 18:21:46.841 DEBUG ExecutorServiceTest:31 - wait
+2014-08-01 18:21:46.845 DEBUG ExecutorServiceTest:33 - end
+2014-08-01 18:21:57.698 DEBUG ExecutorServiceTest:19 - start
+2014-08-01 18:21:57.703 DEBUG ExecutorServiceTest:31 - wait
+2014-08-01 18:21:57.708 DEBUG ExecutorServiceTest:33 - end
+2014-08-01 18:22:04.834 DEBUG ExecutorServiceTest:19 - start
+2014-08-01 18:22:04.839 DEBUG ExecutorServiceTest:31 - wait
+2014-08-01 18:22:04.844 DEBUG ExecutorServiceTest:33 - end
+2014-08-01 18:22:16.232 DEBUG ExecutorServiceTest:19 - start
+2014-08-01 18:22:16.236 DEBUG ExecutorServiceTest:31 - wait
+2014-08-01 18:22:16.248 DEBUG ExecutorServiceTest:33 - end
+2014-08-01 18:22:27.486 DEBUG ExecutorServiceTest:19 - start
+2014-08-01 18:22:27.490 DEBUG ExecutorServiceTest:32 - wait
+2014-08-01 18:22:27.502 DEBUG ExecutorServiceTest:34 - end
+2014-08-01 18:33:09.745 DEBUG ExecutorServiceTest:19 - start
+2014-08-01 18:33:09.750 DEBUG ExecutorServiceTest:32 - wait
+2014-08-01 18:33:47.751 DEBUG ExecutorServiceTest:19 - start
+2014-08-01 18:33:47.756 DEBUG ExecutorServiceTest:32 - wait
+2014-08-01 18:40:42.124 DEBUG ExecutorServiceTest:19 - start
+2014-08-01 18:40:42.129 DEBUG ExecutorServiceTest:32 - wait
+2014-08-01 18:40:43.362 DEBUG ExecutorServiceTest:28 - hello
+2014-08-01 18:40:43.362 DEBUG ExecutorServiceTest:34 - end
+2014-08-01 18:41:11.940 DEBUG ExecutorServiceTest:19 - start
+2014-08-01 18:41:11.945 DEBUG ExecutorServiceTest:32 - wait
+2014-08-01 18:41:13.178 DEBUG ExecutorServiceTest:28 - hello
+2014-08-01 18:41:13.179 DEBUG ExecutorServiceTest:34 - end
+2014-08-01 18:48:18.406 DEBUG ExecutorServiceTest:19 - start
+2014-08-01 18:48:18.410 DEBUG ExecutorServiceTest:32 - wait
+2014-08-01 18:48:19.643 DEBUG ExecutorServiceTest:28 - hello

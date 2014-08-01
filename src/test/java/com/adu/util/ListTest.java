@@ -13,7 +13,7 @@ public class ListTest {
 	@Test
 	public void subList() {
 		List<String> list = Arrays.asList("1", "2", "3");
-		logger.debug(list.subList(0, list.size()));
+		logger.debug(list.subList(3, 4));
 	}
 
 }
