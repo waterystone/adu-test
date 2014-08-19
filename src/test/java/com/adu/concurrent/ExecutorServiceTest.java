@@ -29,7 +29,7 @@ public class ExecutorServiceTest {
 			}
 		});
 
-		// 必须shutdown()才能awaitTermination(),否则awaitTermination()会一直等到timeout.而且shutdown()后，线程池也不再可用。
+		// 并不是终止线程的运行，而是禁止在这个Executor中添加新的任务.必须shutdown()才能awaitTermination(),否则awaitTermination()会一直等到timeout.而且shutdown()后。
 		executor.shutdown();
 		logger.debug("wait");
 		executor.awaitTermination(10000, TimeUnit.SECONDS);
