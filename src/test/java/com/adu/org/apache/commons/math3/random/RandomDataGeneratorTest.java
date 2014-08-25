@@ -1,4 +1,4 @@
-package com.adu.org.apache.commons.math3;
+package com.adu.org.apache.commons.math3.random;
 
 import java.util.Random;
 
@@ -24,7 +24,7 @@ public class RandomDataGeneratorTest {
 		Random random = new Random();
 		long t1 = System.currentTimeMillis();
 		for (int i = 0; i < 1000000; i++) {
-			// generator.nextBeta(alpha, beta);
+			 generator.nextBeta(alpha, beta);
 			Math.sqrt((alpha + i) * beta);
 			// random.nextDouble();
 		}
