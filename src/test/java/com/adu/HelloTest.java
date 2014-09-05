@@ -10,5 +10,6 @@ public class HelloTest {
 	@Test
 	public void test() {
 		logger.debug("hello,world!");
+		
 	}
 }
