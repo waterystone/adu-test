@@ -5,7 +5,14 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 public class IntegerTest {
-	private final Log logger = LogFactory.getLog(StringTest.class);
+	private final Log logger = LogFactory.getLog(this.getClass());
+
+	@Test
+	public void integer() {
+		String str = "20923561";
+		Integer ret = new Integer(str);
+		logger.debug("ret=" + ret);
+	}
 
 	@Test
 	public void parseInt() {
