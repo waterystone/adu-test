@@ -12,6 +12,14 @@ public class StringTest {
 	private final Log logger = LogFactory.getLog(StringTest.class);
 
 	@Test
+	public void matches() {
+		String regex = "\\d{4}";
+		String str = "wend";
+		boolean res = str.matches(regex);
+		logger.debug("res=" + res);
+	}
+
+	@Test
 	public void test() {
 		process(message);
 	}
@@ -36,4 +44,5 @@ public class StringTest {
 		}
 
 	}
+
 }
