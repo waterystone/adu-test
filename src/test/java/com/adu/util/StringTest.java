@@ -1,5 +1,6 @@
 package com.adu.util;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +13,16 @@ public class StringTest {
 	private final Log logger = LogFactory.getLog(StringTest.class);
 
 	@Test
+	public void test() {
+		String s = "a b c d";
+		String[] arr = s.split(" ");
+		for (String str : arr) {
+			str = "t";
+		}
+		logger.debug("arr=" + arr);
+	}
+
+	@Test
 	public void matches() {
 		String regex = "\\d{4}";
 		String str = "wend";
@@ -20,7 +31,15 @@ public class StringTest {
 	}
 
 	@Test
-	public void test() {
+	public void split() {
+		String regex = ";| ";
+		String str = "sdfs";
+		String[] res = str.split(regex);
+		logger.debug("res=" + Arrays.asList(res));
+	}
+
+	@Test
+	public void test1() {
 		process(message);
 	}
 

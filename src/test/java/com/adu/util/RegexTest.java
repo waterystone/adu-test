@@ -126,8 +126,8 @@ public class RegexTest {
 
 	@Test
 	public void group() {
-		String url = "m.sohu.com/n/403321984/?v=3&_once_=000113_click&fp=0";
-		String regex = "^(3g|m)\\.sohu\\.com/[np]/(\\d+)/\\?.*_once_=000113_(\\w+)";
+		String url = "m.sohu.com/n/1999760/?v=3&_once_=000113_click&fp=0";
+		String regex = "^(3g|m)\\.sohu\\.com/[np]/(\\d{1,7})/\\?.*_once_=000113_(\\w+)";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(url);
 		while (matcher.find()) {

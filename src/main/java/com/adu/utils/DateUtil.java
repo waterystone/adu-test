@@ -7,14 +7,29 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class DateUtil {
-	private static SimpleDateFormat dateFormat = new SimpleDateFormat(
+	private static SimpleDateFormat formater = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss");
-	private static SimpleDateFormat pathFormat = new SimpleDateFormat(
-			"yyyy/MM/dd");
-	private final Log logger = LogFactory.getLog(this.getClass());
 
-	public static String getDatePath(Date date) {
-		return pathFormat.format(date);
+	private static Log logger = LogFactory.getLog(DateUtil.class);
+
+	public static String format(long date) {
+		return formater.format(date);
 	}
 
+	public static String format(Date date) {
+		if (date == null) {
+			return null;
+		}
+		return formater.format(date);
+	}
+
+	public static Date parse(String source) {
+		Date res = null;
+		try {
+			res = formater.parse(source);
+		} catch (Exception e) {
+			logger.error("[ERROR-parse]source=" + source, e);
+		}
+		return res;
+	}
 }
