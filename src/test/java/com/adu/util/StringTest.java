@@ -13,13 +13,17 @@ public class StringTest {
 	private final Log logger = LogFactory.getLog(StringTest.class);
 
 	@Test
-	public void test() {
-		String s = "a b c d";
-		String[] arr = s.split(" ");
-		for (String str : arr) {
-			str = "t";
-		}
-		logger.debug("arr=" + arr);
+	public void format() {
+		double pi = 2342323.141591;
+		String ret = String.format("%4.2f", pi);
+		logger.debug("ret=" + ret);
+	}
+
+	@Test
+	public void replace() {
+		String str = "abcd";
+		String ret = str.replace("ab", "xy");
+		logger.debug("str=" + str + ",ret=" + ret);
 	}
 
 	@Test
