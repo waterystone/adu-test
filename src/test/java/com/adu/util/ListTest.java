@@ -16,4 +16,14 @@ public class ListTest {
 		logger.debug(list.subList(3, 4));
 	}
 
+	@Test
+	public void test() {
+		List<String> list = Arrays.asList(" 1 ", " 2", "3");
+		for (String str : list) {
+			str = str.trim();
+			int a = 1;
+		}
+		logger.debug("list=" + list);
+	}
+
 }
