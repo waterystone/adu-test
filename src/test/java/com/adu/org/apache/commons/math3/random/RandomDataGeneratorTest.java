@@ -19,13 +19,13 @@ public class RandomDataGeneratorTest {
 
 	@Test
 	public void nextBeta() {
-		double alpha = 24232.242224242, beta = 1231.23424242;
+		double alpha = 1, beta = 2;
 		logger.debug("start");
 		Random random = new Random();
 		long t1 = System.currentTimeMillis();
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; i < 10000; i++) {
 			 generator.nextBeta(alpha, beta);
-			Math.sqrt((alpha + i) * beta);
+			//Math.sqrt((alpha + i) * beta);
 			// random.nextDouble();
 		}
 		long t2 = System.currentTimeMillis();
