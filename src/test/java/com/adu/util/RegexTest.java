@@ -138,4 +138,18 @@ public class RegexTest {
 		}
 
 	}
+
+	@Test
+	public void group1() {
+		String content = "<a href=\"http://tv.sohu.com/20141020/n405296564.shtml\" target=\"_blank\">";
+		String regex = "a href=\"(.+)\" target";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(content);
+		while (matcher.find()) {
+			String group = matcher.group();
+			String url = matcher.group(1);
+			logger.debug("group=" + group + ",url=" + url);
+		}
+
+	}
 }
