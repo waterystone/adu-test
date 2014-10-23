@@ -24,8 +24,8 @@ public class RandomDataGeneratorTest {
 		Random random = new Random();
 		long t1 = System.currentTimeMillis();
 		for (int i = 0; i < 10000; i++) {
-			 generator.nextBeta(alpha, beta);
-			//Math.sqrt((alpha + i) * beta);
+			generator.nextBeta(alpha, beta);
+			// Math.sqrt((alpha + i) * beta);
 			// random.nextDouble();
 		}
 		long t2 = System.currentTimeMillis();

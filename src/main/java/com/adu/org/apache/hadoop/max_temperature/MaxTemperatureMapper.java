@@ -1,4 +1,4 @@
-package com.adu.apache.hadoop.max_temperature;
+package com.adu.org.apache.hadoop.max_temperature;
 
 import java.io.IOException;
 
