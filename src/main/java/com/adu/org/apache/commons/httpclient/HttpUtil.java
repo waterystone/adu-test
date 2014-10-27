@@ -1,5 +1,8 @@
 package com.adu.org.apache.commons.httpclient;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,7 +38,18 @@ public class HttpUtil {
 
 			// 执行getMethod
 			httpClient.executeMethod(getMethod);
-			res = getMethod.getResponseBodyAsString();
+			// res=getMethod.getResponseBodyAsString();
+			// res=getMethod.getResponseBodyAsString(1048576);
+
+			InputStream inputStream = getMethod.getResponseBodyAsStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					inputStream));
+			StringBuffer stringBuffer = new StringBuffer();
+			String str = null;
+			while ((str = br.readLine()) != null) {
+				stringBuffer.append(str);
+			}
+			res = stringBuffer.toString();
 		} catch (ConnectTimeoutException e) {
 			logger.error("[ERROR-CONNECTION-TIMEOUT]url=" + url);
 		} catch (Exception e) {
