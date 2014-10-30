@@ -28,8 +28,11 @@ public class JedisClientTest {
 	@Test
 	public void get() {
 		String key = PREFIX_KEY + "test";
-		String ret = this.jedisCluster.get(key);
-		logger.debug("ret=" + ret);
+		key = "SOHUWLALLPA";
+		for (int i = 0; i < 1; i++) {
+			String ret = this.jedisCluster.get(key);
+			logger.debug("ret=" + ret);
+		}
 	}
 
 	@Test
