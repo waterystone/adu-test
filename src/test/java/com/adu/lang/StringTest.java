@@ -16,6 +16,13 @@ public class StringTest {
 	}
 
 	@Test
+	public void match() {
+		String str = "sz000673";
+		String regex = "(sh600|sh601|sz000|sz300|sz002|sz112)\\d{3}";
+		logger.debug(str.matches(regex));
+	}
+
+	@Test
 	public void string() throws UnsupportedEncodingException {
 		String s = "\u300a\u76d7\u9a6c\u8bb0\u300b\u6b27\u6d32\u5927\u5192\u9669";
 		String res = new String(s.getBytes("UNICODE"), "GBK");
