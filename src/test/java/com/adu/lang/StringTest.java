@@ -16,6 +16,13 @@ public class StringTest {
 	}
 
 	@Test
+	public void startsWith() {
+		String str = "视频：少女醉酒打车遭司机性侵 醒来不见内裤";
+		logger.debug(str.startsWith("视频："));
+		logger.debug(str.substring(3));
+	}
+
+	@Test
 	public void match() {
 		String str = "sz000673";
 		String regex = "(sh600|sh601|sz000|sz300|sz002|sz112)\\d{3}";
