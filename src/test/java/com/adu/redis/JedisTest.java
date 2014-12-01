@@ -27,14 +27,14 @@ public class JedisTest {
 
 	@Test
 	public void get() {
-		String key = PREFIX_KEY + "test";
+		String key = "http://dealer.auto.sohu.com/bat67367/article_3202277.html";
 		String ret = this.jedis.get(key);
 		logger.debug("ret=" + ret);
 	}
 
 	@Test
 	public void ttl() {
-		String key = "http://auto.sohu.com/20141128/n406450139_1.shtml";
+		String key = "http://dealer.auto.sohu.com/bat67367/article_3202277.html";
 		long ret = this.jedis.ttl(key);
 		logger.debug("ret=" + ret);
 	}
