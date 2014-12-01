@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
 
 public class JedisClusterUtil {
