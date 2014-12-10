@@ -27,7 +27,7 @@ public class JedisTest {
 
 	@Test
 	public void get() {
-		String key = "http://dealer.auto.sohu.com/bat67367/article_3202277.html";
+		String key = "http://mt.sohu.com/20141209/n406780220.shtml";
 		String ret = this.jedis.get(key);
 		logger.debug("ret=" + ret);
 	}
