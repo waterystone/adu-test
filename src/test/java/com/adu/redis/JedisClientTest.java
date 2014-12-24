@@ -18,10 +18,10 @@ public class JedisClientTest {
 	}
 
 	@Test
-	public void set() {
+	public void setex() {
 		String key = PREFIX_KEY + "test";
 		String value = "hello,world";
-		String ret = this.jedisCluster.set(key, value);
+		String ret = this.jedisCluster.setex(key, 3600, value);
 		logger.debug("ret=" + ret);
 	}
 

@@ -18,16 +18,16 @@ public class JedisTest {
 	}
 
 	@Test
-	public void set() {
+	public void setex() {
 		String key = PREFIX_KEY + "test";
 		String value = "hello,world";
-		String ret = this.jedis.set(key, value);
+		String ret = this.jedis.setex(key, 3600, value);
 		logger.debug("ret=" + ret);
 	}
 
 	@Test
 	public void get() {
-		String key = "http://mt.sohu.com/20141209/n406780220.shtml";
+		String key = PREFIX_KEY + "test";
 		String ret = this.jedis.get(key);
 		logger.debug("ret=" + ret);
 	}
