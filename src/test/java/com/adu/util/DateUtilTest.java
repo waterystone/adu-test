@@ -12,6 +12,12 @@ public class DateUtilTest {
 	private Log logger = LogFactory.getLog(this.getClass());
 
 	@Test
+	public void test() {
+		Date date = new Date(1420360985828l);
+		logger.debug("date=" + date);
+	}
+
+	@Test
 	public void format() {
 		Date now = new Date();
 		String res = DateUtil.format(now);
