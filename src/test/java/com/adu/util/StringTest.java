@@ -28,8 +28,8 @@ public class StringTest {
 
 	@Test
 	public void matches() {
-		String regex = "\\d{4}";
-		String str = "wend";
+		String regex = ".*(胸|下体).*";
+		String str = "大胸女没头脑";
 		boolean res = str.matches(regex);
 		logger.debug("res=" + res);
 	}
