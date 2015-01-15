@@ -13,7 +13,7 @@ public class DateUtilTest {
 
 	@Test
 	public void test() {
-		Date date = new Date(1420360985828l);
+		Date date = new Date(1418667545000l);
 		logger.debug("date=" + date);
 	}
 

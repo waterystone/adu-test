@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import redis.clients.jedis.JedisCluster;
 
-public class JedisClientTest {
+public class JedisClusterTest {
 	private JedisCluster jedisCluster;
 	private String PREFIX_KEY = "YUNJIEDU:TEST:";
 	private final Log logger = LogFactory.getLog(this.getClass());
