@@ -12,8 +12,8 @@ public class RegexTest {
 
 	@Test
 	public void matches() {
-		String regex = "a.*b";
-		String str = "aslfjskjb";
+		String regex = "^m\\.sohu\\.com/n/(\\d+)/\\?.*wscrid=1137_(\\d+).*";
+		String str = "m.sohu.com/n/407821518/?c=39&wscrid=1137_4";
 		boolean isMatch = Pattern.matches(regex, str);// 等价于Pattern.compile(regex).matcher(input).matches()
 		logger.info("isMatch=" + isMatch);
 	}
