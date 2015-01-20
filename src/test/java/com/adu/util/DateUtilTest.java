@@ -13,8 +13,9 @@ public class DateUtilTest {
 
 	@Test
 	public void test() {
-		Date date = new Date(1421391174000l);
-		logger.debug("date=" + date);
+		Date date = new Date(1421656903274l);
+		String res = DateUtil.format(date);
+		logger.debug("res=" + res);
 	}
 
 	@Test
