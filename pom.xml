@@ -27,6 +27,8 @@
 				<includes>
 					<include>**/*.properties</include>
 					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.txt</include>
 				</includes>
 			</resource>
 		</resources>
@@ -42,6 +44,7 @@
 				<includes>
 					<include>**/*.xml</include>
 					<include>**/*.properties</include>
+					<include>**/*.txt</include>
 				</includes>
 			</testResource>
 		</testResources>
@@ -167,6 +170,12 @@
 			<artifactId>json-lib</artifactId>
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
 		</dependency>
 	</dependencies>
 </project>
