@@ -3,8 +3,10 @@ package com.adu.utils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +88,30 @@ public class FileUtil {
 	}
 
 	/**
+	 * 读取文件的内容
+	 * 
+	 * @param filename
+	 * @return
+	 */
+	public static String read(String filename) {
+		StringBuffer buffer = new StringBuffer();
+
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					FileUtil.class.getClassLoader().getResourceAsStream(
+							filename)));
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				buffer.append(line);
+			}
+		} catch (Exception e) {
+			logger.error("[ERROR-read]filename=" + filename, e);
+		}
+
+		return buffer.toString();
+	}
+
+	/**
 	 * 写文件
 	 * 
 	 * @param filename
@@ -138,5 +164,19 @@ public class FileUtil {
 
 		}
 		return false;
+	}
+
+	public static void writeCSV(String filename, String content) {
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(filename), "GBK"));
+			writer.write(content);
+			writer.flush();
+			writer.close();
+		} catch (Exception e) {
+			logger.error("[ERROR-readIntegerListFromFile]filename=" + filename,
+					e);
+		}
 	}
 }

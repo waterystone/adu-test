@@ -13,7 +13,7 @@ public class DateUtilTest {
 
 	@Test
 	public void test() {
-		Date date = new Date(1421656903274l);
+		Date date = new Date(1388505600000l);
 		String res = DateUtil.format(date);
 		logger.debug("res=" + res);
 	}
@@ -34,8 +34,14 @@ public class DateUtilTest {
 
 	@Test
 	public void parse() {
-		String source = "2014-09-12 18:54:33";
+		String source = "2015-02-23 02:45:00";
 		Date res = DateUtil.parse(source);
+
 		logger.debug("res=" + res);
+
+		long delta = System.currentTimeMillis() - res.getTime();
+		double elapsedTime = delta / 3600000.0;
+		double score = 0.167 * (0.5 + 2.0 / (1 + Math.exp(elapsedTime / 24.0))) / 1.5;
+		logger.debug("score=" + score + ",elapsedTime=" + elapsedTime);
 	}
 }
