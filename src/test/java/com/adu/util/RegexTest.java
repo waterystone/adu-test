@@ -125,6 +125,21 @@ public class RegexTest {
 	}
 
 	@Test
+	public void compile() {
+		String contentRegex = "<content>(.*)</content>";
+		Pattern contentPattern = Pattern.compile(contentRegex, Pattern.DOTALL);
+
+		String content = "<content>这是内容\n结束</content>";
+		Matcher matcher = contentPattern.matcher(content);
+		while (matcher.find()) {
+			String group = matcher.group();
+			String newContent = matcher.group(1);
+			logger.debug("group=" + group + ",newContent=" + newContent);
+		}
+
+	}
+
+	@Test
 	public void group() {
 		String url = "m.sohu.com/n/1999760/?v=3&_once_=000113_click&fp=0";
 		String regex = "^(3g|m)\\.sohu\\.com/[np]/(\\d{1,7})/\\?.*_once_=000113_(\\w+)";
