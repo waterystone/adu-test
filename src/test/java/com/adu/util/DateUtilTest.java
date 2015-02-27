@@ -13,7 +13,8 @@ public class DateUtilTest {
 
 	@Test
 	public void test() {
-		Date date = new Date(1388505600000l);
+		long sec = 1;
+		Date date = new Date(sec * 1000);
 		String res = DateUtil.format(date);
 		logger.debug("res=" + res);
 	}
