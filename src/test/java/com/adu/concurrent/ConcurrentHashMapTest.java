@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
@@ -37,25 +38,43 @@ public class ConcurrentHashMapTest {
 
 	@Test
 	public void test1() throws InterruptedException {
-		final Map<Integer, String> map = new ConcurrentHashMap<Integer, String>();
+		final Map<Integer, String> map = new HashMap<Integer, String>();
 
 		for (int i = 0; i < 1000; i++) {
 			new Thread() {
 				public void run() {
-					for (int i = 0; i < 100; i++) {
+					for (int i = 0; i < 10; i++) {
 						map.put(i, i + "");
 					}
 				};
 
 			}.start();
 		}
-		for (Map.Entry<Integer, String> entry : map.entrySet()) {
-			logger.debug(entry);
+
+		while (Thread.activeCount() > 1) {
+			Thread.yield();
 		}
-		Thread.sleep(10000);
 		List<Integer> keyList = new ArrayList<Integer>(map.keySet());
 		Collections.sort(keyList);
 		logger.debug("size=" + map.size() + ",keys=" + keyList);
 
+	}
+
+	@Test
+	public void add() {
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		for (int i = 0; i < 10; i++) {
+			map.put(i, i + "");
+		}
+
+		int i = 1;
+		Iterator<Integer> iter = map.keySet().iterator();
+		while (iter.hasNext()) {
+			int key = iter.next();
+			logger.debug("[" + (i++) + "]" + key);
+
+			map.put(key, key + "-hello");
+
+		}
 	}
 }
