@@ -1,8 +1,5 @@
 package com.adu.org.apache.zookeeper;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.zookeeper.KeeperException;
@@ -11,6 +8,9 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class ZooKeeperTest {
 	private ZooKeeper zooKeeper;

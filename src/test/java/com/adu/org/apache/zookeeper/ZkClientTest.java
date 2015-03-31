@@ -1,8 +1,5 @@
 package com.adu.org.apache.zookeeper;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
-
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkDataListener;
 import org.I0Itec.zkclient.ZkClient;
@@ -11,6 +8,9 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
 import org.junit.Test;
+
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class ZkClientTest {
 	private ZkClient zkClient;
