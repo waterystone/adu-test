@@ -20,6 +20,32 @@ public class FileUtil {
 	private static Log logger = LogFactory.getLog(FileUtil.class);
 
 	/**
+	 *
+	 * @param filename
+	 * @return
+	 */
+	public static List<String> readFile(String filename) {
+		List<String> res = new ArrayList<String>();
+
+
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					FileUtil.class.getClassLoader().getResourceAsStream(
+							filename)));
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				res.add(line);
+			}
+		} catch (Exception e) {
+			logger.error("[ERROR-readFile]filename=" + filename,
+					e);
+		}
+
+
+		return res;
+	}
+
+	/**
 	 * 从resource目录下的文件读入int列表。空行及注释行(以#开头)会略过
 	 * 
 	 * @param filename

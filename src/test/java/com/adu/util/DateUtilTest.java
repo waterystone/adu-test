@@ -14,7 +14,7 @@ public class DateUtilTest {
 	@Test
 	public void test() {
 		long sec = 1;
-		Date date = new Date(1426658770);
+		Date date = new Date(1428462564541l);
 		String res = DateUtil.format(date);
 		logger.debug("res=" + res);
 	}
