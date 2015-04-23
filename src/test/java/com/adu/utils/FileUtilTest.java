@@ -33,7 +33,7 @@ public class FileUtilTest {
         }
 
         for (String line : pvLines) {
-            uvMap.put(line.split(",")[0], line.split(",")[1]);
+            pvMap.put(line.split(",")[0], line.split(",")[1]);
         }
         for (String id : ids) {
             String uv = uvMap.get(id);
