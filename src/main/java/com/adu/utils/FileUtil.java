@@ -5,11 +5,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
@@ -20,13 +22,12 @@ public class FileUtil {
 	private static Log logger = LogFactory.getLog(FileUtil.class);
 
 	/**
-	 *
+	 * 
 	 * @param filename
 	 * @return
 	 */
 	public static List<String> readFile(String filename) {
 		List<String> res = new ArrayList<String>();
-
 
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -37,10 +38,31 @@ public class FileUtil {
 				res.add(line);
 			}
 		} catch (Exception e) {
-			logger.error("[ERROR-readFile]filename=" + filename,
-					e);
+			logger.error("[ERROR-readFile]filename=" + filename, e);
 		}
 
+		return res;
+	}
+
+	/**
+	 * 使用Scanner读取文件
+	 * 
+	 * @param filename
+	 * @return
+	 */
+	public static List<String> readFile1(String filename) {
+		List<String> res = new ArrayList<String>();
+
+		try {
+			InputStream stream = FileUtil.class.getClassLoader()
+					.getResourceAsStream(filename);
+			Scanner scanner = new Scanner(stream);
+			while (scanner.hasNext()) {
+				res.add(scanner.next());
+			}
+		} catch (Exception e) {
+			logger.error("[ERROR-readFile1]filename=" + filename, e);
+		}
 
 		return res;
 	}

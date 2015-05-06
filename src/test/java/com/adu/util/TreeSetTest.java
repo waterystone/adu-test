@@ -1,22 +1,24 @@
 package com.adu.util;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-public class HashSetTest {
-	private final Log logger = LogFactory.getLog(this.getClass());
+public class TreeSetTest {
+	private final Log logger = LogFactory.getLog(TreeSetTest.class);
 
 	@Test
 	public void test() {
-		Set<String> set = new HashSet<String>();
+		Set<String> set = new TreeSet<String>();
 		set.add("a");
+		set.add("c");
 		set.add("b");
 		set.add("c");
-		set.add("c");
 		logger.debug(set);
+
 	}
+
 }

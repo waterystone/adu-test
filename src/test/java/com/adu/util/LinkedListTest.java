@@ -1,6 +1,5 @@
 package com.adu.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,8 +8,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-public class ListTest {
-	private final Log logger = LogFactory.getLog(ListTest.class);
+public class LinkedListTest {
+	private final Log logger = LogFactory.getLog(LinkedListTest.class);
 
 	@Test
 	public void subList() {

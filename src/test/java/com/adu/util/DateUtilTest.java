@@ -28,7 +28,7 @@ public class DateUtilTest {
 
 	@Test
 	public void format1() {
-		long timeStamp = System.currentTimeMillis();
+		long timeStamp = 1429497948000l;
 		String res = DateUtil.format(timeStamp);
 		logger.debug("res=" + res);
 	}
