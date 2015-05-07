@@ -8,6 +8,16 @@ public class IntegerTest {
 	private final Log logger = LogFactory.getLog(this.getClass());
 
 	@Test
+	public void test() {
+		Integer a = 1, b = 1;
+		Integer c = new Integer(1), d = new Integer(1);
+		logger.debug(a == b);
+		logger.debug(a.equals(b));
+		logger.debug(c == d);
+		logger.debug(c.equals(d));
+	}
+
+	@Test
 	public void integer() {
 		String str = "20923561";
 		Integer ret = new Integer(str);
