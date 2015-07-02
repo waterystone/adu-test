@@ -117,7 +117,7 @@
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-core</artifactId>
-            <version>0.20.2-cdh3u1</version>
+            <version>0.20.2</version>
         </dependency>
 
         <dependency>
@@ -143,7 +143,7 @@
             <version>2.2.0</version>
         </dependency>
         <dependency>
-            <groupId>kafka</groupId>
+            <groupId>org.apache.kafka</groupId>
             <artifactId>kafka_2.10</artifactId>
             <version>0.8.1</version>
         </dependency>
