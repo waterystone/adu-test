@@ -1,16 +1,14 @@
 package com.adu.utils;
 
-import java.io.IOException;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /*
 * */
-public class BeanConvertTool {
+public class JsonUtil {
     private static final ObjectMapper objectMapper = new ObjectMapper();
-    private static Log logger = LogFactory.getLog(BeanConvertTool.class);
+    private static Log logger = LogFactory.getLog(JsonUtil.class);
 
     public static String toJson(Object object) {
         String res = null;
@@ -22,7 +20,7 @@ public class BeanConvertTool {
         return res;
     }
 
-    public static <T> T toObject(Class<T> t, String s) {
+    public static <T> T toObject(String s, Class<T> t) {
         try {
             return objectMapper.readValue(s, t);
         } catch (Exception e) {
