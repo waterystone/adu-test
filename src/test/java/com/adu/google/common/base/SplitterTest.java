@@ -1,24 +1,23 @@
 package com.adu.google.common.base;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import com.google.common.base.Splitter;
 
 /**
  * Created by yunjie.du on 2015/7/8.
  */
 public class SplitterTest {
-    private final Log logger = LogFactory.getLog(this.getClass());
+	private final Log logger = LogFactory.getLog(this.getClass());
 
-    @Test
-    public void splitToList() {
-        String str = "a,b,c";
-        List<String> res = Splitter.on(",").splitToList(str);
-        logger.debug(res);
-    }
+	@Test
+	public void splitToList() {
+		String str = "3-2-5, 3-2-6";
+		List<String> res = Splitter.on(", ").splitToList(str);
+		logger.debug(res);
+	}
 }
