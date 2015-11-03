@@ -8,18 +8,21 @@ public class ThreadTest {
 	private final Log logger = LogFactory.getLog(this.getClass());
 
 	@Test
-	public void newTest() {
+	public void newTest() throws InterruptedException {
 		Thread thread = new Thread() {
 
 			@Override
 			public void run() {
-				for (int i = 0; i < 20; i++) {
-					System.out.println(Thread.currentThread().getName() + "-"
-							+ i);
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					logger.error("[ERROR-run]", e);
 				}
 			}
 		};
 		thread.start();
+		thread.join();
+		logger.debug("end");
 
 	}
 
@@ -28,6 +31,44 @@ public class ThreadTest {
 		int res = Thread.MIN_PRIORITY;
 		logger.debug("res=" + res);
 
+	}
+
+	@Test
+	public void sleep() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		logger.debug("end");
+	}
+
+	@Test
+	public void yield() {
+		Thread.yield();
+		logger.debug("end");
+	}
+
+	@Test
+	public void waitTest() {
+		Thread thread = new Thread();
+		try {
+			thread.wait();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		logger.debug("end");
+	}
+
+	@Test
+	public void joinTest() {
+		Thread thread = new Thread();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		logger.debug("end");
 	}
 
 	@Test
