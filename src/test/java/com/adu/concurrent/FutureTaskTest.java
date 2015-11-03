@@ -17,7 +17,7 @@ public class FutureTaskTest {
 	@Test
 	public void get() throws InterruptedException, ExecutionException {
 		MyTask task = new MyTask();
-		FutureTask<String> futureTask = new FutureTask<>(task);
+		FutureTask<String> futureTask = new FutureTask<String>(task);
 		executor.execute(futureTask);
 		String res = futureTask.get();
 		logger.debug("res=" + res);
