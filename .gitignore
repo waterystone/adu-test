@@ -1,8 +1,11 @@
+# kdiff3 ignore
+*.orig
+
 # maven ignore
-target
+target/
 
 # eclipse ignore
-.settings
+.settings/
 .project
 .classpath
 
@@ -13,8 +16,8 @@ target
 *.iws
 
 # temp ignore
-/logs
 *.log
+logs/
 *.cache
 *.diff
 *.patch
