@@ -13,7 +13,6 @@ public class DateUtilTest {
 
 	@Test
 	public void test() {
-		long sec = 1;
 		Date date = new Date(1428462564541l);
 		String res = DateUtil.format(date);
 		logger.debug("res=" + res);
@@ -35,10 +34,10 @@ public class DateUtilTest {
 
 	@Test
 	public void parse() {
-		Date start = DateUtil.parse("2015-03-15 00:00:00");
-		Date end = DateUtil.parse("2015-03-16 00:00:00");
+		Date start = DateUtil.parseStringToDate("2015-03-15 00:00:00");
+		Date end = DateUtil.parseStringToDate("2015-03-16 00:00:00");
 
-		logger.debug("start=" + start.getTime() + ",end=" + end.getTime());
+		logger.debug("start=" + start + ",end=" + end);
 
 	}
 }
