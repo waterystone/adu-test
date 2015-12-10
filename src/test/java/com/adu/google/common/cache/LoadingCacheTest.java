@@ -20,8 +20,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-public class CacheBuilderTest {
-	LoadingCache<String, Person> cache;
+public class LoadingCacheTest {
+	private LoadingCache<String, Person> cache;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Test
