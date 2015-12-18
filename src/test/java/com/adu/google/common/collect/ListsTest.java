@@ -68,6 +68,8 @@ public class ListsTest {
 			}
 
 		});
+		res = Lists.newArrayList(res);
+		res.add("adu");
 
 		logger.debug("res={}", res);
 	}
