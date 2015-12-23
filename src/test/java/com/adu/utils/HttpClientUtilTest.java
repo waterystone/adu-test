@@ -15,7 +15,7 @@ public class HttpClientUtilTest {
 
 	@Test
 	public void httpGet() throws IOException {
-		String url = "http://api.maoyan.com/mmdb/movie/v1/list/coming.json";
+		String url = "http://hotel.qunar.com/city/beijing_city/dt-45/";
 		String res = HttpClientUtil.httpGet(url);
 		logger.debug("res={}", res);
 	}
