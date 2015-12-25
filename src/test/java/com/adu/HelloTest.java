@@ -11,7 +11,7 @@ public class HelloTest {
 	public void test() {
 
 		String res = "hello,world!";
-		res = System.currentTimeMillis() + "";
+		res = Long.MAX_VALUE + "";
 		logger.debug("res={}", res);
 	}
 
