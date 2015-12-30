@@ -5,6 +5,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import com.google.common.collect.Lists;
 
 /**
  * 时间工具类
@@ -274,6 +277,19 @@ public final class DateUtil {
 
 	public static Date getNow() {
 		return new Date();
+	}
+
+	public static List<Date> getDateList(String fromDate, String toDate) {
+		List<Date> res = Lists.newArrayList();
+		Date startDate = parseStringToDate(fromDate, FORMAT_DATE_PATTERN);
+		Date endDate = parseStringToDate(toDate, FORMAT_DATE_PATTERN);
+
+		Date currentDate = startDate;
+		while (currentDate.before(endDate)) {
+			res.add(currentDate);
+			currentDate = addDay(currentDate, 1);// 天数+1
+		}
+		return res;
 	}
 
 }

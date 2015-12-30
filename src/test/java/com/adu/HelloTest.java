@@ -10,9 +10,8 @@ public class HelloTest {
 	@Test
 	public void test() {
 
-		String res = "hello,world!";
-		res = Long.MAX_VALUE + "";
-		logger.debug("res={}", res);
+		String res = "changchun_8074";
+		logger.debug("res={}", res.hashCode());
 	}
 
 }

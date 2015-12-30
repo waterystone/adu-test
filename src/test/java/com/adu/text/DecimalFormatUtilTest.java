@@ -11,12 +11,12 @@ public class DecimalFormatUtilTest {
 
 	@Test
 	public void format() {
-		double pi = 3.1415927;
+		double pi = 354.5415927;
 		String pattern = "0";// 取一位整数
 		// pattern = "0.00";// 取一位整数和两位小数
-		pattern = "00.000";// 取两位整数和三位小数，整数不足部分以0填补。
+		// pattern = "00.000";// 取两位整数和三位小数，整数不足部分以0填补。
 		pattern = "#";// 取所有整数部分
-		pattern = "#.##";// 取所有整数部分,两位小数
+		// pattern = "#.##";// 取所有整数部分,两位小数
 		// pattern = "#.##%";// 以百分比方式计数，并取两位小数
 		DecimalFormat decimalFormat = new DecimalFormat(pattern);
 		String ret = decimalFormat.format(pi);
