@@ -17,7 +17,7 @@ import kafka.javaapi.consumer.ConsumerConnector;
 import kafka.message.MessageAndMetadata;
 
 public class HighLevelConsumerTest {
-	private String topic = "log.hotel.qhstats.hprice.log.hotel.level.pb.wireless.roomstatus";
+	private String topic = "xxx";
 	private ConsumerConnector consumer;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -25,7 +25,7 @@ public class HighLevelConsumerTest {
 	public void init() {
 		Properties props = new Properties();
 
-		props.put("zookeeper.connect", "zk.dev.corp.qunar.com:2181/qhstatsdev");
+		props.put("zookeeper.connect", "zk.dev.corp.xxx.com:2181/qhstatsdev");
 		props.put("zookeeper.connection.timeout.ms", "20000");
 		props.put("serializer.class", "kafka.serializer.StringEncoder");
 		props.put("group.id", "des-yunjie.du-test");
