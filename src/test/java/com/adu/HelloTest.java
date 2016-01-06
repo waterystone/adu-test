@@ -9,7 +9,6 @@ public class HelloTest {
 
 	@Test
 	public void test() {
-
 		String res = "changchun_8074";
 		logger.debug("res={}", res.hashCode());
 	}
