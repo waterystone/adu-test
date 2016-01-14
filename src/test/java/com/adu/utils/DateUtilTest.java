@@ -17,4 +17,11 @@ public class DateUtilTest {
 		logger.debug("res={}", res);
 	}
 
+	@Test
+	public void parseStringToDate() {
+		String str = "2016-0-0";
+		Date res = DateUtil.parseStringToDate(str, "yyyy-M-d");
+		logger.debug("res={}", res);
+	}
+
 }
