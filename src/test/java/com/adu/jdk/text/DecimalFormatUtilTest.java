@@ -1,4 +1,4 @@
-package com.adu.text;
+package com.adu.jdk.text;
 
 import java.text.DecimalFormat;
 

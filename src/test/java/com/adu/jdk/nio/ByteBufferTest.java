@@ -1,4 +1,4 @@
-package com.adu.nio;
+package com.adu.jdk.nio;
 
 import java.nio.ByteBuffer;
 

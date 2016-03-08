@@ -1,4 +1,4 @@
-package com.adu.net;
+package com.adu.jdk.net;
 
 import java.net.URL;
 

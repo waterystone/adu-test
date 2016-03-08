@@ -1,4 +1,4 @@
-package com.adu.text;
+package com.adu.jdk.text;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -6,6 +6,8 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+
+import com.adu.text.SimpleDateFormatUtil;
 
 public class SimpleDateFormatUtilTest {
 	private final Log logger = LogFactory.getLog(this.getClass());

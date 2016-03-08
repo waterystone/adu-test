@@ -1,4 +1,4 @@
-package com.adu.lang.reflect;
+package com.adu.jdk.lang.reflect;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

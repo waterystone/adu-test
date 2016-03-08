@@ -1,4 +1,4 @@
-package com.adu.lang;
+package com.adu.jdk.lang;
 
 import java.io.UnsupportedEncodingException;
 

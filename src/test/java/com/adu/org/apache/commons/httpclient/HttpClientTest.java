@@ -1,4 +1,4 @@
-package com.adu.httpclient;
+package com.adu.org.apache.commons.httpclient;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;

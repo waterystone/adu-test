@@ -1,15 +1,15 @@
-package com.adu.lang;
+package com.adu.jdk.lang;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-public class CharTest {
+public class MathTest {
 	private final Log logger = LogFactory.getLog(this.getClass());
 
 	@Test
-	public void test() {
-		char res = '中';
+	public void abs() {
+		int res = Math.abs(-1);
 		logger.debug("res=" + res);
 	}
 }
