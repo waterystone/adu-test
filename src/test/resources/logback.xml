@@ -3,6 +3,7 @@
 	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
 		<resetJUL>true</resetJUL>
 	</contextListener>
+	<!--取消Logger自身的状态打印 -->
 	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
 
 	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
