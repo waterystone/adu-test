@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="false">
+<configuration>
 	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
 		<resetJUL>true</resetJUL>
 	</contextListener>
+	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
 
 	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder charset="UTF-8">
