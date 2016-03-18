@@ -1,20 +1,20 @@
 package com.adu.jdk.lang;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class IntegerTest {
-	private final Log logger = LogFactory.getLog(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Test
 	public void test() {
 		Integer a = 1, b = 1;
 		Integer c = new Integer(1), d = new Integer(1);
-		logger.debug(a == b);
-		logger.debug(a.equals(b));
-		logger.debug(c == d);
-		logger.debug(c.equals(d));
+		logger.debug("res={}", a == b);
+		logger.debug("res={}", a.equals(b));
+		logger.debug("res={}", c == d);
+		logger.debug("res={}", c.equals(d));
 	}
 
 	@Test
@@ -35,5 +35,12 @@ public class IntegerTest {
 	public void maxValue() {
 		int ret = Integer.MAX_VALUE;
 		logger.debug("ret=" + ret);
+	}
+
+	@Test
+	public void vauleOf() {
+		Integer int1 = Integer.valueOf(-129);
+		Integer int2 = Integer.valueOf(-129);
+		logger.debug("res={}", int1 == int2);
 	}
 }

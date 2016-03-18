@@ -3,6 +3,7 @@ package com.adu.utils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
@@ -12,6 +13,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
@@ -30,9 +33,8 @@ public class FileUtil {
 		List<String> res = new ArrayList<String>();
 
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					FileUtil.class.getClassLoader().getResourceAsStream(
-							filename)));
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(FileUtil.class.getClassLoader().getResourceAsStream(filename)));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				res.add(line);
@@ -54,8 +56,7 @@ public class FileUtil {
 		List<String> res = new ArrayList<String>();
 
 		try {
-			InputStream stream = FileUtil.class.getClassLoader()
-					.getResourceAsStream(filename);
+			InputStream stream = FileUtil.class.getClassLoader().getResourceAsStream(filename);
 			Scanner scanner = new Scanner(stream);
 			while (scanner.hasNext()) {
 				res.add(scanner.next());
@@ -80,9 +81,8 @@ public class FileUtil {
 		List<String> exceptionList = new ArrayList<String>();
 
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					FileUtil.class.getClassLoader().getResourceAsStream(
-							filename)));
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(FileUtil.class.getClassLoader().getResourceAsStream(filename)));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				// 判断空行及注释行
@@ -98,8 +98,7 @@ public class FileUtil {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("[ERROR-readIntegerListFromFile]filename=" + filename,
-					e);
+			logger.error("[ERROR-readIntegerListFromFile]filename=" + filename, e);
 		}
 
 		// 打印不合格的行
@@ -145,9 +144,8 @@ public class FileUtil {
 		StringBuffer buffer = new StringBuffer();
 
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					FileUtil.class.getClassLoader().getResourceAsStream(
-							filename)));
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(FileUtil.class.getClassLoader().getResourceAsStream(filename)));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				buffer.append(line);
@@ -169,8 +167,7 @@ public class FileUtil {
 	 * @param isAppend
 	 *            是否追加
 	 */
-	public static void writeFile(String filename, String content,
-			boolean isAppend) {
+	public static void writeFile(String filename, String content, boolean isAppend) {
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new FileWriter(filename, isAppend));
@@ -178,8 +175,7 @@ public class FileUtil {
 			writer.flush();
 			writer.close();
 		} catch (Exception e) {
-			logger.error("[ERROR-readIntegerListFromFile]filename=" + filename,
-					e);
+			logger.error("[ERROR-readIntegerListFromFile]filename=" + filename, e);
 		}
 	}
 
@@ -217,14 +213,58 @@ public class FileUtil {
 	public static void writeCSV(String filename, String content) {
 		BufferedWriter writer = null;
 		try {
-			writer = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream(filename), "GBK"));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), "GBK"));
 			writer.write(content);
 			writer.flush();
 			writer.close();
 		} catch (Exception e) {
-			logger.error("[ERROR-readIntegerListFromFile]filename=" + filename,
-					e);
+			logger.error("[ERROR-readIntegerListFromFile]filename=" + filename, e);
 		}
+	}
+
+	public static String compress(String filePath) {
+		File excelFile = new File(filePath);
+		String simpleFileName = excelFile.getName();
+		File zipFile = null;
+		if (excelFile.getParent() == null) {
+			zipFile = new File(simpleFileName + ".zip");
+		} else {
+			zipFile = new File(excelFile.getParent() + File.separator + simpleFileName + ".zip");
+		}
+
+		InputStream inputStream = null;
+		ZipOutputStream zipOutputStream = null;
+		try {
+			inputStream = new FileInputStream(excelFile);
+			zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFile));
+			zipOutputStream.putNextEntry(new ZipEntry(excelFile.getName()));
+			byte[] tmp = new byte[1024];
+			while (inputStream.read(tmp) != -1) {
+				zipOutputStream.write(tmp);
+			}
+		} catch (Exception e) {
+			logger.error("compress zip file error", e);
+
+		} finally {
+			if (inputStream != null) {
+				try {
+					inputStream.close();
+				} catch (Exception e) {
+					logger.info("close inputStream error", e);
+
+				}
+
+			}
+			if (zipOutputStream != null) {
+				try {
+					zipOutputStream.close();
+				} catch (Exception e) {
+					logger.error("close zipOutputStream error", e);
+
+				}
+			}
+		}
+
+		return zipFile.getPath();
 	}
 }
