@@ -24,7 +24,7 @@ public class CronExpressionTest {
 	@Test
 	public void getNextValidTimeAfter() {
 		Date res = cronExpression.getNextValidTimeAfter(new Date());
-		logger.debug("res={}", DateUtil.format(res));
+		logger.debug("res={}", DateUtil.formatDateToString(res));
 	}
 
 	@Test
@@ -34,14 +34,14 @@ public class CronExpressionTest {
 
 		int i = 1;
 		for (Date date : res) {
-			logger.debug("[{}]{}", i++, DateUtil.format(date));
+			logger.debug("[{}]{}", i++, DateUtil.formatDateToString(date));
 		}
 	}
 
 	@Test
 	public void isSatisfiedBy() {
 		boolean res = cronExpression
-				.isSatisfiedBy(DateUtil.parseStringToDate("2016-03-12 12:00:00", DateUtil.FORMAT_DATE_TIME_PATTERN));
+				.isSatisfiedBy(DateUtil.parseDateString("2016-03-12 12:00:00", DateUtil.FORMAT_BAR_DATE_TIME_PATTERN));
 		logger.debug("res={}", res);
 	}
 
