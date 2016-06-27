@@ -9,8 +9,8 @@ public class LogUtilTest {
 
 	@Test
 	public void generateLogStr() {
-		String params = "wrapperId,originalPrice,originalPreferentialPrice,price,mobilePrice,preferentialPrice,mobilePreferentialPrice,priceArr,preferentialPriceArr,priceType,mobilePriceType,name,normalizationName,priceSource,displayRoomStatus,roomStatus,roomStatusNight,roomStatusArr,roomId,roomIdInt";
-		String res = LogUtil.generateLogStr("priceEntry", params);
+		String params = "statDate,daqu,cityCode,hotelSeq,supplierId,restConsumeStart,restConsumeEnd,isMonthConsumeZero,isWeek1ConsumeZero,isWeek2ConsumeZero,start,end";
+		String res = LogUtil.generateLogStr("", params);
 		logger.debug("res={}", res);
 	}
 
