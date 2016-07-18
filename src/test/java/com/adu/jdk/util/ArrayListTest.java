@@ -1,4 +1,4 @@
-package com.adu.util;
+package com.adu.jdk.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;

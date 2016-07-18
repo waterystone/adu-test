@@ -6,7 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import com.adu.util.ArrayListTest;
+import com.adu.jdk.util.ArrayListTest;
 
 public class ByteBufferTest {
 	private final Log logger = LogFactory.getLog(ArrayListTest.class);

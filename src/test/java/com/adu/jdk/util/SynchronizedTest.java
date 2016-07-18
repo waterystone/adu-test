@@ -1,4 +1,4 @@
-package com.adu.util;
+package com.adu.jdk.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

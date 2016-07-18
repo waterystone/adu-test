@@ -1,4 +1,4 @@
-package com.adu.util.concurrent;
+package com.adu.jdk.util.concurrent;
 
 import java.util.concurrent.TimeUnit;
 

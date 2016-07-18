@@ -1,4 +1,4 @@
-package com.adu.util;
+package com.adu.jdk.util;
 
 import java.util.Arrays;
 import java.util.LinkedList;
