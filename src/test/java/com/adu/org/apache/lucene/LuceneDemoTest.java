@@ -50,7 +50,7 @@ public class LuceneDemoTest {
         IndexSearcher isearcher = new IndexSearcher(ireader);
         // Parse a simple query that searches for "text":
         QueryParser parser = new QueryParser("fieldname", analyzer);
-        Query query = parser.parse("drove");
+        Query query = parser.parse("drove AND drunk");
         ScoreDoc[] hits = isearcher.search(query, 1000).scoreDocs;
         // Iterate through the results:
         for (int i = 0; i < hits.length; i++) {
