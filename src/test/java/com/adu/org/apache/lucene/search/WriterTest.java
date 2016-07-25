@@ -49,7 +49,7 @@ public class WriterTest {
         doc2.add(new StringField("author", "Baron Schwartz", Field.Store.YES));
         doc2.add(new StringField("isbn", "9781449332471", Field.Store.YES));
         doc2.add(new FloatPoint("price", 54.99f));
-        doc1.add(new IntPoint("releaseDate", 2011215));
+        doc2.add(new IntPoint("releaseDate", 20110215));
         doc2.add(new StringField("category", "MySQL", Field.Store.YES));
         documents.add(doc2);
 
@@ -59,7 +59,7 @@ public class WriterTest {
         doc3.add(new StringField("author", "Tom White", Field.Store.YES));
         doc3.add(new StringField("isbn", "978-1449311520", Field.Store.YES));
         doc3.add(new FloatPoint("price", 17.63f));
-        doc1.add(new IntPoint("releaseDate", 20150315));
+        doc3.add(new IntPoint("releaseDate", 20150315));
         doc3.add(new StringField("category", "Hadoop", Field.Store.YES));
         documents.add(doc3);
 
