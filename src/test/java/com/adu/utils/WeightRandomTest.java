@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class WeightRandomTest {
     List<Pair<String, Integer>> list;
-    private WeightRandom<Integer, String> random;
+    private WeightRandom<String, Integer> random;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -22,8 +22,8 @@ public class WeightRandomTest {
     public void random() {
         Map<String, Integer> countMap = Maps.newHashMap();
         for (int i = 0; i < 100000000; i++) {
-            String randomValue = random.random();
-            countMap.put(randomValue, countMap.getOrDefault(randomValue, 0) + 1);
+            String randomKey = random.random();
+            countMap.put(randomKey, countMap.getOrDefault(randomKey, 0) + 1);
         }
 
         for (Pair<String, Integer> pair : list) {
