@@ -1,10 +1,10 @@
 package com.adu.jdk.lang;
 
+import java.io.UnsupportedEncodingException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
-
-import java.io.UnsupportedEncodingException;
 
 public class StringTest {
     private final Log logger = LogFactory.getLog(StringTest.class);
@@ -54,6 +54,12 @@ public class StringTest {
         String s = "\u300a\u76d7\u9a6c\u8bb0\u300b\u6b27\u6d32\u5927\u5192\u9669";
         String res = new String(s.getBytes("UNICODE"), "GBK");
         logger.debug("res=" + res);
+    }
+
+    @Test
+    public void valueOf() {
+        String str = null + "";
+        logger.debug(str);
     }
 
     @Test
