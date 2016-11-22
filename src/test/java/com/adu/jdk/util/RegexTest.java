@@ -167,4 +167,18 @@ public class RegexTest {
 		}
 
 	}
+
+	@Test
+	public void group2() {
+		String content = "DZS-6045_multi_dump";
+		String regex = "DZS-(\\d+)";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(content);
+		while (matcher.find()) {
+			String group = matcher.group();
+			String url = matcher.group(1);
+			logger.info("group=" + group + ",url=" + url);
+		}
+
+	}
 }
