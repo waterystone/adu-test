@@ -63,6 +63,6 @@ class MyCallBack implements Callback {
 
     @Override
     public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-        logger.info("[start-onCompletion]recordMetadata=" + StringUtil.toString(recordMetadata));
+        logger.info("[start-onCompletion]recordMetadata={},e={}", StringUtil.toString(recordMetadata), e);
     }
 }
