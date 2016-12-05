@@ -77,7 +77,9 @@ public class FilesTest {
         logger.debug("[start_rename-dir]");
 
         // 重命名目录
+        int iter = 0;
         while (true) {
+            logger.debug("iter={}", ++iter);
             final MyCounter dirCounter = new MyCounter();
             Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
                 @Override
@@ -88,7 +90,7 @@ public class FilesTest {
                         if (isSuccess) {
                             logger.debug("[SUCCESS-rename-dir]dir={},dest={}", dir, dest);
                             dirCounter.addCount(1);
-                            return FileVisitResult.TERMINATE;
+                            return FileVisitResult.SKIP_SUBTREE;
                         }
 
                         logger.error("[ERROR-rename-dir]dir={},dest={}", dir, dest);
