@@ -59,6 +59,13 @@ public class FilesTest {
 	}
 
 	@Test
+	public void append2() throws IOException {
+		File file = new File("D:/a.txt");
+		Files.append(" ", file, charset);
+		logger.debug("end");
+	}
+
+	@Test
 	public void equal() throws IOException {
 		boolean res = Files.equal(file, to);
 		logger.debug("res={}", res);

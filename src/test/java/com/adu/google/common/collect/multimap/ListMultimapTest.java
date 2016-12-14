@@ -12,11 +12,33 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
 
 public class ListMultimapTest {
     private ListMultimap<String, String> multimap;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Test
+    public void orderTest() {
+        ListMultimap<Integer, Integer> map = ArrayListMultimap.create();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 1000; j++) {
+                map.put(i, j);
+            }
+        }
+
+        Ordering ordering = Ordering.natural();
+
+        for (int i = 0; i < 10; i++) {
+            List<Integer> list = map.get(i);
+            boolean isOrder = ordering.isOrdered(list);
+            if (!isOrder) {
+                logger.warn("[WARN-order]i={},list={}", i, list);
+            }
+        }
+
+        logger.info("end");
+    }
 
     @Test
     public void test() {
