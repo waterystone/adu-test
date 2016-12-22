@@ -1,8 +1,17 @@
 package com.adu.model;
 
-public class MyPerson {
+import org.joda.time.DateTime;
+
+import com.adu.api.common.Stringfy;
+
+import java.util.Date;
+
+public class MyPerson extends Stringfy {
     private String name;
     private int age;
+    private DateTime birthDate;
+    private Date myDate;
+    private SubObject myObject;
 
     public MyPerson() {
     }
@@ -11,6 +20,27 @@ public class MyPerson {
         super();
         this.name = name;
         this.age = age;
+    }
+
+    public MyPerson(String name, int age, DateTime birthDate) {
+        this.name = name;
+        this.age = age;
+        this.birthDate = birthDate;
+    }
+
+    public MyPerson(String name, int age, DateTime birthDate, Date myDate) {
+        this.name = name;
+        this.age = age;
+        this.birthDate = birthDate;
+        this.myDate = myDate;
+    }
+
+    public MyPerson(String name, int age, DateTime birthDate, Date myDate, SubObject myObject) {
+        this.name = name;
+        this.age = age;
+        this.birthDate = birthDate;
+        this.myDate = myDate;
+        this.myObject = myObject;
     }
 
     public String getName() {
@@ -29,9 +59,27 @@ public class MyPerson {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "Person [name=" + name + ", age=" + age + "]";
+    public DateTime getBirthDate() {
+        return birthDate;
     }
 
+    public void setBirthDate(DateTime birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Date getMyDate() {
+        return myDate;
+    }
+
+    public void setMyDate(Date myDate) {
+        this.myDate = myDate;
+    }
+
+    public SubObject getMyObject() {
+        return myObject;
+    }
+
+    public void setMyObject(SubObject myObject) {
+        this.myObject = myObject;
+    }
 }
