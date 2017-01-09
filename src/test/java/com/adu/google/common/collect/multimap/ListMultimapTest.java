@@ -7,16 +7,14 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import com.adu.BaseTest;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Ordering;
 
-public class ListMultimapTest {
+public class ListMultimapTest extends BaseTest {
     private ListMultimap<String, String> multimap;
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
     public void orderTest() {
@@ -62,7 +60,7 @@ public class ListMultimapTest {
     @Test
     public void get() {
         List<String> res = multimap.get("b");
-        logger.debug("res={}", res);
+        print(res);
     }
 
     @Test

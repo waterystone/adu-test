@@ -55,8 +55,8 @@ public final class DateUtil {
      */
     public static final long SECOND_OF_DAY = 60 * 60 * 24L;
 
-    public static String formatDateToString(Date date) {
-        return formatDateToString(date, FORMAT_BAR_DATE_TIME_PATTERN);
+    public static String format(Date date) {
+        return format(date, FORMAT_BAR_DATE_TIME_PATTERN);
     }
 
     /**
@@ -66,7 +66,7 @@ public final class DateUtil {
      * @param pattern
      * @return
      */
-    public static String formatDateToString(Date date, String pattern) {
+    public static String format(Date date, String pattern) {
         FastDateFormat fdf = FastDateFormat.getInstance(pattern);
         String dateStr = null;
         try {
@@ -150,7 +150,7 @@ public final class DateUtil {
      * @param dateStr
      * @return
      */
-    public static Date parseDateString(String dateStr) {
+    public static Date parse(String dateStr) {
         if (dateStr == null || "".equals(dateStr)) return null;
 
         if (!dateStr.matches("\\d{4}-[01]\\d-[0123]\\d\\s{1,2}[012]\\d:[0-6]\\d:[0-6]\\d")) {
@@ -166,7 +166,7 @@ public final class DateUtil {
         }
     }
 
-    public static Date parseDateString(String dateStr, String pattern) {
+    public static Date parse(String dateStr, String pattern) {
         if (dateStr == null || "".equals(dateStr)) return null;
 
         try {
