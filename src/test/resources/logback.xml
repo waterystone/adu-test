@@ -6,9 +6,11 @@
 	<!--取消Logger自身的状态打印 -->
 	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
 
+	<property name="normal-pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5p %c{1}:%L - %m%n"/>
+
 	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder charset="UTF-8">
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %c{1}:%L - %m%n</pattern>
+			<pattern>${normal-pattern}</pattern>
 		</encoder>
 	</appender>
 	<appender name="resultAppender"
@@ -19,13 +21,13 @@
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %c{1}:%L - %m%n</pattern>
+			<pattern>${normal-pattern}</pattern>
 		</encoder>
 	</appender>
 	<appender name="mainAppender" class="ch.qos.logback.core.FileAppender">
 		<File>./logs/main.log</File>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %c{1}:%L - %m%n</pattern>
+			<pattern>${normal-pattern}</pattern>
 		</encoder>
 	</appender>
 	<appender name="rootAppender"
@@ -35,7 +37,7 @@
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %c{1}:%L - %m%n</pattern>
+			<pattern>${normal-pattern}</pattern>
 		</encoder>
 	</appender>
 
