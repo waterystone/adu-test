@@ -27,4 +27,8 @@ public class BaseTest {
             logger.debug("[{}]key={},value={}", ++i, entry.getKey(), entry.getValue());
         }
     }
+
+    protected void logRes(Object res) {
+        logger.debug("res={}", res);
+    }
 }

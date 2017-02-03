@@ -13,7 +13,7 @@ public class PropertyUtilTest {
 
     @Test
     public void copyProperties() {
-        Person orig = new Person("adu", 21, new DateTime());
+        Person orig = new Person("adu", 21);
         MyPerson dest = new MyPerson();
         PropertyUtil.copyProperties(orig, dest);
 

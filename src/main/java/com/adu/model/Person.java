@@ -2,16 +2,12 @@ package com.adu.model;
 
 import java.util.Date;
 
-import org.joda.time.DateTime;
-
 import com.adu.api.common.Stringfy;
 
 public class Person extends Stringfy {
     private String name;
     private int age;
-    private DateTime birthDate;
-    private Date myDate;
-    private SubObject myObject;
+    private Date birthDate;
 
     public Person() {
         super();
@@ -23,25 +19,16 @@ public class Person extends Stringfy {
         this.age = age;
     }
 
-    public Person(String name, int age, DateTime birthDate) {
+    public Person(String name, int age, Date birthDate) {
         this.name = name;
         this.age = age;
         this.birthDate = birthDate;
     }
 
-    public Person(String name, int age, DateTime birthDate, Date myDate) {
-        this.name = name;
-        this.age = age;
-        this.birthDate = birthDate;
-        this.myDate = myDate;
-    }
-
-    public Person(String name, int age, DateTime birthDate, Date myDate, SubObject myObject) {
-        this.name = name;
-        this.age = age;
-        this.birthDate = birthDate;
-        this.myDate = myDate;
-        this.myObject = myObject;
+    public Person(PersonBuilder personBuilder) {
+        this.name = personBuilder.getName();
+        this.age = personBuilder.getAge();
+        this.birthDate = personBuilder.getBirthDate();
     }
 
     public String getName() {
@@ -60,27 +47,11 @@ public class Person extends Stringfy {
         this.age = age;
     }
 
-    public DateTime getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(DateTime birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public Date getMyDate() {
-        return myDate;
-    }
-
-    public void setMyDate(Date myDate) {
-        this.myDate = myDate;
-    }
-
-    public SubObject getMyObject() {
-        return myObject;
-    }
-
-    public void setMyObject(SubObject myObject) {
-        this.myObject = myObject;
     }
 }

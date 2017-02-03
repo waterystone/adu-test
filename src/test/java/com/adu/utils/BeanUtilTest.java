@@ -1,9 +1,5 @@
 package com.adu.utils;
 
-import java.util.Date;
-
-import com.adu.model.SubObject;
-import org.joda.time.DateTime;
 import org.junit.Test;
 
 import com.adu.BaseTest;
@@ -18,14 +14,14 @@ public class BeanUtilTest extends BaseTest {
 
     @Test
     public void cloneBean() throws Exception {
-        Person person = new Person("adu", 21, new DateTime(), new Date(),new SubObject("test"));
+        Person person = new Person("adu", 21);
         MyPerson res = BeanUtil.cloneBean(person, MyPerson.class);
         logger.debug("res={}", res);
     }
 
     @Test
     public void copyProperties() throws Exception {
-        Person person = new Person("adu", 21, new DateTime());
+        Person person = new Person("adu", 21);
         MyPerson res = new MyPerson();
 
         BeanUtil.copyProperties(person, res);

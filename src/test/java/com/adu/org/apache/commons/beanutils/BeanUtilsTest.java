@@ -23,7 +23,7 @@ public class BeanUtilsTest {
 
     @Test
     public void copyProperties() throws Exception {
-        Person person = new Person("adu", 21, new DateTime());
+        Person person = new Person("adu", 21);
         MyPerson res = new MyPerson();
 
         BeanUtils.copyProperties(res, person);
