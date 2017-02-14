@@ -11,7 +11,7 @@ public class HelloTest {
     @Test
     public void test() {
         String res = "Hello,World!";
-        logger.debug("res={}", res);
+        logger.info("res={}", res);
     }
 
 

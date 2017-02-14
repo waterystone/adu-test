@@ -2,16 +2,18 @@ package com.adu.concurrent;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
-
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ExecutorServiceTest {
-    private static final ExecutorService executor = Executors.newFixedThreadPool(3);
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private ExecutorService executor;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
     public void execute() throws InterruptedException {
@@ -46,5 +48,18 @@ public class ExecutorServiceTest {
             }
             logger.debug("name={},hello", name);
         }
+    }
+
+    @Before
+    public void init() {
+        // executor = Executors.newFixedThreadPool(3);
+        executor = Executors.newFixedThreadPool(10, new ThreadFactory() {
+            private final AtomicLong counter = new AtomicLong(0);
+
+            @Override
+            public Thread newThread(Runnable r) {
+                return new Thread(null, r, "myThread-" + counter.incrementAndGet(), 0);
+            }
+        });
     }
 }

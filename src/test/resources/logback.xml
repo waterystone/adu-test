@@ -6,7 +6,7 @@
 	<!--取消Logger自身的状态打印 -->
 	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
 
-	<property name="normal-pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5p %c{1}:%L - %m%n"/>
+	<property name="normal-pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %p %c{1}:%L - %m%n"/>
 
 	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder charset="UTF-8">
