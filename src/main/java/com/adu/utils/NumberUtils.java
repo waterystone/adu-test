@@ -30,7 +30,7 @@ import java.util.Set;
  * @author Rob Harrop
  * @since 1.1.2
  */
-public abstract class NumberUtil {
+public abstract class NumberUtils {
 
     private static final BigInteger LONG_MIN = BigInteger.valueOf(Long.MIN_VALUE);
 
