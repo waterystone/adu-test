@@ -279,6 +279,18 @@
 			<version>1.5.1</version>
 		</dependency>
 
+		<!--json diff-->
+		<dependency>
+			<groupId>org.zalando.zjsonpatch</groupId>
+			<artifactId>zjsonpatch</artifactId>
+			<version>0.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.skyscreamer</groupId>
+			<artifactId>jsonassert</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
