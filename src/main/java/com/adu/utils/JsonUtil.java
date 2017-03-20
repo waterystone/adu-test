@@ -169,6 +169,14 @@ public class JsonUtil {
         return null;
     }
 
+    public Object unescape(String str){
+        if(StringUtils.isEmpty(str)){
+            return str;
+        }
+
+        return str;
+    };
+
     /**
      * Escapes Special Character
      */

@@ -31,6 +31,11 @@ public class Person extends Stringfy {
         this.birthDate = personBuilder.getBirthDate();
     }
 
+    @Override
+    public int hashCode() {
+        return (this.name + this.age + this.birthDate).hashCode();
+    }
+
     public String getName() {
         return name;
     }

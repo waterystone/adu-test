@@ -11,7 +11,7 @@ public class HelloTest {
     @Test
     public void test() {
         String res = "Hello,World!";
-        logger.info("res={}", res);
+        logger.info("res={}", System.currentTimeMillis());
     }
 
 

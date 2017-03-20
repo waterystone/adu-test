@@ -19,6 +19,14 @@ public class RegexTest {
 	}
 
 	@Test
+	public void matches2() {
+		String regex = "*";
+		String str = "m.sohu.com/n/407821518/?c=39&wscrid=1137_4";
+		boolean isMatch = Pattern.matches(regex, str);// 等价于Pattern.compile(regex).matcher(input).matches()
+		logger.info("isMatch=" + isMatch);
+	}
+
+	@Test
 	public void pattern() {
 		String regex = "a.*b\\?";
 		Pattern pattern = Pattern.compile(regex);
