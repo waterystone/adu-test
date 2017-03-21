@@ -1,6 +1,6 @@
 package com.adu.utils;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBException;
 
@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import com.adu.bean.JsonBean;
 import com.adu.model.MyPerson;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * @author: yunjie.du
@@ -20,6 +22,32 @@ import com.adu.model.MyPerson;
 public class JsonUtilTest {
     private String json;
     private static final Logger logger = LoggerFactory.getLogger(JsonUtilTest.class);
+
+    @Test
+    public void test() {
+        JSONObject object = new JSONObject();
+        for (int i = 0; i < 100; i++) {
+            object.put(i + "", i);
+        }
+
+        JSONObject childObject = new JSONObject();
+        for (int i = 0; i < 100; i++) {
+            childObject.put(i + "", i);
+        }
+        object.put("childObject", childObject);
+
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(JSONArray.parseObject(childObject.toJSONString()));
+        jsonArray.add(JSONArray.parseObject(childObject.toJSONString()));
+        jsonArray.add(JSONArray.parseObject(childObject.toJSONString()));
+        object.put("childArray", jsonArray);
+
+        String json = object.toJSONString();
+
+        Map map = JsonUtil.toObject(json, Map.class);
+        Object res = JsonUtil.sortKey(map);
+        logger.info("res={}", res);
+    }
 
     @Test
     public void string2Object() throws JAXBException {
@@ -64,8 +92,11 @@ public class JsonUtilTest {
 
     @Before
     public void init() {
-        json = "{\n" + "    \"ResultCode\": 0,\n" + "    \"Students\": [{\n" + "        \"id\": 1,\n"
-                + "        \"name\": \"zhangsan\",\n" + "        \"age\": 20\n" + "    },\n" + "    {\n"
-                + "        \"id\": 2,\n" + "        \"name\": \"lisi\",\n" + "        \"age\": 18\n" + "    }]\n" + "}";
+        JSONObject object = new JSONObject();
+        for (int i = 0; i < 100; i++) {
+            object.put(i + "", i);
+        }
+
+        json = object.toJSONString();
     }
 }

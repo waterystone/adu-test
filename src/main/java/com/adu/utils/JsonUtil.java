@@ -2,6 +2,9 @@ package com.adu.utils;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.JsonNode;
@@ -13,6 +16,8 @@ import org.codehaus.jackson.map.ser.impl.SimpleFilterProvider;
 import org.codehaus.jackson.type.TypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.collect.Maps;
 
 /**
  * 使用Jackson处理Json
@@ -156,6 +161,32 @@ public class JsonUtil {
         }
     }
 
+    /**
+     * 对所有JsonObject里的key进行排序
+     * 
+     * @param obj
+     * @return
+     */
+    public static Object sortKey(Object obj) {
+        if (obj instanceof Map) {
+            Map map = (Map) obj;
+            TreeMap treeMap = Maps.newTreeMap();
+            for (Object key : map.keySet()) {
+                treeMap.put(key, sortKey(map.get(key)));
+            }
+            return treeMap;
+
+        } else if (obj instanceof List) {
+            List list = (List) obj;
+            for (int i = 0; i < list.size(); i++) {
+                list.set(i, sortKey(list.get(i)));
+            }
+            return list;
+        }
+
+        return obj;
+    }
+
     public static String prettyFormat(Object obj) {
         try {
             if (obj instanceof String) {
@@ -169,8 +200,8 @@ public class JsonUtil {
         return null;
     }
 
-    public Object unescape(String str){
-        if(StringUtils.isEmpty(str)){
+    public Object unescape(String str) {
+        if (StringUtils.isEmpty(str)) {
             return str;
         }
 
