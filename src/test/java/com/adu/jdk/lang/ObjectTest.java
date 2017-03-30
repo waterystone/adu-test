@@ -12,7 +12,7 @@ public class ObjectTest extends BaseTest {
         for (int i = 0; i < 20; i++) {
 
             Integer[] array = new Integer[1024 * 1024];
-            logger.debug("obj={},hashCode={}", obj, obj.hashCode());
+            logger.debug("obj={},hashCode={},identityHashCode={}", obj, obj.hashCode(), System.identityHashCode(obj));
         }
     }
 
