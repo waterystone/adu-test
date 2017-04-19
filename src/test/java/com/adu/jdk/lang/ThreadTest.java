@@ -13,8 +13,9 @@ public class ThreadTest extends BaseTest {
             @Override
             public void run() {
                 try {
+                    Thread.currentThread().setName("test");
                     logger.info("thread-start");
-                    Thread.sleep(10000);
+                    Thread.sleep(100000);
                     logger.info("thread-end");
                 } catch (InterruptedException e) {
                     logger.error("[ERROR-run]", e);

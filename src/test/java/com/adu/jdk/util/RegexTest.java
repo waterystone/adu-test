@@ -20,7 +20,7 @@ public class RegexTest {
 
 	@Test
 	public void matches2() {
-		String regex = "*";
+		String regex = ".*";
 		String str = "m.sohu.com/n/407821518/?c=39&wscrid=1137_4";
 		boolean isMatch = Pattern.matches(regex, str);// 等价于Pattern.compile(regex).matcher(input).matches()
 		logger.info("isMatch=" + isMatch);
@@ -187,6 +187,18 @@ public class RegexTest {
 			String url = matcher.group(1);
 			logger.info("group=" + group + ",url=" + url);
 		}
+	}
 
+	@Test
+	public void group3() {
+		String content = "[0].mainOrderInfo.trackData.SUBMIT_TRACE[1]";
+		String regex = "(.+)\\[\\d+\\]$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(content);
+		if (matcher.matches()) {
+			String group = matcher.group();
+			String url = matcher.group(1);
+			logger.info("group=" + group + ",url=" + url);
+		}
 	}
 }

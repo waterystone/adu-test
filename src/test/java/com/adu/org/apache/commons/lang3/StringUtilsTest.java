@@ -14,4 +14,11 @@ public class StringUtilsTest {
 		String res = StringUtils.substring(str, 1, -1);
 		logger.debug("res=" + res);
 	}
+
+	@Test
+	public void test2() {
+		String str = "ab";
+		boolean res = StringUtils.equals("*",str);
+		logger.debug("res=" + res);
+	}
 }
