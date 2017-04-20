@@ -1,18 +1,13 @@
 package com.adu;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class HelloTest {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+public class HelloTest extends BaseTest {
 
     @Test
     public void test() {
         String res = "Hello,World!";
-        Object obj = new StringBuffer();
-        logger.info("res={}", System.currentTimeMillis());
+        logRes(res);
     }
 
 }
