@@ -1,16 +1,22 @@
 package com.adu.jdk.lang;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-public class RuntimeTest {
-	private final Log logger = LogFactory.getLog(this.getClass());
+import com.adu.BaseTest;
 
-	@Test
-	public void availableProcessors() {
-		int res = Runtime.getRuntime().availableProcessors();
-		logger.debug("res=" + res);
+public class RuntimeTest extends BaseTest {
 
-	}
+    @Test
+    public void availableProcessors() {
+        int res = Runtime.getRuntime().availableProcessors();
+        logger.debug("res=" + res);
+
+    }
+
+    @Test
+    public void exit() {
+        Runtime.getRuntime().exit(-7);
+        logger.debug("end");
+
+    }
 }
