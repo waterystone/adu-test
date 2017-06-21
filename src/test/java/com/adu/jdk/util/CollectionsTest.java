@@ -20,4 +20,11 @@ public class CollectionsTest extends BaseTest {
         Collections.sort(list);
         print(list);
     }
+
+    @Test
+    public void fill() {
+        List<Integer> list = Lists.newArrayList(1, 2, 3);
+        Collections.fill(list, -1);
+        print(list);
+    }
 }

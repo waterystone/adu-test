@@ -23,4 +23,17 @@ public class StopWatchTest extends BaseTest {
         long res = stopwatch.elapsed(TimeUnit.MILLISECONDS);
         logRes(res);
     }
+
+    @Test
+    public void reset() throws InterruptedException {
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
+        Thread.sleep(2000);
+
+        stopwatch.reset();
+        stopwatch.start();
+        Thread.sleep(2000);
+        long res = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+        logRes(res);
+    }
 }

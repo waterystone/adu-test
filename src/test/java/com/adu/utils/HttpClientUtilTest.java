@@ -40,6 +40,18 @@ public class HttpClientUtilTest {
 
 	@Test
 	public void httpPost1() throws IOException {
+		String url = "http://sms.api.qunar.com/pcheck";
+
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("phone", "18600183021"));
+		nvps.add(new BasicNameValuePair("prenum", "86"));
+
+		String res = HttpClientUtil.httpPost(url, nvps);
+		logger.debug("res={}", res);
+	}
+
+	@Test
+	public void httpPost2() throws IOException {
 		String url = "http://movieapi-dev.baidu.com/ticket/partner/lockseat";
 
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
