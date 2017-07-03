@@ -15,15 +15,26 @@ public class ThreadTest extends BaseTest {
                 try {
                     Thread.currentThread().setName("test");
                     logger.info("thread-start");
-                    Thread.sleep(100000);
+                    for (int i = 0; i < 10; i++) {
+                        for (int j = 0; j < 1000000000; j++) {
+                            Math.sin(0.34334);
+                        }
+                        logger.info("i={}", i);
+                    }
                     logger.info("thread-end");
-                } catch (InterruptedException e) {
-                    logger.error("[ERROR-run]", e);
+                } catch (Exception e) {
+                    logger.info("Exception,interrupted={}", Thread.interrupted(), e);
+                } finally {
+                    logger.info("finally~~,interrupted={}", Thread.interrupted());
                 }
             }
         };
         thread.start();
-        // thread.join();
+        Thread.sleep(1000);
+        logger.info("start interrupt thread!");
+        thread.interrupt();
+
+        thread.join();
         logger.debug("end");
 
     }
