@@ -85,7 +85,7 @@ public class JsonUtilTest {
 
     @Test
     public void prettyFormat() {
-        // json = "{\"name\":\"adu\",\"age\":20}";
+        json = "[ \"TTS_PAY_DATA\", \"331228932400\", [ \"pay_record_0\" ] ]";
         String res = JsonUtil.prettyFormat(json);
         logger.info("res={}", res);
     }
