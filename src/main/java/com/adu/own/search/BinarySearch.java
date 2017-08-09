@@ -42,7 +42,7 @@ public class BinarySearch {
      * @param array
      * @param target
      * @param <T>
-     * @return
+     * @return -1表示小于首个元素
      */
     public static <T extends Comparable> int searchMaxLessThanOrEquals(T[] array, T target) {
         if (array == null || array.length == 0) {
