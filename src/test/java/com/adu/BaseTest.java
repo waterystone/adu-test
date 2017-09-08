@@ -23,6 +23,12 @@ public class BaseTest {
         }
     }
 
+    protected <T> void print(T[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            logger.debug("[{}]{}", i + 1, arr[i]);
+        }
+    }
+
     protected void print(Map<?, ?> map) {
         int i = 0;
         for (Map.Entry entry : map.entrySet()) {
