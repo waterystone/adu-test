@@ -22,8 +22,10 @@ public class GeoHashTest extends BaseTest {
 
     @Test
     public void geoHashStringWithCharacterPrecision() {
-        String res = GeoHash.geoHashStringWithCharacterPrecision(lat, lon, 8);
-        logRes(res);
+        for (int number = 1; number <= 12; number++) {
+            String res = GeoHash.geoHashStringWithCharacterPrecision(lat, lon, number);
+            logRes(res);
+        }
     }
 
     @Test
