@@ -5,6 +5,7 @@ import java.util.Date;
 import com.adu.api.common.Stringfy;
 
 public class MyPerson extends Stringfy {
+    private static final long serialVersionUID = 8112690830881563910L;
     private String name;
     private int age;
     private Date birthDate;

@@ -68,6 +68,7 @@ public class MapTest extends BaseTest {
     }
 
     class Person extends Stringfy {
+        private static final long serialVersionUID = -4929314622396623797L;
         private int id;
         private String name;
 
