@@ -34,7 +34,7 @@ public class FilesTest {
 
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                logger.debug("file={},attrs={}", file, attrs);
+                logger.debug("io={},attrs={}", file, attrs);
                 return FileVisitResult.CONTINUE;
             }
         });
@@ -57,7 +57,7 @@ public class FilesTest {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                 if (StringUtils.containsAny(file.getFileName().toString(), searchChars)) {
-                    logger.debug("file={},attrs={}", file, attrs);
+                    logger.debug("io={},attrs={}", file, attrs);
                 }
                 return FileVisitResult.CONTINUE;
             }
@@ -124,18 +124,18 @@ public class FilesTest {
                     String dest = StringUtils.replaceChars(file.toString(), searchChars, replaceChars);
                     boolean isSuccess = file.toFile().renameTo(new File(dest));
                     if (isSuccess) {
-                        logger.debug("[SUCCESS-rename-file]file={},dest={}", file, dest);
+                        logger.debug("[SUCCESS-rename-io]io={},dest={}", file, dest);
                         return FileVisitResult.CONTINUE;
                     }
 
-                    logger.error("[ERROR-rename-file]file={},dest={}", file, dest);
+                    logger.error("[ERROR-rename-io]io={},dest={}", file, dest);
                     return FileVisitResult.TERMINATE;
                 }
                 return FileVisitResult.CONTINUE;
             }
         });
 
-        logger.debug("[end_rename-file]");
+        logger.debug("[end_rename-io]");
 
     }
 

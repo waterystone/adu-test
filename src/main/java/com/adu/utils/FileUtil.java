@@ -243,7 +243,7 @@ public class FileUtil {
 				zipOutputStream.write(tmp);
 			}
 		} catch (Exception e) {
-			logger.error("compress zip file error", e);
+			logger.error("compress zip io error", e);
 
 		} finally {
 			if (inputStream != null) {

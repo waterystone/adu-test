@@ -332,6 +332,12 @@
 			<artifactId>compress-lzf</artifactId>
 			<version>1.0.4</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.xiaoleilu</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>3.1.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

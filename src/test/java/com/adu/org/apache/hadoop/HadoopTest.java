@@ -18,11 +18,11 @@ public class HadoopTest {
 		Configuration conf = new Configuration();
 		FileSystem fs = FileSystem.get(conf);
 
-		// check if the file exists
+		// check if the io exists
 		Path path = new Path(filename);
 		if (fs.exists(path)) {
 			FSDataInputStream is = fs.open(path);
-			// get the file info to create the buffer
+			// get the io info to create the buffer
 			FileStatus stat = fs.getFileStatus(path);
 
 			// create the buffer
@@ -35,7 +35,7 @@ public class HadoopTest {
 			logger.debug(new String(buffer));
 
 		} else {
-			throw new Exception("the file is not found .");
+			throw new Exception("the io is not found .");
 		}
 	}
 }
