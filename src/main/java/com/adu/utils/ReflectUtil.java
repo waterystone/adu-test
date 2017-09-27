@@ -1,16 +1,19 @@
 package com.adu.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.core.ParameterNameDiscoverer;
 
 /**
  * 给对象的空属性填充默认值
  */
 public class ReflectUtil {
+    private static final ParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
     private static final Logger logger = LoggerFactory.getLogger(ReflectUtil.class);
 
     /**
@@ -75,6 +78,10 @@ public class ReflectUtil {
         }
     }
 
+    public static String[] getParameterNames(Method method) {
+        return parameterNameDiscoverer.getParameterNames(method);
+    }
+
     public static void fillDefaultValue(Object object) {
         if (object == null) {
             return;
@@ -88,31 +95,31 @@ public class ReflectUtil {
                     Class<?> type = field.getType();
                     String typeName = type.getName();
                     if (field.get(object) == null) {
-                        //String
+                        // String
                         if (String.class.getName().equals(typeName)) {
                             field.set(object, "");
                         }
-                        //int
+                        // int
                         if (Integer.class.getName().equals(typeName)) {
                             field.set(object, new Integer(0));
                         }
-                        //long
+                        // long
                         if (Long.class.getName().equals(typeName)) {
                             field.set(object, new Long(0));
                         }
-                        //double
+                        // double
                         if (Double.class.getName().equals(typeName)) {
                             field.set(object, new Double(0.0));
                         }
-                        //date
+                        // date
                         if (Date.class.getName().equals(typeName)) {
                             field.set(object, new Date());
                         }
-                        //boolean
+                        // boolean
                         if (Boolean.class.getName().equals(typeName)) {
                             field.set(object, new Boolean(false));
                         }
-                        //float
+                        // float
                         if (Float.class.getName().equals(typeName)) {
                             field.set(object, new Float(0));
                         }

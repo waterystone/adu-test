@@ -4,9 +4,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.adu.BaseTest;
 import com.adu.model.Person;
 
-public class ReflectUtilTest {
+public class ReflectUtilTest extends BaseTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
@@ -28,6 +29,12 @@ public class ReflectUtilTest {
         Person person = new Person();
         ReflectUtil.fillDefaultValue(person);
         logger.debug("person={}", person);
+    }
+
+    @Test
+    public void test() throws NoSuchMethodException {
+        String[] res = ReflectUtil.getParameterNames(Person.class.getDeclaredMethod("setAge", int.class));
+        logRes(res);
     }
 
 }
