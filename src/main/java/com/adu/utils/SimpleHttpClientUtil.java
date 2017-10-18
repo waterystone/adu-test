@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
  * @date 2015年12月2日 下午7:56:21
  */
 public class SimpleHttpClientUtil {
-	private static final DefaultHttpClient httpClient = new DefaultHttpClient();
+	private static final DefaultHttpClient HTTP_CLIENT = new DefaultHttpClient();
 	private static final Logger logger = LoggerFactory.getLogger(SimpleHttpClientUtil.class);
 
 	/**
@@ -59,7 +59,7 @@ public class SimpleHttpClientUtil {
 	 * post数据到url 返回数据编码使用自动探测
 	 * 
 	 * @param url
-	 * @param parameter
+	 * @param nvps
 	 *            参数
 	 * @return
 	 * @throws IOException
@@ -72,7 +72,7 @@ public class SimpleHttpClientUtil {
 	 * post数据到url
 	 * 
 	 * @param url
-	 * @param parameter
+	 * @param nvps
 	 *            参数
 	 * @param charset
 	 *            对方url页面的编码，不为null可以免去自动探测的性能消耗，如果为null，则使用自动探测
@@ -95,7 +95,7 @@ public class SimpleHttpClientUtil {
 		String content = null;
 		HttpEntity entity = null;
 		try {
-			HttpResponse response = httpClient.execute(request, context);
+			HttpResponse response = HTTP_CLIENT.execute(request, context);
 			StatusLine status = response.getStatusLine();
 			entity = response.getEntity();
 

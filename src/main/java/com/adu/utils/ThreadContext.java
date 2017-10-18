@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class ThreadContext {
 
-    //Local variables
+    /* Local variables */
     private static ThreadLocal<Map> threadLocal = new ThreadLocal();
 
     /**

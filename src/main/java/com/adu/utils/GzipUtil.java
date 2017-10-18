@@ -12,9 +12,9 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class GZIPUtil {
+public final class GzipUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(GZIPUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(GzipUtil.class);
 
     public static final int BUFFER = 1024;
 
@@ -62,7 +62,7 @@ public final class GZIPUtil {
             gos = new GZIPOutputStream(os);
 
             int count;
-            byte data[] = new byte[BUFFER];
+            byte[] data = new byte[BUFFER];
             while ((count = is.read(data, 0, BUFFER)) != -1) {
                 gos.write(data, 0, count);
             }
@@ -80,7 +80,7 @@ public final class GZIPUtil {
             gis = new GZIPInputStream(is);
 
             int count;
-            byte data[] = new byte[BUFFER];
+            byte[] data = new byte[BUFFER];
             while ((count = gis.read(data, 0, BUFFER)) != -1) {
                 os.write(data, 0, count);
             }

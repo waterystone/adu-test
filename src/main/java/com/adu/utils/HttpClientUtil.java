@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2015年12月2日 下午7:56:21
  */
 public class HttpClientUtil {
-    private static final DefaultHttpClient httpClient = createDefaultClient(1000, 3000, 200, 50);
+    private static final DefaultHttpClient HTTP_CLIENT = createDefaultClient(1000, 3000, 200, 50);
     private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
 
     /**
@@ -99,7 +99,7 @@ public class HttpClientUtil {
         String content = null;
         HttpEntity entity = null;
         try {
-            HttpResponse response = httpClient.execute(request, context);
+            HttpResponse response = HTTP_CLIENT.execute(request, context);
             StatusLine status = response.getStatusLine();
             entity = response.getEntity();
 
@@ -132,7 +132,7 @@ public class HttpClientUtil {
      * @return
      */
     public static DefaultHttpClient createDefaultClient(int connTimeout, int readTimeout, int maxTotal,
-                                                        int MaxPerRoute) {
+                                                        int maxPerRoute) {
         HttpParams params = new BasicHttpParams();
 
         // 连接超时
@@ -153,7 +153,7 @@ public class HttpClientUtil {
 
         ThreadSafeClientConnManager cm = new ThreadSafeClientConnManager(schemeRegistry, 1, TimeUnit.MINUTES);
         cm.setMaxTotal(maxTotal);
-        cm.setDefaultMaxPerRoute(MaxPerRoute);
+        cm.setDefaultMaxPerRoute(maxPerRoute);
 
         DefaultHttpClient client = new DefaultHttpClient(cm, params);
         return client;

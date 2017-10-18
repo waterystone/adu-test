@@ -21,6 +21,10 @@ import org.apache.commons.io.LineIterator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * 文件工具
+ * @author yunjie.du
+ */
 public class FileUtil {
 	private static Log logger = LogFactory.getLog(FileUtil.class);
 

@@ -32,7 +32,7 @@ public class StringTest {
     @Test
     public void equals() {
         String str = "1";
-        logger.debug(str.equals(null));
+        logger.debug(str.equals("1"));
     }
 
     @Test

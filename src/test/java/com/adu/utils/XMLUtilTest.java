@@ -30,7 +30,7 @@ public class XMLUtilTest {
                 "        </Student>\n" +
                 "    </Students>\n" +
                 "</GetStudentsResult>";
-        XMLBean res = XMLUtil.xmlToBean(XMLBean.class, xml);
+        XMLBean res = XmlUtil.xmlToBean(XMLBean.class, xml);
         logger.info(res.toString());
     }
 }

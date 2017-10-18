@@ -10,7 +10,7 @@ public class MD5UtilTest {
     @Test
     public void getMD5String() {
         String str = "adu";
-        String res = MD5Util.getMD5String(str);
+        String res = Md5Util.getMD5String(str);
         logger.debug("res={}", res);
     }
 }

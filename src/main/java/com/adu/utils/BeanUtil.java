@@ -13,7 +13,7 @@ import org.dozer.Mapper;
  * @date 2016/12/22 16:03
  */
 public class BeanUtil {
-    private static final Mapper map = new DozerBeanMapper();
+    private static final Mapper MAPPER = new DozerBeanMapper();
 
     /**
      * 将目标对象转换为指定对象，相同属性名进行属性值复制
@@ -27,7 +27,7 @@ public class BeanUtil {
         if (source == null) {
             return null;
         }
-        return map.map(source, clazz);
+        return MAPPER.map(source, clazz);
     }
 
     /**
@@ -37,7 +37,7 @@ public class BeanUtil {
      * @param target
      */
     public static void copyProperties(Object source, Object target) {
-        map.map(source, target);
+        MAPPER.map(source, target);
     }
 
     /**

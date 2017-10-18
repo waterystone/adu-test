@@ -11,9 +11,10 @@ import org.springframework.core.ParameterNameDiscoverer;
 
 /**
  * 给对象的空属性填充默认值
+ * @author yunjie.du
  */
 public class ReflectUtil {
-    private static final ParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
+    private static final ParameterNameDiscoverer PARAMETER_NAME_DISCOVERER = new LocalVariableTableParameterNameDiscoverer();
     private static final Logger logger = LoggerFactory.getLogger(ReflectUtil.class);
 
     /**
@@ -79,7 +80,7 @@ public class ReflectUtil {
     }
 
     public static String[] getParameterNames(Method method) {
-        return parameterNameDiscoverer.getParameterNames(method);
+        return PARAMETER_NAME_DISCOVERER.getParameterNames(method);
     }
 
     public static void fillDefaultValue(Object object) {

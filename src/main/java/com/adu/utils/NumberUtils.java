@@ -20,8 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * 源自Spring的org.springframework.util.NumberUtils.
- * Miscellaneous utility methods for number conversion and parsing.
+ * 源自Spring的org.springframework.util.NumberUtils. Miscellaneous utility methods for number conversion and parsing.
  * <p>
  * Mainly for internal use within the framework; consider Apache's Commons Lang for a more comprehensive suite of number
  * utilities.
@@ -30,7 +29,10 @@ import java.util.Set;
  * @author Rob Harrop
  * @since 1.1.2
  */
-public abstract class NumberUtils {
+public class NumberUtils {
+    private NumberUtils() {
+
+    }
 
     private static final BigInteger LONG_MIN = BigInteger.valueOf(Long.MIN_VALUE);
 

@@ -13,8 +13,8 @@ import org.apache.commons.logging.LogFactory;
  * @email yunjiedu@sohu-inc.com
  * @date 2014-9-12 上午11:08:10
  */
-public class IPUtil {
-	private static Log logger = LogFactory.getLog(IPUtil.class);
+public class IpUtil {
+	private static Log logger = LogFactory.getLog(IpUtil.class);
 
 	/**
 	 * 根据本地ip.linux环境下注意在/etc/hosts下设置x.x.x.x hostname(与hostname命令结果一致)。

@@ -9,7 +9,7 @@ public class IPUtilTest {
 
 	@Test
 	public void getLocalIP() {
-		String res = IPUtil.getLocalIp();
+		String res = IpUtil.getLocalIp();
 		logger.debug(res);
 	}
 }

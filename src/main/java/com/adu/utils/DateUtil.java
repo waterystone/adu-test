@@ -6,10 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.collect.Lists;
 
 /**
  * 时间工具类
@@ -18,7 +19,6 @@ import org.slf4j.LoggerFactory;
  * @date 2015年12月2日 下午8:49:44
  */
 public final class DateUtil {
-
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtil.class);
     public static final String YYYY_MM = "yyyy-MM";
@@ -33,14 +33,13 @@ public final class DateUtil {
     public static final String FORMAT_BAR_DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
     private static final String FORMAT_CHINESE_DATE_TIME_PATTERN = "yyyy年MM月dd日 HH:mm:ss";
 
-
-    private static final int[] MAX_MONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private static final int[] MAX_MONTH = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     /**
      * 星期中文名称
      */
-    public static final String[] WEEKDAY_NAME_CN = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+    public static final String[] WEEKDAY_NAME_CN = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
 
-    private static final FastDateFormat format = FastDateFormat.getInstance(FORMAT_BAR_DATE_TIME_PATTERN);
+    private static final FastDateFormat DATE_FORMAT = FastDateFormat.getInstance(FORMAT_BAR_DATE_TIME_PATTERN);
     /**
      * 每天毫秒数
      */
@@ -76,7 +75,6 @@ public final class DateUtil {
         }
         return dateStr;
     }
-
 
     /**
      * 获取两个Date之间的天数
@@ -143,7 +141,6 @@ public final class DateUtil {
         return c.getTime();
     }
 
-
     /**
      * 从时间json字符串反解一个date
      *
@@ -151,7 +148,9 @@ public final class DateUtil {
      * @return
      */
     public static Date parse(String dateStr) {
-        if (dateStr == null || "".equals(dateStr)) return null;
+        if (dateStr == null || "".equals(dateStr)) {
+            return null;
+        }
 
         if (!dateStr.matches("\\d{4}-[01]\\d-[0123]\\d\\s{1,2}[012]\\d:[0-6]\\d:[0-6]\\d")) {
             LOGGER.error("date parse error ,date {}", dateStr);
@@ -159,7 +158,7 @@ public final class DateUtil {
         }
 
         try {
-            return format.parse(dateStr);
+            return DATE_FORMAT.parse(dateStr);
         } catch (ParseException e) {
             LOGGER.error("date parse error ,date {}", dateStr);
             return null;
@@ -167,7 +166,9 @@ public final class DateUtil {
     }
 
     public static Date parse(String dateStr, String pattern) {
-        if (dateStr == null || "".equals(dateStr)) return null;
+        if (dateStr == null || "".equals(dateStr)) {
+            return null;
+        }
 
         try {
             SimpleDateFormat format = new SimpleDateFormat(pattern);
@@ -218,7 +219,6 @@ public final class DateUtil {
         return Math.abs(seconds);
     }
 
-
     public static Date getFirstDayOfYear(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
@@ -230,11 +230,10 @@ public final class DateUtil {
         return c.getTime();
     }
 
-
     /**
      * 将某个日期增加指定天数，并返回结果,如果传入负数，则返回指定日期之前的日期
      *
-     * @param date    要操作的日期对象
+     * @param date 要操作的日期对象
      * @param ammount 要增加天的数
      * @return 结果日期对象
      */
@@ -268,7 +267,7 @@ public final class DateUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(d);
         int ds = MAX_MONTH[calendar.get(Calendar.MONTH)];
-        //闰年处理
+        // 闰年处理
         if (ds == 1 && calendar.get(Calendar.YEAR) % 4 == 0) {
             ds++;
         }
@@ -343,8 +342,8 @@ public final class DateUtil {
      * 修改时间
      *
      * @param stdDate 被操作的时间
-     * @param field   操作的纬度 Month，Year, Day
-     * @param n       操作的数量
+     * @param field 操作的纬度 Month，Year, Day
+     * @param n 操作的数量
      * @return
      */
     public static Date addDate(Date stdDate, int field, int n) {
@@ -364,6 +363,5 @@ public final class DateUtil {
         }
         return res;
     }
-
 
 }

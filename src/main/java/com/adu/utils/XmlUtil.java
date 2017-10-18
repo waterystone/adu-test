@@ -16,7 +16,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-public class XMLUtil {
+/**
+ * @author yunjie.du
+ */
+public class XmlUtil {
 
     // public static <T> T xmlToBean(Class<T> t, String xml) throws Exception {
     // JAXBContext context = JAXBContext.newInstance(t);
@@ -29,8 +32,9 @@ public class XMLUtil {
     }
 
     public static String beanToXml(Object obj, String encode) throws Exception {
-        if (obj == null)
+        if (obj == null) {
             return "";
+        }
         JAXBContext context = JAXBContext.newInstance(obj.getClass());
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_ENCODING, encode);// 设置编码
