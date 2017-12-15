@@ -14,8 +14,8 @@ import com.xiaoleilu.hutool.util.RuntimeUtil;
 public class RunTimeUtilTest extends BaseTest {
     @Test
     public void exec() {
-        List<String> res = RuntimeUtil.exec("ls");
-        print(res);
+        Process res = RuntimeUtil.exec("ls");
+        logRes(res);
     }
 
 

@@ -12,6 +12,7 @@ public class SimpleDateFormatUtil {
 			"yyyy-MM-dd HH:mm:ss");
 	private final Log logger = LogFactory.getLog(this.getClass());
 
+
 	public static String format(Date date) {
 		String ret = dateFormat.format(date);
 		return ret;
