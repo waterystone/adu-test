@@ -9,25 +9,21 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Function;
 
 public class FunctionTest {
-	private Function<String, Integer> function;
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Test
-	public void apply() {
-		String str = "hello,world!";
-		int res = function.apply(str);
-		logger.debug("res={}", res);
-	}
+    private Function<String, Integer> function;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Before
-	public void init() {
-		function = new Function<String, Integer>() {
+    @Test
+    public void apply() {
+        String str = "hello,world!";
+        int res = function.apply(str);
+        logger.debug("res={}", res);
+    }
 
-			@Override
-			public Integer apply(String input) {
-				return StringUtils.length(input);
-			}
-		};
-	}
+    @Before
+    public void init() {
+        //function = (String s1) -> StringUtils.length(s1);
+        function = StringUtils::length;
+    }
 
 }
