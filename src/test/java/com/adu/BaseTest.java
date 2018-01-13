@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.BaseStream;
 
+import com.adu.utils.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,11 +18,13 @@ public class BaseTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+
     protected void print(Iterable<?> iterable) {
         Iterator<?> iterator = iterable.iterator();
         int i = 0;
         while (iterator.hasNext()) {
-            logger.debug("[{}]{}", ++i, iterator.next());
+            logger.debug("[{}]{}", ++i, stringfy(iterator.next()));
         }
     }
 
@@ -29,28 +32,40 @@ public class BaseTest {
         Iterator iterator = stream.iterator();
         int i = 0;
         while (iterator.hasNext()) {
-            logger.debug("[{}]{}", ++i, iterator.next());
+            logger.debug("[{}]{}", ++i, stringfy(iterator.next()));
         }
     }
 
     protected <T> void print(T[] arr) {
         for (int i = 0; i < arr.length; i++) {
-            logger.debug("[{}]{}", i + 1, arr[i]);
+            logger.debug("[{}]{}", i + 1, stringfy(arr[i]));
         }
     }
 
     protected void print(Map<?, ?> map) {
         int i = 0;
         for (Map.Entry entry : map.entrySet()) {
-            logger.debug("[{}]key={},value={}", ++i, entry.getKey(), entry.getValue());
+            logger.debug("[{}]key={},value={}", ++i, stringfy(entry.getKey()), stringfy(entry
+                    .getValue()));
         }
     }
 
+
     protected void logRes(Object res) {
-        logger.debug("res={}", res);
+        logger.debug("res={}", stringfy(res));
     }
 
-    protected void logResStringfy(Object res) {
-        logger.debug("res={}", StringUtil.toString(res));
+
+    protected String stringfy(Object obj) {
+//        try {
+//            if (obj.getClass().getDeclaredMethod("toString") != null) {//是否显式实现toString()
+//                return obj.toString();
+//            }
+//        } catch (NoSuchMethodException e) {
+//        }
+
+        return JsonUtil.toString(obj);
+        //return StringUtil.toString(obj);
     }
+
 }

@@ -39,7 +39,7 @@ public class SQLUtilsTest extends BaseTest {
     @Test
     public void parseStatements() {
         List<SQLStatement> res = SQLUtils.parseStatements(sql, JdbcConstants.MYSQL);
-        logResStringfy(res);
+        logRes(res);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class SQLUtilsTest extends BaseTest {
         MySqlSchemaStatVisitor schemaStatVisitor = new MySqlSchemaStatVisitor();
         for (SQLStatement sqlStatement : sqlStatementList) {
             sqlStatement.accept(schemaStatVisitor);
-            logResStringfy(schemaStatVisitor);
+            logRes(sqlStatement);
         }
     }
 
