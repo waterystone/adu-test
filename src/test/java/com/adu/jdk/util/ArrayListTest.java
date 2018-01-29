@@ -3,6 +3,7 @@ package com.adu.jdk.util;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -27,10 +28,8 @@ public class ArrayListTest extends BaseTest {
         priceList.forEach(price -> logger.debug("{}", price));
     }
 
-
-
     @Test
-    public void v() {
+    public void stream() {
         Stream<BigDecimal> res = priceList.stream();
         logRes(res);
 
@@ -43,6 +42,16 @@ public class ArrayListTest extends BaseTest {
         list.add("c");
         list.add("b");
         list.sort((e1, e2) -> e1.compareTo(e2));
+        print(list);
+    }
+
+    @Test
+    public void sort2() {
+        List<String> list = new ArrayList<String>();
+        list.add("a");
+        list.add("def");
+        list.add("bc");
+        list.sort(Comparator.comparingInt(e -> e.length()));
         print(list);
     }
 
