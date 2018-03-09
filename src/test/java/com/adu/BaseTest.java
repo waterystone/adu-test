@@ -18,6 +18,7 @@ public class BaseTest {
     //A
     //B
     //C
+    //D
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
