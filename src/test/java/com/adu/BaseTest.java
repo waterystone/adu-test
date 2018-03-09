@@ -15,7 +15,7 @@ import com.adu.utils.StringUtil;
  * @date 2016/10/19 18:33
  */
 public class BaseTest {
-    //A
+    //ADU
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
