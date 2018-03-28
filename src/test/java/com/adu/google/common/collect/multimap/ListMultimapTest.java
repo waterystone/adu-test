@@ -14,6 +14,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Ordering;
 
 public class ListMultimapTest extends BaseTest {
+
     private ListMultimap<String, String> multimap;
 
     @Test
@@ -79,6 +80,11 @@ public class ListMultimapTest extends BaseTest {
     public void replaceValues() {
         List<String> res = multimap.replaceValues("b", Arrays.asList("b7", "b8"));
         logger.debug("res={}", res);
+    }
+
+    @Test
+    public void toStringTest() {
+        logger.debug("res={}", multimap);
     }
 
     @Before
