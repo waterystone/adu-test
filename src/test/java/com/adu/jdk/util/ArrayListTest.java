@@ -36,6 +36,13 @@ public class ArrayListTest extends BaseTest {
     }
 
     @Test
+    public void get() {
+        List<Integer> list = new ArrayList<>();
+        logRes(list.get(0));
+
+    }
+
+    @Test
     public void sort() {
         List<String> list = new ArrayList<String>();
         list.add("a");
