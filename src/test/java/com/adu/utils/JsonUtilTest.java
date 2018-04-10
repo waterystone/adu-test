@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSONObject;
  * @date: 2015/7/17 18:44
  */
 public class JsonUtilTest {
+
     private String json;
     private static final Logger logger = LoggerFactory.getLogger(JsonUtilTest.class);
 
@@ -84,6 +85,13 @@ public class JsonUtilTest {
     }
 
     @Test
+    public void toObject3() {
+        String json = "{\"name\":\"adu\",\"age\":20}";
+        MyBean res = JsonUtil.toObject(json, MyBean.class);
+        logger.info("res={}", res);
+    }
+
+    @Test
     public void prettyFormat() {
         json = "[ \"TTS_PAY_DATA\", \"331228932400\", [ \"pay_record_0\" ] ]";
         String res = JsonUtil.prettyFormat(json);
@@ -98,5 +106,19 @@ public class JsonUtilTest {
         }
 
         json = object.toJSONString();
+    }
+
+    public static class MyBean {
+
+        private String name;
+        private int age;
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
     }
 }
