@@ -9,11 +9,18 @@ import com.adu.BaseTest;
 import com.google.common.base.Charsets;
 
 public class ClassTest extends BaseTest {
+
     private Class<?> clazz = this.getClass();
 
     @Test
     public void getClassTest() {
         logger.debug("res={}", clazz);
+    }
+
+    @Test
+    public void getName() {
+        String res = clazz.getName();
+        logRes(res);
     }
 
     @Test
