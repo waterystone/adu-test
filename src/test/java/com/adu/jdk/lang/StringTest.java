@@ -1,12 +1,14 @@
 package com.adu.jdk.lang;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 public class StringTest {
+
     private final Log logger = LogFactory.getLog(StringTest.class);
 
     @Test
@@ -66,6 +68,14 @@ public class StringTest {
     public void replaceAll() {
         String str = "2015-04-08 14";
         String res = str.replaceAll("(-| )", "");
+        logger.debug("res=" + res);
+
+    }
+
+    @Test
+    public void toLowerCase() {
+        String str = "CANIMANNEM";
+        String res = str.toLowerCase(Locale.getDefault());
         logger.debug("res=" + res);
 
     }
