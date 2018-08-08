@@ -15,7 +15,7 @@ import com.adu.utils.StringUtil;
  * @date 2016/10/19 18:33
  */
 public class BaseTest {
-    //ADU
+    // ADU
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -44,27 +44,25 @@ public class BaseTest {
     protected void print(Map<?, ?> map) {
         int i = 0;
         for (Map.Entry entry : map.entrySet()) {
-            logger.debug("[{}]key={},value={}", ++i, stringfy(entry.getKey()), stringfy(entry
-                    .getValue()));
+            logger.debug("[{}]key={},value={}", ++i, stringfy(entry.getKey()), stringfy(entry.getValue()));
         }
     }
-
 
     protected void logRes(Object res) {
         logger.debug("res={}", stringfy(res));
     }
 
-
     protected String stringfy(Object obj) {
-//        try {
-//            if (obj.getClass().getDeclaredMethod("toString") != null) {//是否显式实现toString()
-//                return obj.toString();
-//            }
-//        } catch (NoSuchMethodException e) {
-//        }
+        // try {
+        // if (obj.getClass().getDeclaredMethod("toString") != null) {//是否显式实现toString()
+        // return obj.toString();
+        // }
+        // } catch (NoSuchMethodException e) {
+        // }
 
-        return JsonUtil.toString(obj);
-        //return StringUtil.toString(obj);
+        // return JsonUtil.toString(obj);
+        // return StringUtil.toString(obj);
+        return obj.toString();
     }
 
 }
