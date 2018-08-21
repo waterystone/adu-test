@@ -52,7 +52,6 @@ public class BootStrapTest extends BaseTest {
             ByteBuf byteBuf = datagramPacket.content();
             byte[] contentBytes = new byte[byteBuf.readableBytes()];
             byteBuf.readBytes(contentBytes);
-
             String content = new String(contentBytes);
             logger.info("content={}", content);
 
