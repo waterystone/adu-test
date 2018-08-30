@@ -2,7 +2,9 @@ package com.adu.utils;
 
 import javax.xml.bind.JAXBException;
 
+import com.adu.BaseTest;
 import com.adu.bean.XMLBean;
+import com.google.common.collect.Lists;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +13,7 @@ import org.slf4j.LoggerFactory;
  * @author: yunjie.du
  * @date: 2015/7/17 18:44
  */
-public class XMLUtilTest {
-    private static final Logger logger = LoggerFactory.getLogger(XMLUtilTest.class);
+public class XMLUtilTest extends BaseTest {
 
     @Test
     public void xmlToBean() throws JAXBException {
@@ -30,7 +31,15 @@ public class XMLUtilTest {
                 "        </Student>\n" +
                 "    </Students>\n" +
                 "</GetStudentsResult>";
-        XMLBean res = XmlUtil.xmlToBean(XMLBean.class, xml);
-        logger.info(res.toString());
+        XMLBean res = XmlUtil.xmlToBean(xml, XMLBean.class);
+        logger.info("res={}", res);
+    }
+
+    @Test
+    public void beanToXml() throws Exception {
+        XMLBean xmlBean = new XMLBean(0,
+                Lists.newArrayList(new XMLBean.Student(1, "zhangsan", 20), new XMLBean.Student(2, "lisi", 23)));
+        String res = XmlUtil.beanToXml(xmlBean);
+        logger.info("res=\n{}", res);
     }
 }

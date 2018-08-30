@@ -1,5 +1,7 @@
 package com.adu.bean;
 
+import com.adu.api.common.Stringfy;
+
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
@@ -9,12 +11,20 @@ import java.util.List;
  */
 @XmlAccessorType(value = XmlAccessType.FIELD)
 @XmlRootElement(name = "GetStudentsResult")
-public class XMLBean {
+public class XMLBean extends Stringfy {
     @XmlElement(name = "ResultCode")
     private int resultCode;
     @XmlElementWrapper(name = "Students")
     @XmlElement(name = "Student")
     private List<Student> studentList;
+
+    public XMLBean() {
+    }
+
+    public XMLBean(int resultCode, List<Student> studentList) {
+        this.resultCode = resultCode;
+        this.studentList = studentList;
+    }
 
     public int getResultCode() {
         return resultCode;
@@ -22,11 +32,6 @@ public class XMLBean {
 
     public void setResultCode(int resultCode) {
         this.resultCode = resultCode;
-    }
-
-    @Override
-    public String toString() {
-        return "XMLBean{" + "resultCode=" + resultCode + ", studentList=" + studentList + '}';
     }
 
     public List<Student> getStudentList() {
@@ -38,13 +43,22 @@ public class XMLBean {
     }
 
     @XmlAccessorType(value = XmlAccessType.FIELD)
-    public static class Student {
+    public static class Student extends Stringfy {
         @XmlAttribute(name = "id")
         private int id;
         @XmlElement(name = "name")
         private String name;
         @XmlElement(name = "age")
         private int age;
+
+        public Student() {
+        }
+
+        public Student(int id, String name, int age) {
+            this.id = id;
+            this.name = name;
+            this.age = age;
+        }
 
         public int getId() {
             return id;
@@ -70,9 +84,5 @@ public class XMLBean {
             this.age = age;
         }
 
-        @Override
-        public String toString() {
-            return "Student{" + "id=" + id + ", name='" + name + '\'' + ", age=" + age + '}';
-        }
     }
 }

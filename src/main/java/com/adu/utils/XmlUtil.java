@@ -38,6 +38,7 @@ public class XmlUtil {
         JAXBContext context = JAXBContext.newInstance(obj.getClass());
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_ENCODING, encode);// 设置编码
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);// 是否格林化结果
         m.setProperty(Marshaller.JAXB_FRAGMENT, true);// 展示xml头
         StringWriter sw = new StringWriter();
         m.marshal(obj, sw);
@@ -53,7 +54,7 @@ public class XmlUtil {
      * @throws Exception
      */
 
-    public static <T> T xmlToBean(String data, Class<T> clazz) throws Exception {
+    public static <T> T xmlToBean2(String data, Class<T> clazz) throws Exception {
 
         Document document = DocumentHelper.parseText(data);
         Element rootElement = document.getRootElement();
@@ -84,7 +85,7 @@ public class XmlUtil {
         return (T) object;
     }
 
-    public static <T> T xmlToBean(Class<T> t, String xml) throws JAXBException {
+    public static <T> T xmlToBean(String xml, Class<T> t) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(t);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return (T) unmarshaller.unmarshal(new StringReader(xml));
