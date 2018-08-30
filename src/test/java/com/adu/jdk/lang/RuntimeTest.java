@@ -19,4 +19,11 @@ public class RuntimeTest extends BaseTest {
         logger.debug("end");
 
     }
+
+    @Test
+    public void addShutdownHook() {
+        logger.info("end");
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> logger.info("shutdown!!!")));
+
+    }
 }
