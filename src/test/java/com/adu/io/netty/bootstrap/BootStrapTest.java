@@ -22,6 +22,11 @@ public class BootStrapTest extends BaseTest {
     private MyChannelInitializer myChannelInitializer = new MyChannelInitializer();
     private MyChannelHandler myChannelHandler = new MyChannelHandler();
 
+    /**
+     * 测试方法:$telnet localhost 28860
+     * 
+     * @throws InterruptedException
+     */
     @Test
     public void boot() throws InterruptedException {
         Bootstrap bootstrap = new Bootstrap();

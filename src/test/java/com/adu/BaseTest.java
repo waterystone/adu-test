@@ -2,9 +2,11 @@ package com.adu;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.BaseStream;
 
 import com.adu.utils.JsonUtil;
+import com.google.common.util.concurrent.Uninterruptibles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,6 +65,10 @@ public class BaseTest {
         // return JsonUtil.toString(obj);
         // return StringUtil.toString(obj);
         return obj.toString();
+    }
+
+    protected void sleepUninterruptibly() {
+        Uninterruptibles.sleepUninterruptibly(1, TimeUnit.HOURS);
     }
 
 }
