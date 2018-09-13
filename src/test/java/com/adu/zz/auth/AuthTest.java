@@ -24,10 +24,10 @@ public class AuthTest extends BaseTest {
         JSONArray jsonArray = JSONArray.parseArray(content);
         StringBuffer buffer = new StringBuffer();
 
-        List<String> headerList = Lists.newArrayList("姓名", "用户ID", "职位", "手机", "入职时间", "领导");
+        List<String> headerList = Lists.newArrayList("姓名", "用户ID", "职位", "手机", "入职时间", "在职状态", "领导");
         buffer.append(joiner.join(headerList) + "\n");
 
-        List<String> splitList = Lists.newArrayList("---", "---", "---", "---", "---", "---");
+        List<String> splitList = Lists.newArrayList("---", "---", "---", "---", "---", "---", "---");
         buffer.append(joiner.join(splitList) + "\n");
 
         for (int i = 0; i < jsonArray.size(); i++) {
@@ -38,6 +38,7 @@ public class AuthTest extends BaseTest {
             list.add(info.getString("positionName"));
             list.add(info.getString("mobile"));
             list.add(info.getString("onboardTime"));
+            list.add(info.getString("userStatus"));
             list.add(info.getString("leaders"));
 
             buffer.append(joiner.join(list) + "\n");
