@@ -14,4 +14,10 @@ public class MyEnumTest extends BaseTest {
         MyEnum res = MyEnum.SUCC;
         logger.debug("res={}", res.toString());
     }
+
+    @Test
+    public void codeOf() {
+        MyEnum res = MyEnum.codeOf(0);
+        logRes(res);
+    }
 }

@@ -2,6 +2,7 @@ package com.adu;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.BaseStream;
 
@@ -55,6 +56,9 @@ public class BaseTest {
     }
 
     protected String stringfy(Object obj) {
+        if (Objects.isNull(obj)) {
+            return null;
+        }
         // try {
         // if (obj.getClass().getDeclaredMethod("toString") != null) {//是否显式实现toString()
         // return obj.toString();
@@ -63,8 +67,8 @@ public class BaseTest {
         // }
 
         // return JsonUtil.toString(obj);
-        // return StringUtil.toString(obj);
-        return obj.toString();
+        return StringUtil.toString(obj);
+        // return obj.toString();
     }
 
     protected void sleepUninterruptibly() {

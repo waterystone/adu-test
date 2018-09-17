@@ -1,5 +1,8 @@
 package com.adu.enums;
 
+import java.util.Map;
+
+import com.google.common.collect.Maps;
 
 public enum MyEnum {
     SUCC(0, "成功"),
@@ -14,13 +17,15 @@ public enum MyEnum {
         this.desc = desc;
     }
 
-    public static MyEnum codeOf(int code) {
+    private static Map<Integer, MyEnum> codeMap = Maps.newHashMapWithExpectedSize(MyEnum.values().length);
+    static {
         for (MyEnum myEnum : MyEnum.values()) {
-            if (myEnum.code == code) {
-                return myEnum;
-            }
+            codeMap.put(myEnum.getCode(), myEnum);
         }
-        return null;
+    }
+
+    public static MyEnum codeOf(int code) {
+        return codeMap.get(code);
     }
 
     public int getCode() {
@@ -30,4 +35,5 @@ public enum MyEnum {
     public String getDesc() {
         return desc;
     }
-    }
+
+}
