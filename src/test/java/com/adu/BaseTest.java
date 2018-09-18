@@ -67,8 +67,8 @@ public class BaseTest {
         // }
 
         // return JsonUtil.toString(obj);
-        return StringUtil.toString(obj);
-        // return obj.toString();
+        //return StringUtil.toString(obj);
+         return obj.toString();
     }
 
     protected void sleepUninterruptibly() {
