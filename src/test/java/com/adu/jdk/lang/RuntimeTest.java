@@ -3,6 +3,7 @@ package com.adu.jdk.lang;
 import org.junit.Test;
 
 import com.adu.BaseTest;
+import com.adu.lang.MyThread;
 
 public class RuntimeTest extends BaseTest {
 
@@ -23,7 +24,7 @@ public class RuntimeTest extends BaseTest {
     @Test
     public void addShutdownHook() {
         logger.info("end");
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> logger.info("shutdown!!!")));
+        Runtime.getRuntime().addShutdownHook(new MyThread());
 
     }
 }
