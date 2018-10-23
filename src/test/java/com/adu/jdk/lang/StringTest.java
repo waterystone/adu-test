@@ -46,8 +46,9 @@ public class StringTest {
 
     @Test
     public void match() {
-        String str = "sz000673";
+        String str = "yunjie_test";
         String regex = "(sh600|sh601|sz000|sz300|sz002|sz112)\\d{3}";
+        regex = "[A-Za-z]+[A-Za-z0-9_]{0,99}";
         logger.debug(str.matches(regex));
     }
 

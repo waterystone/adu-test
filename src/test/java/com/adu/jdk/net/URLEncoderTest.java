@@ -13,7 +13,7 @@ public class URLEncoderTest {
 
     @Test
     public void encode() throws UnsupportedEncodingException {
-        String url = "http://www.baidu.com?from=a&keywords=test";
+        String url = "http://www.baidu.com?from=a&keywords=test&name=List<String>";
         String res = URLEncoder.encode(url, Charsets.UTF_8.name());
         logger.debug("res={}", res);
     }
