@@ -6,7 +6,7 @@ public class HelloTest extends BaseTest {
 
     @Test
     public void test() {
-        String res = "Hello,World!";
+        String res = "Hello,World!gitlab";
         logRes(res);
     }
 
