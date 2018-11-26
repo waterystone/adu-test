@@ -14,6 +14,7 @@ public class CalcScore {
     private static Random random = new Random();
 
     public static void main(String[] args) {
+        System.out.print("main");
         for (int i = 0; i < nums.length; i++) {
             List<Integer> list = getList(nums[i]);
 
