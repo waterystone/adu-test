@@ -426,6 +426,12 @@
             <artifactId>rocksdbjni</artifactId>
             <version>5.15.10</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.msgpack</groupId>
+            <artifactId>msgpack</artifactId>
+            <version>0.6.12</version>
+        </dependency>
     </dependencies>
 
     <build>
