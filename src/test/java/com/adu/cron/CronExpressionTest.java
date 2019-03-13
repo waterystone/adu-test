@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import com.adu.BaseTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -11,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.adu.utils.DateUtil;
 
-public class CronExpressionTest {
+public class CronExpressionTest extends BaseTest {
 	private CronExpression cronExpression;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -32,10 +33,7 @@ public class CronExpressionTest {
 		int count = 5;
 		List<Date> res = cronExpression.getNextValidTimeAfter(new Date(), count);
 
-		int i = 1;
-		for (Date date : res) {
-			logger.debug("[{}]{}", i++, DateUtil.format(date));
-		}
+		print(res);
 	}
 
 	@Test
@@ -47,7 +45,7 @@ public class CronExpressionTest {
 
 	@Before
 	public void before() throws ParseException {
-		this.cronExpression = new CronExpression("0/5 0 12 * * ?");
+		this.cronExpression = new CronExpression("30 0 0 * * ?");
 	}
 
 }
