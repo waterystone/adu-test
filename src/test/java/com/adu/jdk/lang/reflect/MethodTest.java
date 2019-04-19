@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 /**
  * @author duyunjie
@@ -18,10 +19,14 @@ public class MethodTest extends BaseTest {
         logRes(method);
     }
 
-    @Before
-    public void init() throws ClassNotFoundException, NoSuchMethodException {
-        Class<?> clazz = this.getClass().getClassLoader().loadClass("java.lang.String");
+    @Test
+    public void test2() throws NoSuchMethodException {
+        method = ArrayList.class.getDeclaredMethod("clear");
+        logRes(method);
+    }
 
-        method = clazz.getDeclaredMethod("split", String.class);
+    @Before
+    public void init() throws NoSuchMethodException {
+        method = String.class.getDeclaredMethod("split", String.class);
     }
 }
