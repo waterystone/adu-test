@@ -1,11 +1,12 @@
 package com.adu.jdk.lang.reflect;
 
-import com.adu.BaseTest;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
+import com.adu.BaseTest;
 
 /**
  * @author duyunjie
@@ -22,6 +23,18 @@ public class MethodTest extends BaseTest {
     @Test
     public void test2() throws NoSuchMethodException {
         method = ArrayList.class.getDeclaredMethod("clear");
+        logRes(method);
+    }
+
+    @Test
+    public void test3() throws NoSuchMethodException {
+        method = String.class.getDeclaredMethod("copyValueOf", char[].class);
+        logRes(method);
+    }
+
+    @Test
+    public void getDeclaredMethods() {
+        Method[] res = String.class.getDeclaredMethods();
         logRes(method);
     }
 

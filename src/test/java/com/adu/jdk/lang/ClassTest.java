@@ -25,8 +25,8 @@ public class ClassTest extends BaseTest {
 
     @Test
     public void getResource() {
-        URL res = clazz.getResource("/");
-        logger.debug("res={}", res);
+        logger.info("{}", clazz.getResource(""));
+        logger.info("{}", clazz.getResource("/"));
     }
 
     @Test
