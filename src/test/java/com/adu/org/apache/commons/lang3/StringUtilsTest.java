@@ -21,4 +21,11 @@ public class StringUtilsTest {
 		boolean res = StringUtils.equals("*",str);
 		logger.debug("res=" + res);
 	}
+
+    @Test
+    public void substringBetween() {
+        String str = "collector-1.5.2.jar";
+        String res = StringUtils.substringBetween(str, "collector-", ".jar");
+        logger.debug("res=" + res);
+    }
 }
