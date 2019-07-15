@@ -15,10 +15,8 @@
         <RollingRandomAccessFile name="DEBUG" fileName="${log_home}/debug.log"
                                  filePattern="${log_home}/$${date:yyyy-MM}/debug.log.%d{yyyy-MM-dd}.log.gz">
             <Filters>
-                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
-                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL" />
-                <ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL" />
-                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" />
+                <ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL" /><!-- info及以上的拒绝，以下的交由下一个filter -->
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" /><!-- 到这里，只剩debug及以下的。debug的accept，其他的直接拒绝。从而实现只接收debug日志。 -->
             </Filters>
 
             <PatternLayout pattern="${location_pattern}" />
@@ -33,7 +31,6 @@
         <RollingRandomAccessFile name="INFO" fileName="${log_home}/info.log"
                                  filePattern="${log_home}/$${date:yyyy-MM}/info.log.%d{yyyy-MM-dd}.log">
             <Filters>
-                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
                 <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL" />
                 <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />
             </Filters>
