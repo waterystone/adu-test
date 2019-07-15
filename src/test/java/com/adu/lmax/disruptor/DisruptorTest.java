@@ -21,16 +21,17 @@ import com.lmax.disruptor.util.DaemonThreadFactory;
 public class DisruptorTest extends BaseTest {
     @Test
     public void test1() {
-        // The factory for the event
+        // The factory for the event。初始时利用工厂创建实例填满ringBuffer,之后的消息会一直复用这些实例，而不是每次都创建。
         EventFactory<LogEvent> factory = new EventFactory<LogEvent>() {
             @Override
             public LogEvent newInstance() {
+                logger.info("[factory]");
                 return new LogEvent();
             }
         };
 
         // Specify the size of the ring buffer, must be power of 2.
-        int bufferSize = 1024;
+        int bufferSize = 8;
 
         // Construct the Disruptor
         Disruptor<LogEvent> disruptor = new Disruptor<LogEvent>(factory, bufferSize, DaemonThreadFactory.INSTANCE);
@@ -39,7 +40,7 @@ public class DisruptorTest extends BaseTest {
         disruptor.handleEventsWith(new EventHandler<LogEvent>() {
             @Override
             public void onEvent(LogEvent logEvent, long l, boolean b) throws Exception {
-                logger.info("[consumer]logEvent={}", logEvent);
+                logger.info("[consume]logEvent={},l={},b={}", logEvent, l, b);
             }
         });
 
@@ -49,13 +50,15 @@ public class DisruptorTest extends BaseTest {
         // Get the ring buffer from the Disruptor to be used for publishing.
         RingBuffer<LogEvent> ringBuffer = disruptor.getRingBuffer();
 
+        // 发送消息
         AtomicInteger counter = new AtomicInteger(1);
         for (int i = 0; i < 100; i++) {
             ringBuffer.publishEvent(new EventTranslator<LogEvent>() {
                 @Override
                 public void translateTo(LogEvent logEvent, long l) {
+                    String before = logEvent.toString();
                     logEvent.setMsg(String.valueOf(counter.getAndIncrement()));
-                    logger.info("[produce]logEvent={}", logEvent);
+                    logger.info("[produce]logEvent={},l={},before={}", logEvent, l, before);
                 }
             });
 
