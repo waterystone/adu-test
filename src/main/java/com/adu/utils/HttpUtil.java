@@ -12,16 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HttpUtil {
-    public static void main(String args[]) {
-        try {
-            String url = "http://api.srvmgr.zhuaninc.com/sdk/useNewPlatform?callerKey=rq65Kc6G4br1wRvQsnIjki3gzEXGoB7a&serviceName=zzsale";
-            String res = retryGet(url);
-            System.out.println("res=" + res);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * Send a get request
      *
