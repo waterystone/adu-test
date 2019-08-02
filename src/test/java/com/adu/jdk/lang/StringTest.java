@@ -25,9 +25,12 @@ public class StringTest {
         logger.debug(Integer.toHexString(System.identityHashCode(str3)));
     }
 
+    /**
+     * https://blog.csdn.net/lonely_fireworks/article/details/7962171/
+     */
     @Test
     public void format() {
-        String str = String.format("{0:P}", 0.85);
+        String str = String.format("%03d", 40);
         logger.debug(str);
     }
 
