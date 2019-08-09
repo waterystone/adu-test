@@ -26,11 +26,4 @@ public class ObjectsTest extends BaseTest {
         logger.debug("res={}", res);
     }
 
-    @Test
-    public void firstNonNullTest() {
-        String a = null, b = "adu";
-        String res = Objects.firstNonNull(a, b);
-        logRes(res);
-    }
-
 }

@@ -11,19 +11,19 @@ public class CharMatcherTest {
 
 	@Test
 	public void any() {
-		CharMatcher res = CharMatcher.ANY;
+		CharMatcher res = CharMatcher.any();
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void none() {
-		CharMatcher res = CharMatcher.NONE;
+		CharMatcher res = CharMatcher.none();
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void digit() {
-		CharMatcher res = CharMatcher.DIGIT;
+		CharMatcher res = CharMatcher.digit();
 		logger.debug("res={}", res);
 	}
 
@@ -53,13 +53,13 @@ public class CharMatcherTest {
 
 	@Test
 	public void and() {
-		CharMatcher res = CharMatcher.JAVA_DIGIT.and(CharMatcher.JAVA_LOWER_CASE);
+		CharMatcher res = CharMatcher.javaDigit().and(CharMatcher.javaLowerCase());
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void or() {
-		CharMatcher res = CharMatcher.JAVA_DIGIT.or(CharMatcher.JAVA_LOWER_CASE);
+		CharMatcher res = CharMatcher.javaDigit().or(CharMatcher.javaLowerCase());
 		logger.debug("res={}", res);
 	}
 
@@ -69,69 +69,69 @@ public class CharMatcherTest {
 	@Test
 	public void collapseFrom() {
 		String str = "a b  c   d";
-		String res = CharMatcher.WHITESPACE.collapseFrom(str, ' ');
+		String res = CharMatcher.whitespace().collapseFrom(str, ' ');
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void matches() {
-		boolean res = CharMatcher.JAVA_DIGIT.matches('9');
+		boolean res = CharMatcher.javaDigit().matches('9');
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void matchesAllOf() {
 		String str = "2374823897";
-		boolean res = CharMatcher.JAVA_DIGIT.matchesAllOf(str);
+		boolean res = CharMatcher.javaDigit().matchesAllOf(str);
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void matchesAnyOf() {
 		String str = "sdfsfa2";
-		boolean res = CharMatcher.JAVA_DIGIT.matchesAnyOf(str);
+		boolean res = CharMatcher.javaDigit().matchesAnyOf(str);
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void matchesNoneOf() {
 		String str = "sdfsfa";
-		boolean res = CharMatcher.JAVA_DIGIT.matchesNoneOf(str);
+		boolean res = CharMatcher.javaDigit().matchesNoneOf(str);
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void countIn() {
 		String str = "a b  c   d";
-		int res = CharMatcher.WHITESPACE.countIn(str);
+		int res = CharMatcher.whitespace().countIn(str);
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void indexIn() {
 		String str = "a b  c   d";
-		int res = CharMatcher.WHITESPACE.indexIn(str);
+		int res = CharMatcher.whitespace().indexIn(str);
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void indexIn1() {
 		String str = "a b  c   d";
-		int res = CharMatcher.WHITESPACE.indexIn(str, 2);
+		int res = CharMatcher.whitespace().indexIn(str, 2);
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void lastIndexIn() {
 		String str = "a b  c   d";
-		int res = CharMatcher.WHITESPACE.lastIndexIn(str);
+		int res = CharMatcher.whitespace().lastIndexIn(str);
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void removeFrom() {
 		String str = "a b  c   d";
-		String res = CharMatcher.WHITESPACE.removeFrom(str);
+		String res = CharMatcher.whitespace().removeFrom(str);
 		logger.debug("res={}", res);
 	}
 

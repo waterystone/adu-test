@@ -32,7 +32,7 @@ public class SplitterTest {
 	@Test
 	public void trimResults1() {
 		String str = "a,b,,c, d";
-		List<String> res = Splitter.on(',').trimResults(CharMatcher.WHITESPACE).splitToList(str);
+		List<String> res = Splitter.on(',').trimResults(CharMatcher.whitespace()).splitToList(str);
 
 		printList(res);
 	}
