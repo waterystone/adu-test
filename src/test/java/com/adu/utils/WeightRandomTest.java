@@ -38,6 +38,7 @@ public class WeightRandomTest {
         list.add(new Pair("B", 2));
         list.add(new Pair("C", 3));
         list.add(new Pair("D", 4));
+        list.add(new Pair("E", 0));
 
         this.random = new WeightRandom(list);
     }
