@@ -1,11 +1,11 @@
 package com.adu.jdk.lang;
 
-import java.util.concurrent.TimeUnit;
-
-import org.junit.Test;
-
 import com.adu.BaseTest;
 import com.google.common.util.concurrent.Uninterruptibles;
+import org.junit.Test;
+
+import java.lang.management.ManagementFactory;
+import java.util.concurrent.TimeUnit;
 
 public class SystemTest extends BaseTest {
 
@@ -23,5 +23,17 @@ public class SystemTest extends BaseTest {
             logger.debug("i={},ns={}", i, ns);
             Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
         }
+    }
+
+    @Test
+    public void getenv() {
+        logger.info("pidInfo={}", ManagementFactory.getRuntimeMXBean().getName());
+        for (int i = 0; i < 100; i++) {
+            String res = System.getenv("CURRENT_USER");
+            logger.info("i={},res={}", i, res);
+
+            Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
+        }
+
     }
 }
