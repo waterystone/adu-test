@@ -11,7 +11,7 @@ import org.junit.Test;
 public class HttpUtilTest extends BaseTest {
     @Test
     public void get() {
-        String res = HttpUtil.get("http://gc.ditu.aliyun.com/regeocoding?type=010&l=39.908722,116.397499");
+        String res = HttpUtil.get("https://jsonview.com/example.json");
         logRes(res);
     }
 }

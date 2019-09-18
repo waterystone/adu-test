@@ -16,14 +16,14 @@ public class HttpClientUtilTest {
 	@Test
 	public void httpGet() throws IOException {
 		String url = "http://hotel.qunar.com/city/beijing_city/dt-45/";
-		String res = HttpClientUtil.httpGet(url);
+		String res = QunarHttpClientUtil.httpGet(url);
 		logger.debug("res={}", res);
 	}
 
 	@Test
 	public void httpGet1() throws IOException {
 		String url = "http://api.maoyan.com/mmdb/movie/v1/list/coming.json";
-		String res = HttpClientUtil.httpGet(url, "UTF-8");
+		String res = QunarHttpClientUtil.httpGet(url, "UTF-8");
 		logger.debug("res={}", res);
 	}
 
@@ -34,7 +34,7 @@ public class HttpClientUtilTest {
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 		nvps.add(new BasicNameValuePair("seqid", "1"));
 
-		String res = HttpClientUtil.httpPost(url, nvps);
+		String res = QunarHttpClientUtil.httpPost(url, nvps);
 		logger.debug("res={}", res);
 	}
 
@@ -46,7 +46,7 @@ public class HttpClientUtilTest {
 		nvps.add(new BasicNameValuePair("phone", "18600183021"));
 		nvps.add(new BasicNameValuePair("prenum", "86"));
 
-		String res = HttpClientUtil.httpPost(url, nvps);
+		String res = QunarHttpClientUtil.httpPost(url, nvps);
 		logger.debug("res={}", res);
 	}
 
@@ -57,7 +57,7 @@ public class HttpClientUtilTest {
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 		nvps.add(new BasicNameValuePair("seqid", "1"));
 
-		String res = HttpClientUtil.httpPost(url, nvps, "unicode");
+		String res = QunarHttpClientUtil.httpPost(url, nvps, "unicode");
 		logger.debug("res={}", res);
 	}
 

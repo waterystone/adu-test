@@ -34,9 +34,9 @@ import java.util.concurrent.TimeUnit;
  * @author yunjie.du
  * @date 2015年12月2日 下午7:56:21
  */
-public class HttpClientUtil {
+public class QunarHttpClientUtil {
     private static final DefaultHttpClient HTTP_CLIENT = createDefaultClient(1000, 3000, 200, 50);
-    private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(QunarHttpClientUtil.class);
 
     /**
      * GET方式获取url数据 返回数据编码使用自动探测
