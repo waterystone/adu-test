@@ -43,10 +43,11 @@ import java.util.stream.Collectors;
 /**
  * 带有连接池的Http客户端工具类。具有如下特点：
  * <ol>
- * <li>连接池的最大连接数默认是20，可通过系统变量zzarch.common.http.max.total=200指定；</li>
- * <li>连接池的每个路由的最大连接数默认是2，可通过系统变量zzarch.common.http.max.per.route=10指定；</li>
- * <li>可设置超时，通过{@link com.adu.model.HttpOptions}进行设置；</li>
- * <li>可重试，通过{@link com.adu.model.HttpOptions}进行设置；</li>
+ * <li>基于apache的高性能Http客户端{@link org.apache.http.client.HttpClient}；</li>
+ * <li>连接池的最大连接数默认是20，可通过系统变量-Dzzarch.common.http.max.total=200指定；</li>
+ * <li>连接池的每个路由的最大连接数默认是2，可通过系统变量-Dzzarch.common.http.max.per.route=10指定；</li>
+ * <li>可设置超时，通过{@link HttpOptions}进行设置；</li>
+ * <li>可重试，通过{@link HttpOptions}进行设置；</li>
  * </ol>
  *
  * @author duyunjie
