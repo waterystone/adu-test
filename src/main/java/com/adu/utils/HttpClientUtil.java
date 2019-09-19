@@ -1,5 +1,8 @@
 package com.adu.utils;
 
+import com.adu.Constants;
+import com.adu.handler.HttpRequestRetryHandler;
+import com.adu.model.HttpOptions;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
@@ -27,7 +30,6 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nullable;
 import javax.net.ssl.SSLContext;
 import java.nio.charset.StandardCharsets;
 import java.security.cert.CertificateException;
@@ -39,24 +41,32 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
+ * 带有连接池的Http客户端工具类。具有如下特点：
+ * <ol>
+ * <li>连接池的最大连接数默认是20，可通过系统变量zzarch.common.http.max.total=200指定；</li>
+ * <li>连接池的每个路由的最大连接数默认是2，可通过系统变量zzarch.common.http.max.per.route=10指定；</li>
+ * <li>可设置超时，通过{@link com.adu.model.HttpOptions}进行设置；</li>
+ * <li>可重试，通过{@link com.adu.model.HttpOptions}进行设置；</li>
+ * </ol>
+ *
  * @author duyunjie
  * @date 2019-09-18 16:33
  */
 public class HttpClientUtil {
+    private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
+
     /**
      * HttpClient 连接池
      */
-    private static PoolingHttpClientConnectionManager cm = initPoolingHttpClientConnectionManager();
-
-    private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
+    private static PoolingHttpClientConnectionManager CONNECTION_MANAGER = initPoolingHttpClientConnectionManager();
 
     public static String httpGet(String url) throws Exception {
         return httpGet(url, null, null, null);
     }
 
 
-    public static String httpGet(String url, int timeoutMs) throws Exception {
-        return httpGet(url, null, null, timeoutMs);
+    public static String httpGet(String url, HttpOptions httpOptions) throws Exception {
+        return httpGet(url, null, null, httpOptions);
     }
 
 
@@ -65,8 +75,8 @@ public class HttpClientUtil {
     }
 
 
-    public static String httpGet(String url, Map<String, ?> params, int timeoutMs) throws Exception {
-        return httpGet(url, null, params, timeoutMs);
+    public static String httpGet(String url, Map<String, ?> params, HttpOptions httpOptions) throws Exception {
+        return httpGet(url, null, params, httpOptions);
     }
 
 
@@ -78,19 +88,19 @@ public class HttpClientUtil {
      * 发送 HTTP GET请求
      *
      * @param url
-     * @param headers   请求头
-     * @param params    请求参数
-     * @param timeoutMs 请求的超时时间
+     * @param headers     请求头
+     * @param params      请求参数
+     * @param httpOptions 配置参数，如重试次数、超时时间等。
      * @return
      * @throws Exception
      */
-    public static String httpGet(String url, @Nullable Map<String, ?> headers, @Nullable Map<String, ?> params, @Nullable Integer timeoutMs) throws Exception {
+    public static String httpGet(String url, Map<String, ?> headers, Map<String, ?> params, HttpOptions httpOptions) throws Exception {
         // 装载请求地址和参数
         URIBuilder ub = new URIBuilder();
         ub.setPath(url);
 
         // 转换请求参数
-        List<NameValuePair> pairs = covertParams2NVPS(params);
+        List<NameValuePair> pairs = convertParams2NVPS(params);
         if (!pairs.isEmpty()) {
             ub.setParameters(pairs);
         }
@@ -103,12 +113,7 @@ public class HttpClientUtil {
             }
         }
 
-        // 设置超时时间
-        if (Objects.nonNull(timeoutMs)) {
-            httpGet.setConfig(RequestConfig.custom().setSocketTimeout(timeoutMs).build());
-        }
-
-        return doHttp(httpGet);
+        return doHttp(httpGet, httpOptions);
     }
 
 
@@ -116,8 +121,8 @@ public class HttpClientUtil {
         return httpPost(url, null, params, null);
     }
 
-    public static String httpPost(String url, Map<String, ?> params, int timeoutMs) throws Exception {
-        return httpPost(url, null, params, timeoutMs);
+    public static String httpPost(String url, Map<String, ?> params, HttpOptions httpOptions) throws Exception {
+        return httpPost(url, null, params, httpOptions);
     }
 
 
@@ -129,17 +134,17 @@ public class HttpClientUtil {
      * 发送 HTTP POST请求
      *
      * @param url
-     * @param headers
-     * @param params
-     * @param timeoutMs
+     * @param headers     请求头
+     * @param params      请求参数
+     * @param httpOptions 配置参数，如重试次数、超时时间等。
      * @return
      * @throws Exception
      */
-    public static String httpPost(String url, Map<String, ?> headers, Map<String, ?> params, @Nullable Integer timeoutMs) throws Exception {
+    public static String httpPost(String url, Map<String, ?> headers, Map<String, ?> params, HttpOptions httpOptions) throws Exception {
         HttpPost httpPost = new HttpPost(url);
 
         // 转换请求参数
-        List<NameValuePair> pairs = covertParams2NVPS(params);
+        List<NameValuePair> pairs = convertParams2NVPS(params);
         if (!pairs.isEmpty()) {
             httpPost.setEntity(new UrlEncodedFormEntity(pairs, StandardCharsets.UTF_8.name()));
         }
@@ -151,12 +156,7 @@ public class HttpClientUtil {
             }
         }
 
-        // 设置超时时间
-        if (Objects.nonNull(timeoutMs)) {
-            httpPost.setConfig(RequestConfig.custom().setSocketTimeout(timeoutMs).build());
-        }
-
-        return doHttp(httpPost);
+        return doHttp(httpPost, httpOptions);
     }
 
 
@@ -169,7 +169,7 @@ public class HttpClientUtil {
      * @return
      * @throws Exception
      */
-    public static String httpPostJson(String url, String param) throws Exception {
+    public static String httpPostJson(String url, String param, HttpOptions httpOptions) throws Exception {
         HttpPost httpPost = new HttpPost(url);
 
         // 设置请求头
@@ -178,7 +178,7 @@ public class HttpClientUtil {
         // 设置请求参数
         httpPost.setEntity(new StringEntity(param, StandardCharsets.UTF_8.name()));
 
-        return doHttp(httpPost);
+        return doHttp(httpPost, httpOptions);
     }
 
     /**
@@ -190,7 +190,7 @@ public class HttpClientUtil {
      * @return
      * @throws Exception
      */
-    public static String httpPostXml(String url, String param) throws Exception {
+    public static String httpPostXml(String url, String param, HttpOptions httpOptions) throws Exception {
         HttpPost httpPost = new HttpPost(url);
 
         // 设置请求头
@@ -199,7 +199,7 @@ public class HttpClientUtil {
         // 设置请求参数
         httpPost.setEntity(new StringEntity(param, StandardCharsets.UTF_8.name()));
 
-        return doHttp(httpPost);
+        return doHttp(httpPost, httpOptions);
     }
 
 
@@ -209,8 +209,8 @@ public class HttpClientUtil {
      * @param params
      * @return
      */
-    public static String covertParams2QueryStr(Map<String, Object> params) {
-        List<NameValuePair> pairs = covertParams2NVPS(params);
+    public static String convertParams2QueryStr(Map<String, ?> params) {
+        List<NameValuePair> pairs = convertParams2NVPS(params);
 
         return URLEncodedUtils.format(pairs, StandardCharsets.UTF_8.name());
     }
@@ -221,7 +221,7 @@ public class HttpClientUtil {
      * @param params
      * @return
      */
-    public static List<NameValuePair> covertParams2NVPS(@Nullable Map<String, ?> params) {
+    public static List<NameValuePair> convertParams2NVPS(Map<String, ?> params) {
         if (params == null) {
             return new ArrayList<>();
         }
@@ -236,10 +236,25 @@ public class HttpClientUtil {
      * @return
      * @throws Exception
      */
-    private static String doHttp(HttpRequestBase request) throws Exception {
+    private static String doHttp(HttpRequestBase request, HttpOptions httpOptions) throws Exception {
+        if (Objects.isNull(httpOptions)) {//如果为空，则用默认的。
+            httpOptions = new HttpOptions();
+        }
+        // 设置超时时间
+        if (Objects.nonNull(httpOptions.getTimeoutMs())) {
+            request.setConfig(RequestConfig.custom().setSocketTimeout(httpOptions.getTimeoutMs()).build());
+        }
+
+        //设置重试策略
+        HttpRequestRetryHandler httpRequestRetryHandler = null;
+        if (Objects.nonNull(httpOptions.getRetryCount())) {
+            httpRequestRetryHandler = new HttpRequestRetryHandler(httpOptions.getRetryCount());
+        }
+
         // 通过连接池获取连接对象
-        CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(cm).build();
+        CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(CONNECTION_MANAGER).setRetryHandler(httpRequestRetryHandler).build();
         return doRequest(httpClient, request);
+
     }
 
     /**
@@ -273,6 +288,7 @@ public class HttpClientUtil {
         return result;
     }
 
+
     /**
      * 初始化连接池
      *
@@ -282,11 +298,19 @@ public class HttpClientUtil {
         // 初始化连接池，可用于请求HTTP/HTTPS（信任所有证书）
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(getRegistry());
 
-        // 整个连接池最大连接数
-        int maxTotal = Integer.valueOf(System.getProperty("http.max.connection", "200"));
-        connectionManager.setMaxTotal(maxTotal);
+        // 整个连接池的最大连接数
+        String maxTotal = System.getProperty(Constants.SYSTEM_PROPERTY_KEY_HTTP_MAX_TOTAL);
+        if (Objects.nonNull(maxTotal)) {
+            connectionManager.setMaxTotal(Integer.valueOf(maxTotal));
+        }
 
-        logger.info("[ZZARCH_COMMON_SUCCESS_initPoolingHttpClientConnectionManager]maxTotal={}", maxTotal);
+        // 每个路由的最大连接数
+        String maxPerRoute = System.getProperty(Constants.SYSTEM_PROPERTY_KEY_HTTP_MAX_PER_ROUTE);
+        if (Objects.nonNull(maxPerRoute)) {
+            connectionManager.setDefaultMaxPerRoute(Integer.valueOf(maxPerRoute));
+        }
+
+        logger.info("[ZZARCH_COMMON_SUCCESS_initPoolingHttpClientConnectionManager]maxTotal={},maxPerRoute={}", maxTotal, maxPerRoute);
         return connectionManager;
     }
 
@@ -330,4 +354,6 @@ public class HttpClientUtil {
         SSLConnectionSocketFactory sslCsf = new SSLConnectionSocketFactory(sslContext, new String[]{"SSLv2Hello", "SSLv3", "TLSv1", "TLSv1.2"}, null, NoopHostnameVerifier.INSTANCE);
         return sslCsf;
     }
+
+
 }
