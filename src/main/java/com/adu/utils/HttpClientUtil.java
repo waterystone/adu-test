@@ -17,23 +17,18 @@ import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.ssl.SSLContextBuilder;
-import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.SSLContext;
 import java.nio.charset.StandardCharsets;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -324,37 +319,12 @@ public class HttpClientUtil {
      */
     private static Registry<ConnectionSocketFactory> getRegistry() {
         try {
-            return RegistryBuilder.<ConnectionSocketFactory>create().register("http", new PlainConnectionSocketFactory()).register("https", getSSLFactory()).build();
+            return RegistryBuilder.<ConnectionSocketFactory>create().register("http", new PlainConnectionSocketFactory()).register("https", new SSLConnectionSocketFactory(SSLContext.getDefault())).build();
         } catch (Exception e) {
             logger.error("[ERROR_getRegistry]", e);
         }
 
         return null;
     }
-
-    /**
-     * 获取HTTPS SSL连接工厂
-     * <p>跳过证书校验，即信任所有证书</p>
-     *
-     * @return
-     * @throws Exception
-     */
-    private static SSLConnectionSocketFactory getSSLFactory() throws Exception {
-        // 设置HTTPS SSL证书信息，跳过证书校验，即信任所有证书请求HTTPS
-        SSLContextBuilder sslBuilder = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-            @Override
-            public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                return true;
-            }
-        });
-
-        // 获取HTTPS SSL证书连接上下文
-        SSLContext sslContext = sslBuilder.build();
-
-        // 获取HTTPS连接工厂
-        SSLConnectionSocketFactory sslCsf = new SSLConnectionSocketFactory(sslContext, new String[]{"SSLv2Hello", "SSLv3", "TLSv1", "TLSv1.2"}, null, NoopHostnameVerifier.INSTANCE);
-        return sslCsf;
-    }
-
 
 }

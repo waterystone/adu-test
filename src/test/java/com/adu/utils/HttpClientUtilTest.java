@@ -14,7 +14,7 @@ import java.util.Map;
  * @date 2019-09-18 19:46
  */
 public class HttpClientUtilTest extends BaseTest {
-    private static final HttpOptions DEFAULT_HTTP_OPTIONS = new HttpOptions().setRetryCount(5).setTimeoutMs(20);
+    private static final HttpOptions DEFAULT_HTTP_OPTIONS = new HttpOptions().setRetryCount(3).setTimeoutMs(2000);
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
