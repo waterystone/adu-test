@@ -484,6 +484,13 @@
             <artifactId>maven-artifact</artifactId>
             <version>3.6.0</version>
         </dependency>
+
+        <!--参考：https://java-object-diff.readthedocs.io/en/latest/-->
+        <dependency>
+            <groupId>de.danielbechler</groupId>
+            <artifactId>java-object-diff</artifactId>
+            <version>0.95</version>
+        </dependency>
     </dependencies>
 
     <build>
