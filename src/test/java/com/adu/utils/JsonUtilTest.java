@@ -1,19 +1,17 @@
 package com.adu.utils;
 
-import java.util.Map;
-
-import javax.xml.bind.JAXBException;
-
+import com.adu.bean.JsonBean;
+import com.adu.model.MyPerson;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.codehaus.jackson.io.JsonStringEncoder;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.adu.bean.JsonBean;
-import com.adu.model.MyPerson;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import javax.xml.bind.JAXBException;
+import java.util.Map;
 
 /**
  * @author: yunjie.du
@@ -47,6 +45,14 @@ public class JsonUtilTest {
 
         Map map = JsonUtil.toObject(json, Map.class);
         Object res = JsonUtil.sortKey(map);
+        logger.info("res={}", res);
+    }
+
+    @Test
+    public void toString1() {
+        MyBean myBean = new MyBean("adu", 20);
+        myBean.setId(205884049609767909L);
+        String res = JsonUtil.toString(myBean);
         logger.info("res={}", res);
     }
 
@@ -110,11 +116,36 @@ public class JsonUtilTest {
 
     public static class MyBean {
 
+        private long id;
         private String name;
         private int age;
 
+        public MyBean() {
+        }
+
+        public MyBean(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
         public void setName(String name) {
             this.name = name;
+        }
+
+        public int getAge() {
+            return age;
         }
 
         public void setAge(int age) {

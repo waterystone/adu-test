@@ -19,6 +19,8 @@ import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -39,8 +41,8 @@ import java.util.stream.Collectors;
  * 带有连接池的Http客户端工具类。具有如下特点：
  * <ol>
  * <li>基于apache的高性能Http客户端{@link org.apache.http.client.HttpClient}；</li>
- * <li>连接池的最大连接数默认是20，可通过系统变量-Dzzarch.common.http.max.total=200指定；</li>
- * <li>连接池的每个路由的最大连接数默认是2，可通过系统变量-Dzzarch.common.http.max.per.route=10指定；</li>
+ * <li>连接池的最大连接数默认是20，可通过{@link #init(int, int)}、或者系统变量-Darch.common.http.max.total=200指定；</li>
+ * <li>连接池的每个路由的最大连接数默认是2，可通过{@link #init(int, int)}、或者系统变量-Darch.common.http.max.per.route=10指定；</li>
  * <li>可设置超时，通过{@link HttpOptions}进行设置；</li>
  * <li>可重试，通过{@link HttpOptions}进行设置；</li>
  * </ol>
@@ -54,7 +56,15 @@ public class HttpClientUtil {
     /**
      * HttpClient 连接池
      */
-    private static PoolingHttpClientConnectionManager CONNECTION_MANAGER = initPoolingHttpClientConnectionManager();
+    private static PoolingHttpClientConnectionManager CONNECTION_MANAGER = buildPoolingHttpClientConnectionManager(null, null);
+
+    /**
+     * @param maxTotal    连接池的最大连接数,默认为20。
+     * @param maxPerRoute 连接池的每个路由的最大连接数，默认为2。
+     */
+    public static void init(int maxTotal, int maxPerRoute) {
+        CONNECTION_MANAGER = buildPoolingHttpClientConnectionManager(maxTotal, maxPerRoute);
+    }
 
     public static String httpGet(String url) throws Exception {
         return httpGet(url, null, null, null);
@@ -198,6 +208,28 @@ public class HttpClientUtil {
         return doHttp(httpPost, httpOptions);
     }
 
+    /**
+     * 通过post发送multipart信息。
+     *
+     * @param url
+     * @param multiparts
+     * @param httpOptions
+     * @return
+     * @throws Exception
+     */
+    public static String httpPostMultipart(String url, Map<String, ContentBody> multiparts, HttpOptions httpOptions) throws Exception {
+        HttpPost httpPost = new HttpPost(url);
+
+        // 设置Multipart
+        MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
+        for (Map.Entry<String, ContentBody> multipartEntry : multiparts.entrySet()) {
+            multipartEntityBuilder.addPart(multipartEntry.getKey(), multipartEntry.getValue());
+        }
+        httpPost.setEntity(multipartEntityBuilder.build());
+
+        return doHttp(httpPost, httpOptions);
+    }
+
 
     /**
      * 转换请求参数，将Map键值对拼接成QueryString字符串
@@ -290,23 +322,33 @@ public class HttpClientUtil {
      *
      * @return
      */
-    private static PoolingHttpClientConnectionManager initPoolingHttpClientConnectionManager() {
+    private static PoolingHttpClientConnectionManager buildPoolingHttpClientConnectionManager(Integer maxTotal, Integer maxPerRoute) {
         // 初始化连接池，可用于请求HTTP/HTTPS（信任所有证书）
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(getRegistry());
 
         // 整个连接池的最大连接数
-        String maxTotal = System.getProperty(Constants.SYSTEM_PROPERTY_KEY_HTTP_MAX_TOTAL);
-        if (Objects.nonNull(maxTotal)) {
-            connectionManager.setMaxTotal(Integer.valueOf(maxTotal));
+        String maxTotalProperty = null;
+        if (Objects.nonNull(maxTotal)) { //首先看有没有在参数中显式指定
+            connectionManager.setMaxTotal(maxTotal);
+        } else { //如果没有在参数中显式指定，则再看有没有在系统变量中指定
+            maxTotalProperty = System.getProperty(Constants.SYSTEM_PROPERTY_KEY_HTTP_MAX_TOTAL);
+            if (Objects.nonNull(maxTotalProperty)) {
+                connectionManager.setMaxTotal(Integer.valueOf(maxTotalProperty));
+            }
         }
 
         // 每个路由的最大连接数
-        String maxPerRoute = System.getProperty(Constants.SYSTEM_PROPERTY_KEY_HTTP_MAX_PER_ROUTE);
-        if (Objects.nonNull(maxPerRoute)) {
-            connectionManager.setDefaultMaxPerRoute(Integer.valueOf(maxPerRoute));
+        String maxPerRouteProperty = null;
+        if (Objects.nonNull(maxPerRoute)) { //首先看有没有在参数中显式指定
+            connectionManager.setDefaultMaxPerRoute(maxPerRoute);
+        } else { //如果没有在参数中显式指定，则再看有没有在系统变量中指定
+            maxPerRouteProperty = System.getProperty(Constants.SYSTEM_PROPERTY_KEY_HTTP_MAX_PER_ROUTE);
+            if (Objects.nonNull(maxPerRouteProperty)) {
+                connectionManager.setDefaultMaxPerRoute(Integer.valueOf(maxPerRouteProperty));
+            }
         }
 
-        logger.info("[ZZARCH_COMMON_SUCCESS_initPoolingHttpClientConnectionManager]maxTotal={},maxPerRoute={}", maxTotal, maxPerRoute);
+        logger.info("[ZZARCH_COMMON_SUCCESS_initPoolingHttpClientConnectionManager]maxTotal={},maxPerRoute={},maxTotalProperty={},maxPerRouteProperty={}", maxTotal, maxPerRoute, maxTotalProperty, maxPerRouteProperty);
         return connectionManager;
     }
 
