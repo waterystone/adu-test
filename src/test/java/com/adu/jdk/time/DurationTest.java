@@ -1,17 +1,14 @@
 package com.adu.jdk.time;
 
+import com.adu.BaseTest;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 
-public class DurationTest {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+public class DurationTest extends BaseTest {
 
     @Test
     public void toHours() {
@@ -20,4 +17,9 @@ public class DurationTest {
         logger.debug("res={}", duration.toHours());
     }
 
+    @Test
+    public void of() {
+        Duration res = Duration.of(1, ChronoUnit.DAYS);
+        logRes(res);
+    }
 }

@@ -1,16 +1,13 @@
 package com.adu.jdk.time;
 
+import com.adu.BaseTest;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 
-public class LocalDateTimeTest {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+public class LocalDateTimeTest extends BaseTest {
 
 
     @Test
@@ -19,4 +16,9 @@ public class LocalDateTimeTest {
         logger.debug("res={}", res);
     }
 
+    @Test
+    public void parse() {
+        LocalDateTime res = LocalDateTime.parse("2019-10-15 16:28:13", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        logRes(res);
+    }
 }
