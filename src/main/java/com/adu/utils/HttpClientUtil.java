@@ -102,8 +102,7 @@ public class HttpClientUtil {
      */
     public static String httpGet(String url, Map<String, ?> headers, Map<String, ?> params, HttpOptions httpOptions) throws Exception {
         // 装载请求地址和参数
-        URIBuilder ub = new URIBuilder();
-        ub.setPath(url);
+        URIBuilder ub = new URIBuilder(url);
 
         // 转换请求参数
         List<NameValuePair> pairs = convertParams2NVPS(params);
@@ -348,7 +347,7 @@ public class HttpClientUtil {
             }
         }
 
-        logger.info("[ZZARCH_COMMON_SUCCESS_initPoolingHttpClientConnectionManager]maxTotal={},maxPerRoute={},maxTotalProperty={},maxPerRouteProperty={}", maxTotal, maxPerRoute, maxTotalProperty, maxPerRouteProperty);
+        logger.info("[ZZARCH_COMMON_SUCCESS_buildPoolingHttpClientConnectionManager]maxTotal={},maxPerRoute={},maxTotalProperty={},maxPerRouteProperty={}", maxTotal, maxPerRoute, maxTotalProperty, maxPerRouteProperty);
         return connectionManager;
     }
 
