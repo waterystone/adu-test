@@ -30,7 +30,7 @@ public class HttpClientUtilTest extends BaseTest {
 
     @Test
     public void httpGet() throws Exception {
-        String url = "https://api.apiopen.top/recommendPoetry";
+        String url = "https://www.flickr.com/services/rest/?method=flickr.test.echo&name=value";
         String res = HttpClientUtil.httpGet(url);
         logger.info("res={}", res);
     }

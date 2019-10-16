@@ -32,7 +32,4 @@ public class FlickrTest extends BaseTest {
         logRes(res);
     }
 
-
-
-
 }

@@ -16,7 +16,7 @@ public class FlickrUtilTest extends BaseTest {
     @Test
     public void search() {
         Map<String, String> params = Maps.newHashMap();
-        params.put("bbox", "116.0699,39.7383,116.6322,40.1159");
+        params.put("bbox", "116.06,39.80,116.65,40.16");
         params.put("geo_context", "2");
 
         String res = FlickrUtil.searchPhotos(params, 1);
@@ -34,7 +34,7 @@ public class FlickrUtilTest extends BaseTest {
     @Test
     public void searchPhotoInfos() throws Exception {
         Map<String, String> params = Maps.newHashMap();
-        params.put("bbox", "116.0699,39.7383,116.6322,40.1159");
+        params.put("bbox", "116.06,39.80,116.65,40.16");
         params.put("geo_context", "2");
 
         String res = FlickrUtil.searchPhotoInfos(params);
