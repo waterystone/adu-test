@@ -114,7 +114,7 @@ public class FlickrUtil {
                         }
                     }
 
-                    logger.info("[searchPhotoInfos]page={},totalPage={}", page, totalPage);
+                    logger.info("[end_searchPhotoInfos_page]page={},size={},totalPage={}", page, photoJsonArray.size(), totalPage);
                     if (page == totalPage) {
                         break;
                     }
@@ -162,14 +162,23 @@ public class FlickrUtil {
             }
             String tags = COMMA_JOINER.join(tagList);
 
+            String longitude = null;
+            String latitude = null;
+            String accuracy = null;
+            String country = null;
+            String county = null;
+            String region = null;
+            String locality = null;
             JSONObject locationJsonObject = photoJsonObject.getJSONObject("location");
-            String longitude = locationJsonObject.getString("longitude");
-            String latitude = locationJsonObject.getString("latitude");
-            String accuracy = locationJsonObject.getString("accuracy");
-            String country = locationJsonObject.getJSONObject("country").getString("_content");
-            String county = locationJsonObject.getJSONObject("county").getString("_content");
-            String region = locationJsonObject.getJSONObject("region").getString("_content");
-            String locality = locationJsonObject.getJSONObject("locality").getString("_content");
+            if (Objects.nonNull(locationJsonObject)) {
+                longitude = locationJsonObject.getString("longitude");
+                latitude = locationJsonObject.getString("latitude");
+                accuracy = locationJsonObject.getString("accuracy");
+                country = locationJsonObject.getJSONObject("country").getString("_content");
+                county = locationJsonObject.getJSONObject("county").getString("_content");
+                region = locationJsonObject.getJSONObject("region").getString("_content");
+                locality = locationJsonObject.getJSONObject("locality").getString("_content");
+            }
 
             String url = photoJsonObject.getJSONObject("urls").getJSONArray("url").getJSONObject(0).getString("_content");
 
