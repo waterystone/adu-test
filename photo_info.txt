@@ -1,0 +1,10 @@
+id&&title&&taken_date&&tags&&longitude&&latitude&&accuracy&&country&&county&&region&&locality&&url
+48906988047&&Beijing&&2019-06-15 20:04:17&&china,xian,beijing&&116.409858&&39.949691&&16&&China&&Beijing&&Beijing&&Dongcheng District&&https://www.flickr.com/photos/24862621@N04/48097882431/
+48906258558&&Beijing&&2019-06-15 20:04:17&&china,xian,beijing&&116.409858&&39.949691&&16&&China&&Beijing&&Beijing&&Dongcheng District&&https://www.flickr.com/photos/24862621@N04/48097882431/
+48906784736&&Beijing&&2019-06-15 20:04:17&&china,xian,beijing&&116.409858&&39.949691&&16&&China&&Beijing&&Beijing&&Dongcheng District&&https://www.flickr.com/photos/24862621@N04/48097882431/
+48906988047&&Beijing&&2019-06-15 20:04:17&&china,xian,beijing&&116.409858&&39.949691&&16&&China&&Beijing&&Beijing&&Dongcheng District&&https://www.flickr.com/photos/24862621@N04/48097882431/
+48906258558&&Beijing&&2019-06-15 20:04:17&&china,xian,beijing&&116.409858&&39.949691&&16&&China&&Beijing&&Beijing&&Dongcheng District&&https://www.flickr.com/photos/24862621@N04/48097882431/
+48906784736&&Beijing&&2019-06-15 20:04:17&&china,xian,beijing&&116.409858&&39.949691&&16&&China&&Beijing&&Beijing&&Dongcheng District&&https://www.flickr.com/photos/24862621@N04/48097882431/
+48906988047&&Beijing&&2019-06-15 20:04:17&&china,xian,beijing&&116.409858&&39.949691&&16&&China&&Beijing&&Beijing&&Dongcheng District&&https://www.flickr.com/photos/24862621@N04/48097882431/
+48906258558&&Beijing&&2019-06-15 20:04:17&&china,xian,beijing&&116.409858&&39.949691&&16&&China&&Beijing&&Beijing&&Dongcheng District&&https://www.flickr.com/photos/24862621@N04/48097882431/
+48906784736&&Beijing&&2019-06-15 20:04:17&&china,xian,beijing&&116.409858&&39.949691&&16&&China&&Beijing&&Beijing&&Dongcheng District&&https://www.flickr.com/photos/24862621@N04/48097882431/

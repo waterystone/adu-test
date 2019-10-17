@@ -16,8 +16,9 @@ public class FlickrUtilTest extends BaseTest {
     @Test
     public void search() {
         Map<String, String> params = Maps.newHashMap();
-        params.put("bbox", "116.06,39.80,116.65,40.16");
-        params.put("geo_context", "2");
+        params.put("bbox", "116.06,39.80,116.65,40.16");//经纬度范围
+        params.put("geo_context", "2");//outdoor
+        params.put("content_type", "1");//拍摄的照片
 
         String res = FlickrUtil.searchPhotos(params, 1);
         logRes(res);
@@ -36,6 +37,7 @@ public class FlickrUtilTest extends BaseTest {
         Map<String, String> params = Maps.newHashMap();
         params.put("bbox", "116.06,39.80,116.65,40.16");
         params.put("geo_context", "2");
+        params.put("content_type", "1");
 
         String res = FlickrUtil.searchPhotoInfos(params);
         Files.write(Paths.get("photo_info.txt"), res.getBytes("UTF-8"));
