@@ -76,7 +76,7 @@ public class FlickrUtil {
     }
 
     private static final Joiner COLUMN_JOINER = Joiner.on("&&").useForNull("null");
-    private static String HEADER = COLUMN_JOINER.join(Lists.newArrayList("id", "title", "taken_date", "longitude", "latitude", "accuracy", "country", "county", "region", "locality", "url"));
+    private static String HEADER = COLUMN_JOINER.join(Lists.newArrayList("id", "title", "taken_date", "tags", "longitude", "latitude", "accuracy", "country", "county", "region", "locality", "url"));
 
     /**
      * 搜索并获取照片的详细信息，可用于表格转换。
@@ -128,6 +128,9 @@ public class FlickrUtil {
         return builder.toString();
     }
 
+
+    private static final Joiner COMMA_JOINER = Joiner.on(",").useForNull("null");
+
     /**
      * 将单个照片的详细json信息转换成以"&&"分隔的各列信息。
      *
@@ -151,6 +154,14 @@ public class FlickrUtil {
             String title = photoJsonObject.getJSONObject("title").getString("_content");
             String takenDate = photoJsonObject.getJSONObject("dates").getString("taken");
 
+            List<String> tagList = Lists.newArrayList();
+            JSONArray tagJsonArray = photoJsonObject.getJSONObject("tags").getJSONArray("tag");
+            for (int i = 0; i < tagJsonArray.size(); i++) {
+                JSONObject tagJsonObject = tagJsonArray.getJSONObject(i);
+                tagList.add(tagJsonObject.getString("_content"));
+            }
+            String tags = COMMA_JOINER.join(tagList);
+
             JSONObject locationJsonObject = photoJsonObject.getJSONObject("location");
             String longitude = locationJsonObject.getString("longitude");
             String latitude = locationJsonObject.getString("latitude");
@@ -162,7 +173,7 @@ public class FlickrUtil {
 
             String url = photoJsonObject.getJSONObject("urls").getJSONArray("url").getJSONObject(0).getString("_content");
 
-            List<String> columnValues = Lists.newArrayList(String.valueOf(photoId), title, takenDate, longitude, latitude, accuracy, country, county, region, locality, url);
+            List<String> columnValues = Lists.newArrayList(String.valueOf(photoId), title, takenDate, tags, longitude, latitude, accuracy, country, county, region, locality, url);
             return COLUMN_JOINER.join(columnValues);
         } catch (Exception e) {
             logger.error("[ERROR_parsePhotoInfo]photoId={},photoInfo={}", photoId, photoInfo, e);
