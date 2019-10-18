@@ -7,6 +7,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,8 +42,8 @@ public class FlickrUtil {
         String res = null;
         try {
             //TODO
-            //res = HttpClientUtil.httpGet("https://api.flickr.com/services/rest", params, httpOptions);
-            res = mockSearchResult();
+            res = HttpClientUtil.httpGet("https://api.flickr.com/services/rest", params, httpOptions);
+            //res = mockSearchResult();
             res = deleteInvalidChars(res);
         } catch (Exception e) {
             logger.error("[ERROR_search]params={},page={}", params, page, e);
@@ -65,8 +67,8 @@ public class FlickrUtil {
         String res = null;
         try {
             //TODO
-            //res = HttpClientUtil.httpGet("https://api.flickr.com/services/rest", params, httpOptions);
-            res = mockPhotoInfoResult();
+            res = HttpClientUtil.httpGet("https://api.flickr.com/services/rest", params, httpOptions);
+            //res = mockPhotoInfoResult();
             res = deleteInvalidChars(res);
         } catch (Exception e) {
             logger.error("[ERROR_getPhotoInfo]photoId={}", photoId, e);
@@ -84,47 +86,66 @@ public class FlickrUtil {
      * @param params
      * @return 每个照片信息一行，列之间用"&&"分隔（带表头）。
      */
-    public static String searchPhotoInfos(Map<String, String> params) {
-        StringBuilder builder = new StringBuilder(HEADER + "\n");
-        int page = 1;
-        while (true) {//分页搜索
-            //1.搜索
-            String searchPhotos = searchPhotos(params, page);
-            if (Objects.nonNull(searchPhotos)) {
-                JSONObject searchPhotosJsonObject = JSON.parseObject(searchPhotos);
-                if (Objects.equals(searchPhotosJsonObject.getString("stat"), "ok")) { //判断结果stat是否ok
-                    JSONObject photosJsonObject = searchPhotosJsonObject.getJSONObject("photos");
-                    int totalPage = photosJsonObject.getIntValue("pages");
-
-                    JSONArray photoJsonArray = photosJsonObject.getJSONArray("photo");
-                    //2.处理该页内的照片
-                    for (int i = 0; i < photoJsonArray.size(); i++) {
-                        JSONObject photoJsonObject = photoJsonArray.getJSONObject(i);
-                        long photoId = photoJsonObject.getLong("id"); //拿到photoId
-
-                        //3.获取详细的照片信息
-                        String photoInfo = getPhotoInfo(photoId);
-
-                        //4.转换成以"&&"分隔的各列信息
-                        String parsedPhotoInfo = parsePhotoInfo(photoId, photoInfo);
-
-                        //5.加入结果
-                        if (Objects.nonNull(parsedPhotoInfo)) {
-                            builder.append(parsedPhotoInfo + "\n");
-                        }
-                    }
-
-                    logger.info("[end_searchPhotoInfos_page]page={},size={},totalPage={}", page, photoJsonArray.size(), totalPage);
-                    if (page == totalPage) {
-                        break;
-                    }
-                    page++;
-                } else {
-                    logger.error("[ERROR_searchPhotosStat]parmas={},page={},searchPhotos={}", page, page, searchPhotos);
-                }
+    public static String searchPhotoInfos(Map<String, String> params, int startPage, int endPage) {
+        StringBuilder builder = new StringBuilder();
+        for (int page = startPage; page < endPage; page++) {//分页搜索
+            String pageResult = searchOnePage(params, page);
+            if (StringUtils.isEmpty(pageResult)) {
+                break;
             }
+
+            builder.append(pageResult);
         }
 
+        return builder.toString();
+    }
+
+    private static String searchOnePage(Map<String, String> params, int page) {
+        StringBuilder builder = new StringBuilder();
+        long start = System.currentTimeMillis();
+        int totalPage = 0;
+        JSONArray photoJsonArray = new JSONArray();
+
+        try {
+            //1.搜索
+            params.put("page", page + "");
+            String searchPhotos = searchPhotos(params, page);
+            if (StringUtils.isEmpty(searchPhotos)) {
+                return null;
+            }
+
+            JSONObject searchPhotosJsonObject = JSON.parseObject(searchPhotos);
+            if (!Objects.equals(searchPhotosJsonObject.getString("stat"), "ok")) { //判断结果stat是否ok
+                logger.error("[ERROR_searchPhotosStat]parmas={},page={},searchPhotos={}", page, page, searchPhotos);
+                return null;
+            }
+
+            JSONObject photosJsonObject = searchPhotosJsonObject.getJSONObject("photos");
+            totalPage = photosJsonObject.getIntValue("pages");
+            photoJsonArray = photosJsonObject.getJSONArray("photo");
+
+            //2.处理该页内的照片
+            for (int i = 0; i < photoJsonArray.size(); i++) {
+                JSONObject photoJsonObject = photoJsonArray.getJSONObject(i);
+                long photoId = photoJsonObject.getLong("id"); //拿到photoId
+
+                //3.获取详细的照片信息
+                String photoInfo = getPhotoInfo(photoId);
+
+                //4.转换成以"&&"分隔的各列信息
+                String parsedPhotoInfo = parsePhotoInfo(photoId, photoInfo);
+
+                //5.加入结果
+                if (StringUtils.isNotEmpty(parsedPhotoInfo)) {
+                    builder.append(parsedPhotoInfo + "\n");
+                }
+            }
+        } catch (Exception e) {
+            logger.error("[ERROR_searchOnePage]params={},page={}", params, page, e);
+        }
+
+        long elapsed = System.currentTimeMillis() - start;
+        logger.info("[end_searchPhotoInfos_page]page={},size={},totalPage={},elapsed={}", page, photoJsonArray.size(), totalPage, elapsed);
         return builder.toString();
     }
 
@@ -139,20 +160,27 @@ public class FlickrUtil {
      * @return
      */
     private static String parsePhotoInfo(long photoId, String photoInfo) {
-        if (Objects.isNull(photoInfo)) {
-            return null;
-        }
-
-        JSONObject photoInfoJsonObject = JSON.parseObject(photoInfo);
-        if (!Objects.equals(photoInfoJsonObject.getString("stat"), "ok")) {
-            logger.error("[ERROR_photoInfoStat]photoId={},photoInfo={}", photoId, photoInfo);
+        if (StringUtils.isEmpty(photoInfo)) {
             return null;
         }
 
         try {
+            JSONObject photoInfoJsonObject = JSON.parseObject(photoInfo);
+            if (!Objects.equals(photoInfoJsonObject.getString("stat"), "ok")) {
+                logger.error("[ERROR_photoInfoStat]photoId={},photoInfo={}", photoId, photoInfo);
+                return null;
+            }
+
             JSONObject photoJsonObject = photoInfoJsonObject.getJSONObject("photo");
             String title = photoJsonObject.getJSONObject("title").getString("_content");
+            if (StringUtils.isEmpty(title)) {
+                title = null;
+            }
+
             String takenDate = photoJsonObject.getJSONObject("dates").getString("taken");
+            if (StringUtils.isEmpty(takenDate)) {
+                takenDate = null;
+            }
 
             List<String> tagList = Lists.newArrayList();
             JSONArray tagJsonArray = photoJsonObject.getJSONObject("tags").getJSONArray("tag");
@@ -160,7 +188,7 @@ public class FlickrUtil {
                 JSONObject tagJsonObject = tagJsonArray.getJSONObject(i);
                 tagList.add(tagJsonObject.getString("_content"));
             }
-            String tags = COMMA_JOINER.join(tagList);
+            String tags = CollectionUtils.isEmpty(tagList) ? null : COMMA_JOINER.join(tagList);
 
             String longitude = null;
             String latitude = null;
@@ -174,10 +202,26 @@ public class FlickrUtil {
                 longitude = locationJsonObject.getString("longitude");
                 latitude = locationJsonObject.getString("latitude");
                 accuracy = locationJsonObject.getString("accuracy");
-                country = locationJsonObject.getJSONObject("country").getString("_content");
-                county = locationJsonObject.getJSONObject("county").getString("_content");
-                region = locationJsonObject.getJSONObject("region").getString("_content");
-                locality = locationJsonObject.getJSONObject("locality").getString("_content");
+
+                JSONObject countryJsonObject = locationJsonObject.getJSONObject("country");
+                if (Objects.nonNull(countryJsonObject)) {
+                    country = countryJsonObject.getString("_content");
+                }
+
+                JSONObject countyJsonObject = locationJsonObject.getJSONObject("county");
+                if (Objects.nonNull(countyJsonObject)) {
+                    county = countyJsonObject.getString("_content");
+                }
+
+                JSONObject regionJsonObject = locationJsonObject.getJSONObject("region");
+                if (Objects.nonNull(regionJsonObject)) {
+                    region = regionJsonObject.getString("_content");
+                }
+
+                JSONObject localityJsonObject = locationJsonObject.getJSONObject("locality");
+                if (Objects.nonNull(localityJsonObject)) {
+                    locality = localityJsonObject.getString("_content");
+                }
             }
 
             String url = photoJsonObject.getJSONObject("urls").getJSONArray("url").getJSONObject(0).getString("_content");
@@ -193,7 +237,7 @@ public class FlickrUtil {
 
 
     private static String deleteInvalidChars(String json) {
-        if (Objects.isNull(json)) {
+        if (StringUtils.isEmpty(json)) {
             return null;
         }
 

@@ -2,6 +2,7 @@ package com.adu.utils;
 
 import com.adu.BaseTest;
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.nio.file.Files;
@@ -38,10 +39,24 @@ public class FlickrUtilTest extends BaseTest {
         params.put("bbox", "116.06,39.80,116.65,40.16");
         params.put("geo_context", "2");
         params.put("content_type", "1");
+        params.put("per_page", "100");
 
-        String res = FlickrUtil.searchPhotoInfos(params);
-        Files.write(Paths.get("photo_info.txt"), res.getBytes("UTF-8"));
-        logRes(res);
+        int startPage = 1;
+        while (true) {
+            int endPage = startPage + 10;
+            String res = FlickrUtil.searchPhotoInfos(params, startPage, endPage);
+            if (StringUtils.isEmpty(res)) {
+                logger.info("[end_searchPhotoInfos]startPage={}", startPage);
+                return;
+            }
+
+            String fileName = String.format("D:\\data\\flickr\\%04d.txt", startPage);
+            Files.write(Paths.get(fileName), res.getBytes("UTF-8"));
+
+            startPage = endPage;
+
+        }
+        //logRes(res);
     }
 
 
