@@ -1,6 +1,7 @@
 package com.adu.utils;
 
 import com.adu.model.HttpOptions;
+import com.adu.model.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -42,7 +43,8 @@ public class FlickrUtil {
         String res = null;
         try {
             //TODO
-            res = HttpClientUtil.httpGet("https://api.flickr.com/services/rest", params, httpOptions);
+            HttpRequest httpRequest = new HttpRequest().setUrl("https://api.flickr.com/services/rest").setParams(params);
+            res = HttpClientUtil.httpGet(httpRequest, httpOptions).getResult();
             //res = mockSearchResult();
             res = deleteInvalidChars(res);
         } catch (Exception e) {
@@ -67,7 +69,8 @@ public class FlickrUtil {
         String res = null;
         try {
             //TODO
-            res = HttpClientUtil.httpGet("https://api.flickr.com/services/rest", params, httpOptions);
+            HttpRequest httpRequest = new HttpRequest().setUrl("https://api.flickr.com/services/rest").setParams(params);
+            res = HttpClientUtil.httpGet(httpRequest, httpOptions).getResult();
             //res = mockPhotoInfoResult();
             res = deleteInvalidChars(res);
         } catch (Exception e) {
