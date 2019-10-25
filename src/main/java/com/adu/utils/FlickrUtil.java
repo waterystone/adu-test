@@ -229,7 +229,7 @@ public class FlickrUtil {
             List<String> columnValues = Lists.newArrayList(String.valueOf(photoId), title, takenDate, tags, longitude, latitude, accuracy, country, county, region, locality, url);
             return COLUMN_JOINER.join(columnValues);
         } catch (Exception e) {
-            logger.error("[ERROR_parsePhotoInfo]photoId={},photoInfo={}", photoId, photoInfo, e);
+            logger.error("[ERROR_parsePhotoInfo]photoId={},photoInfo={},errMsg={}", photoId, StringUtils.substring(photoInfo, 0, 10), StringUtils.substring(e.getMessage(), 0, 20));
         }
 
         return null;

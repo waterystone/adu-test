@@ -41,20 +41,23 @@ public class FlickrUtilTest extends BaseTest {
         params.put("content_type", "1");
         params.put("per_page", "100");
 
-        int startPage = 1;
+        int startPage = 2581;
         while (true) {
             int endPage = startPage + 10;
             String res = FlickrUtil.searchPhotoInfos(params, startPage, endPage);
             if (StringUtils.isEmpty(res)) {
-                logger.info("[end_searchPhotoInfos]startPage={}", startPage);
-                return;
+                logger.info("[empty_searchPhotoInfos]startPage={}", startPage);
+                continue;
             }
 
             String fileName = String.format("D:\\data\\flickr\\%04d.txt", startPage);
             Files.write(Paths.get(fileName), res.getBytes("UTF-8"));
+            logger.info("[success_write_file]startPage={}", startPage);
 
             startPage = endPage;
-
+            if (startPage > 2950) {
+                break;
+            }
         }
         //logRes(res);
     }
