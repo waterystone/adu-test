@@ -3,6 +3,9 @@ package com.adu.utils;
 import com.adu.Constants;
 import com.adu.handler.HttpRequestRetryHandler;
 import com.adu.model.HttpOptions;
+import com.adu.model.HttpRequest;
+import com.adu.model.HttpResponse;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
@@ -32,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import javax.net.ssl.SSLContext;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -41,8 +45,8 @@ import java.util.stream.Collectors;
  * 带有连接池的Http客户端工具类。具有如下特点：
  * <ol>
  * <li>基于apache的高性能Http客户端{@link org.apache.http.client.HttpClient}；</li>
- * <li>连接池的最大连接数默认是20，可通过{@link #init(int, int)}、或者系统变量-Darch.common.http.max.total=200指定；</li>
- * <li>连接池的每个路由的最大连接数默认是2，可通过{@link #init(int, int)}、或者系统变量-Darch.common.http.max.per.route=10指定；</li>
+ * <li>连接池的最大连接数默认是20，可通过{@link #init(int, int)}、或者系统变量-Dzzarch.common.http.max.total=200指定；</li>
+ * <li>连接池的每个路由的最大连接数默认是2，可通过{@link #init(int, int)}、或者系统变量-Dzzarch.common.http.max.per.route=10指定；</li>
  * <li>可设置超时，通过{@link HttpOptions}进行设置；</li>
  * <li>可重试，通过{@link HttpOptions}进行设置；</li>
  * </ol>
@@ -66,55 +70,34 @@ public class HttpClientUtil {
         CONNECTION_MANAGER = buildPoolingHttpClientConnectionManager(maxTotal, maxPerRoute);
     }
 
-    public static String httpGet(String url) throws Exception {
-        return httpGet(url, null, null, null);
-    }
 
-
-    public static String httpGet(String url, HttpOptions httpOptions) throws Exception {
-        return httpGet(url, null, null, httpOptions);
-    }
-
-
-    public static String httpGet(String url, Map<String, ?> params) throws Exception {
-        return httpGet(url, null, params, null);
-    }
-
-
-    public static String httpGet(String url, Map<String, ?> params, HttpOptions httpOptions) throws Exception {
-        return httpGet(url, null, params, httpOptions);
-    }
-
-
-    public static String httpGet(String url, Map<String, ?> headers, Map<String, ?> params) throws Exception {
-        return httpGet(url, headers, params, null);
+    public static HttpResponse httpGet(HttpRequest httpRequest) throws Exception {
+        return httpGet(httpRequest, null);
     }
 
     /**
      * 发送 HTTP GET请求
      *
-     * @param url
-     * @param headers     请求头
-     * @param params      请求参数
+     * @param httpRequest 请求参数，如url，header等。
      * @param httpOptions 配置参数，如重试次数、超时时间等。
      * @return
      * @throws Exception
      */
-    public static String httpGet(String url, Map<String, ?> headers, Map<String, ?> params, HttpOptions httpOptions) throws Exception {
+    public static HttpResponse httpGet(HttpRequest httpRequest, HttpOptions httpOptions) throws Exception {
         // 装载请求地址和参数
-        URIBuilder ub = new URIBuilder(url);
+        URIBuilder ub = new URIBuilder(httpRequest.getUrl());
 
         // 转换请求参数
-        List<NameValuePair> pairs = convertParams2NVPS(params);
+        List<NameValuePair> pairs = convertParams2NVPS(httpRequest.getParams());
         if (!pairs.isEmpty()) {
             ub.setParameters(pairs);
         }
         HttpGet httpGet = new HttpGet(ub.build());
 
         // 设置请求头
-        if (Objects.nonNull(headers)) {
-            for (Map.Entry<String, ?> param : headers.entrySet()) {
-                httpGet.addHeader(param.getKey(), String.valueOf(param.getValue()));
+        if (Objects.nonNull(httpRequest.getHeaders())) {
+            for (Map.Entry<String, String> header : httpRequest.getHeaders().entrySet()) {
+                httpGet.addHeader(header.getKey(), String.valueOf(header.getValue()));
             }
         }
 
@@ -122,42 +105,32 @@ public class HttpClientUtil {
     }
 
 
-    public static String httpPost(String url, Map<String, ?> params) throws Exception {
-        return httpPost(url, null, params, null);
+    public static HttpResponse httpPost(HttpRequest httpRequest) throws Exception {
+        return httpPost(httpRequest, null);
     }
 
-    public static String httpPost(String url, Map<String, ?> params, HttpOptions httpOptions) throws Exception {
-        return httpPost(url, null, params, httpOptions);
-    }
-
-
-    public static String httpPost(String url, Map<String, ?> headers, Map<String, ?> params) throws Exception {
-        return httpPost(url, headers, params, null);
-    }
 
     /**
      * 发送 HTTP POST请求
      *
-     * @param url
-     * @param headers     请求头
-     * @param params      请求参数
-     * @param httpOptions 配置参数，如重试次数、超时时间等。
+     * @param httpRequest 请求参数
+     * @param httpOptions 配置参数
      * @return
      * @throws Exception
      */
-    public static String httpPost(String url, Map<String, ?> headers, Map<String, ?> params, HttpOptions httpOptions) throws Exception {
-        HttpPost httpPost = new HttpPost(url);
+    public static HttpResponse httpPost(HttpRequest httpRequest, HttpOptions httpOptions) throws Exception {
+        HttpPost httpPost = new HttpPost(httpRequest.getUrl());
 
         // 转换请求参数
-        List<NameValuePair> pairs = convertParams2NVPS(params);
+        List<NameValuePair> pairs = convertParams2NVPS(httpRequest.getParams());
         if (!pairs.isEmpty()) {
             httpPost.setEntity(new UrlEncodedFormEntity(pairs, StandardCharsets.UTF_8.name()));
         }
 
         // 设置请求头
-        if (Objects.nonNull(headers)) {
-            for (Map.Entry<String, ?> param : headers.entrySet()) {
-                httpPost.addHeader(param.getKey(), String.valueOf(param.getValue()));
+        if (Objects.nonNull(httpRequest.getHeaders())) {
+            for (Map.Entry<String, String> header : httpRequest.getHeaders().entrySet()) {
+                httpPost.addHeader(header.getKey(), String.valueOf(header.getValue()));
             }
         }
 
@@ -174,7 +147,7 @@ public class HttpClientUtil {
      * @return
      * @throws Exception
      */
-    public static String httpPostJson(String url, String param, HttpOptions httpOptions) throws Exception {
+    public static HttpResponse httpPostJson(String url, String param, HttpOptions httpOptions) throws Exception {
         HttpPost httpPost = new HttpPost(url);
 
         // 设置请求头
@@ -195,7 +168,7 @@ public class HttpClientUtil {
      * @return
      * @throws Exception
      */
-    public static String httpPostXml(String url, String param, HttpOptions httpOptions) throws Exception {
+    public static HttpResponse httpPostXml(String url, String param, HttpOptions httpOptions) throws Exception {
         HttpPost httpPost = new HttpPost(url);
 
         // 设置请求头
@@ -216,15 +189,18 @@ public class HttpClientUtil {
      * @return
      * @throws Exception
      */
-    public static String httpPostMultipart(String url, Map<String, ContentBody> multiparts, HttpOptions httpOptions) throws Exception {
+    public static HttpResponse httpPostMultipart(String url, Map<String, ContentBody> multiparts, HttpOptions httpOptions) throws Exception {
         HttpPost httpPost = new HttpPost(url);
 
         // 设置Multipart
-        MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
-        for (Map.Entry<String, ContentBody> multipartEntry : multiparts.entrySet()) {
-            multipartEntityBuilder.addPart(multipartEntry.getKey(), multipartEntry.getValue());
+        if (Objects.nonNull(multiparts)) {
+            MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
+            for (Map.Entry<String, ContentBody> multipartEntry : multiparts.entrySet()) {
+                multipartEntityBuilder.addPart(multipartEntry.getKey(), multipartEntry.getValue());
+            }
+
+            httpPost.setEntity(multipartEntityBuilder.build());
         }
-        httpPost.setEntity(multipartEntityBuilder.build());
 
         return doHttp(httpPost, httpOptions);
     }
@@ -249,7 +225,7 @@ public class HttpClientUtil {
      * @return
      */
     public static List<NameValuePair> convertParams2NVPS(Map<String, ?> params) {
-        if (params == null) {
+        if (Objects.isNull(params)) {
             return new ArrayList<>();
         }
 
@@ -263,9 +239,9 @@ public class HttpClientUtil {
      * @return
      * @throws Exception
      */
-    private static String doHttp(HttpRequestBase request, HttpOptions httpOptions) throws Exception {
+    private static HttpResponse doHttp(HttpRequestBase request, HttpOptions httpOptions) throws Exception {
         if (Objects.isNull(httpOptions)) {//如果为空，则用默认的。
-            httpOptions = new HttpOptions();
+            httpOptions = HttpOptions.DEFAULT_HTTP_OPTION;
         }
         // 设置超时时间
         if (Objects.nonNull(httpOptions.getTimeoutMs())) {
@@ -293,26 +269,36 @@ public class HttpClientUtil {
      * @return
      * @throws Exception
      */
-    private static String doRequest(CloseableHttpClient httpClient, HttpRequestBase request) throws Exception {
-        String result = null;
+    private static HttpResponse doRequest(CloseableHttpClient httpClient, HttpRequestBase request) throws Exception {
+        HttpResponse res = new HttpResponse();
         CloseableHttpResponse response = null;
+        long start = System.currentTimeMillis();
 
         try {
             // 获取请求结果
             response = httpClient.execute(request);
+
             // 解析请求结果
             HttpEntity entity = response.getEntity();
-            // 转换结果
-            result = EntityUtils.toString(entity, StandardCharsets.UTF_8.name());
-            // 关闭IO流
-            EntityUtils.consume(entity);
+            String result = EntityUtils.toString(entity, StandardCharsets.UTF_8.name()); // 转换结果
+            EntityUtils.consume(entity); // 关闭IO流
+
+            //解析返回header
+            Map<String, String> headers = new HashMap<>(response.getAllHeaders().length);
+            for (Header header : response.getAllHeaders()) {
+                headers.put(header.getName(), header.getValue());
+            }
+
+            res.setStatusCode(response.getStatusLine().getStatusCode()).setResult(result).setHeaders(headers);
         } finally {
-            if (null != response) {
+            if (Objects.nonNull(response)) {
                 response.close();
             }
         }
 
-        return result;
+        long elapsed = System.currentTimeMillis() - start;
+        logger.debug("op=end_doRequest,request={},res={},elapsed={}", request, res, elapsed);
+        return res;
     }
 
 
@@ -367,5 +353,4 @@ public class HttpClientUtil {
 
         return null;
     }
-
 }

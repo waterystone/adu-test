@@ -7,6 +7,8 @@ package com.adu.model;
  * @date 2019-09-19 14:52
  */
 public class HttpOptions {
+    public static final HttpOptions DEFAULT_HTTP_OPTION = new HttpOptions();
+
     private Integer retryCount;//重试次数，默认null表示不重试。
     private Integer timeoutMs;//每次请求的超时时间，毫秒。
 

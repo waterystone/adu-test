@@ -2,6 +2,8 @@ package com.adu.utils;
 
 import com.adu.BaseTest;
 import com.adu.model.HttpOptions;
+import com.adu.model.HttpRequest;
+import com.adu.model.HttpResponse;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
@@ -30,16 +32,19 @@ public class HttpClientUtilTest extends BaseTest {
 
     @Test
     public void httpGet() throws Exception {
-        String url = "https://www.flickr.com/services/rest/?method=flickr.test.echo&name=value";
-        String res = HttpClientUtil.httpGet(url);
+        String url = "https://api.apiopen.top/recommendPoetry";
+        HttpRequest httpRequest = new HttpRequest().setUrl(url);
+
+        HttpResponse res = HttpClientUtil.httpGet(httpRequest);
         logger.info("res={}", res);
     }
 
     @Test
     public void httpGet1() throws Exception {
         String url = "https://api.apiopen.top/recommendPoetry";
+        HttpRequest httpRequest = new HttpRequest().setUrl(url);
 
-        String res = HttpClientUtil.httpGet(url, DEFAULT_HTTP_OPTIONS);
+        HttpResponse res = HttpClientUtil.httpGet(httpRequest, DEFAULT_HTTP_OPTIONS);
         logger.info("res={}", res);
     }
 
@@ -48,8 +53,9 @@ public class HttpClientUtilTest extends BaseTest {
         String url = "https://www.apiopen.top/novelSearchApi";
         Map<String, String> params = new HashMap<>();
         params.put("name", "盗墓笔记");
+        HttpRequest httpRequest = new HttpRequest().setUrl(url).setParams(params);
 
-        String res = HttpClientUtil.httpGet(url, params);
+        HttpResponse res = HttpClientUtil.httpGet(httpRequest);
         logger.info("res={}", res);
     }
 
@@ -58,8 +64,18 @@ public class HttpClientUtilTest extends BaseTest {
         String url = "https://www.apiopen.top/novelSearchApi";
         Map<String, String> params = new HashMap<>();
         params.put("name", "盗墓笔记");
+        HttpRequest httpRequest = new HttpRequest().setUrl(url).setParams(params);
 
-        String res = HttpClientUtil.httpGet(url, params, DEFAULT_HTTP_OPTIONS);
+        HttpResponse res = HttpClientUtil.httpGet(httpRequest, DEFAULT_HTTP_OPTIONS);
+        logger.info("res={}", res);
+    }
+
+    @Test
+    public void httpGet4() throws Exception {
+        String url = "http://localhost:8087/hello";
+        HttpRequest httpRequest = new HttpRequest().setUrl(url);
+
+        HttpResponse res = HttpClientUtil.httpGet(httpRequest);
         logger.info("res={}", res);
     }
 
@@ -69,8 +85,9 @@ public class HttpClientUtilTest extends BaseTest {
         String url = "https://www.apiopen.top/novelSearchApi";
         Map<String, String> params = new HashMap<>();
         params.put("name", "盗墓笔记");
+        HttpRequest httpRequest = new HttpRequest().setUrl(url).setParams(params);
 
-        String res = HttpClientUtil.httpPost(url, params, DEFAULT_HTTP_OPTIONS);
+        HttpResponse res = HttpClientUtil.httpPost(httpRequest, DEFAULT_HTTP_OPTIONS);
         logger.info("res={}", res);
     }
 
@@ -81,7 +98,7 @@ public class HttpClientUtilTest extends BaseTest {
         multiparts.put("name", new StringBody("hello", ContentType.TEXT_PLAIN));
         multiparts.put("file", new FileBody(new File("/opt/system.env")));
 
-        String res = HttpClientUtil.httpPostMultipart(url, multiparts, DEFAULT_HTTP_OPTIONS);
+        HttpResponse res = HttpClientUtil.httpPostMultipart(url, multiparts, DEFAULT_HTTP_OPTIONS);
         logger.info("res={}", res);
     }
 

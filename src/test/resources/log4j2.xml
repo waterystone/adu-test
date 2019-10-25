@@ -76,12 +76,14 @@
     </Appenders>
 
     <Loggers>
-        <asyncRoot level="INFO" includeLocation="true">
+        <logger name="com.adu.HelloTest" level="DEBUG" />
+        <!--    asyncRoot    -->
+        <Root level="INFO" includeLocation="true">
             <AppenderRef ref="CONSOLE" />
             <AppenderRef ref="DEBUG" />
             <AppenderRef ref="INFO" />
             <AppenderRef ref="WARN" />
             <AppenderRef ref="ERROR" />
-        </asyncRoot>
+        </Root>
     </Loggers>
 </Configuration>
