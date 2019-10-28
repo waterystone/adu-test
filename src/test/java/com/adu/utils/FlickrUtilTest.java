@@ -46,7 +46,7 @@ public class FlickrUtilTest extends BaseTest {
         params.put("content_type", "1");
         params.put("per_page", "200");
 
-        LocalDate startDate = LocalDate.parse("2010-02-01");
+        LocalDate startDate = LocalDate.parse("2011-08-01");
         LocalDate maxDate = LocalDate.parse("2019-10-31");
         while (true) {
             LocalDate endDate = startDate.plusMonths(1);

@@ -205,32 +205,32 @@ public class FlickrUtil {
             String locality = null;
             JSONObject locationJsonObject = photoJsonObject.getJSONObject("location");
             if (Objects.nonNull(locationJsonObject)) {
-                longitude = locationJsonObject.getString("longitude");
-                latitude = locationJsonObject.getString("latitude");
-                accuracy = locationJsonObject.getString("accuracy");
+                longitude = empty2null(locationJsonObject.getString("longitude"));
+                latitude = empty2null(locationJsonObject.getString("latitude"));
+                accuracy = empty2null(locationJsonObject.getString("accuracy"));
 
                 JSONObject countryJsonObject = locationJsonObject.getJSONObject("country");
                 if (Objects.nonNull(countryJsonObject)) {
-                    country = countryJsonObject.getString("_content");
+                    country = empty2null(countryJsonObject.getString("_content"));
                 }
 
                 JSONObject countyJsonObject = locationJsonObject.getJSONObject("county");
                 if (Objects.nonNull(countyJsonObject)) {
-                    county = countyJsonObject.getString("_content");
+                    county = empty2null(countyJsonObject.getString("_content"));
                 }
 
                 JSONObject regionJsonObject = locationJsonObject.getJSONObject("region");
                 if (Objects.nonNull(regionJsonObject)) {
-                    region = regionJsonObject.getString("_content");
+                    region = empty2null(regionJsonObject.getString("_content"));
                 }
 
                 JSONObject localityJsonObject = locationJsonObject.getJSONObject("locality");
                 if (Objects.nonNull(localityJsonObject)) {
-                    locality = localityJsonObject.getString("_content");
+                    locality = empty2null(localityJsonObject.getString("_content"));
                 }
             }
 
-            String url = photoJsonObject.getJSONObject("urls").getJSONArray("url").getJSONObject(0).getString("_content");
+            String url = empty2null(photoJsonObject.getJSONObject("urls").getJSONArray("url").getJSONObject(0).getString("_content"));
 
             List<String> columnValues = Lists.newArrayList(String.valueOf(photoId), title, takenDate, tags, longitude, latitude, accuracy, country, county, region, locality, url);
             return COLUMN_JOINER.join(columnValues);
@@ -258,6 +258,14 @@ public class FlickrUtil {
     private static void addCommonParams(Map<String, String> params) {
         params.put("api_key", "38b5b6afbb6a7f604cc6487ff07aec70");
         params.put("format", "json");
+    }
+
+    private static String empty2null(String str) {
+        if (StringUtils.isEmpty(str)) {
+            return null;
+        }
+
+        return str;
     }
 
     private static String mockSearchResult() {
