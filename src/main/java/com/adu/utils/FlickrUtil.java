@@ -47,6 +47,7 @@ public class FlickrUtil {
             res = HttpClientUtil.httpGet(httpRequest, httpOptions).getResult();
             //res = mockSearchResult();
             res = deleteInvalidChars(res);
+            logger.info("op=end_searchPhotos,params={},page={},res={}", params, page, res);
         } catch (Exception e) {
             logger.error("[ERROR_search]params={},page={}", params, page, e);
         }
