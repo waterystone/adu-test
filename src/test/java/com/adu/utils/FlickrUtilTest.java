@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -20,6 +22,7 @@ public class FlickrUtilTest extends BaseTest {
         params.put("bbox", "116.06,39.80,116.65,40.16");//经纬度范围
         params.put("geo_context", "2");//outdoor
         params.put("content_type", "1");//拍摄的照片
+        params.put("per_page", "100");
 
         String res = FlickrUtil.searchPhotos(params, 1);
         logRes(res);
@@ -35,27 +38,33 @@ public class FlickrUtilTest extends BaseTest {
 
     @Test
     public void searchPhotoInfos() throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         Map<String, String> params = Maps.newHashMap();
         params.put("bbox", "116.06,39.80,116.65,40.16");
         params.put("geo_context", "2");
         params.put("content_type", "1");
-        params.put("per_page", "100");
+        params.put("per_page", "200");
 
-        int startPage = 2581;
+        LocalDate startDate = LocalDate.parse("2010-02-01");
+        LocalDate maxDate = LocalDate.parse("2019-10-31");
         while (true) {
-            int endPage = startPage + 10;
-            String res = FlickrUtil.searchPhotoInfos(params, startPage, endPage);
+            LocalDate endDate = startDate.plusMonths(1);
+            params.put("min_taken_date", formatter.format(startDate));
+            params.put("max_taken_date", formatter.format(endDate));
+            String res = FlickrUtil.searchPhotoInfos(params, 1, 30);
             if (StringUtils.isEmpty(res)) {
-                logger.info("[empty_searchPhotoInfos]startPage={}", startPage);
+                logger.info("[empty_searchPhotoInfos]startDate={},endDate={}", startDate, endDate);
                 continue;
             }
 
-            String fileName = String.format("D:\\data\\flickr\\%04d.txt", startPage);
+            String fileName = String.format("D:\\data\\flickr\\%s.txt", formatter.format(startDate));
+            //String fileName = String.format("/Users/yunjie.du/data/flickr/2/data/%s.txt", formatter.format(startDate));
             Files.write(Paths.get(fileName), res.getBytes("UTF-8"));
-            logger.info("[success_write_file]startPage={}", startPage);
+            logger.info("[success_write_file]startDate={}", startDate);
 
-            startPage = endPage;
-            if (startPage > 2950) {
+            startDate = endDate;
+            if (startDate.isAfter(maxDate)) {
                 break;
             }
         }

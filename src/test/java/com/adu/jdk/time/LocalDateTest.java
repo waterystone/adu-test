@@ -13,7 +13,7 @@ public class LocalDateTest extends BaseTest {
     @Test
     public void now() {
         LocalDate res = LocalDate.now();
-        logger.debug("res={}", res);
+        logger.info("res={}", res.toString());
     }
 
     @Test

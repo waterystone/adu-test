@@ -47,7 +47,7 @@ public class FlickrUtil {
             res = HttpClientUtil.httpGet(httpRequest, httpOptions).getResult();
             //res = mockSearchResult();
             res = deleteInvalidChars(res);
-            logger.info("op=end_searchPhotos,params={},page={},res={}", params, page, res);
+            logger.info("op=end_searchPhotos,params={},page={}", params, page);
         } catch (Exception e) {
             logger.error("[ERROR_search]params={},page={}", params, page, e);
         }
@@ -108,6 +108,7 @@ public class FlickrUtil {
         StringBuilder builder = new StringBuilder();
         long start = System.currentTimeMillis();
         int totalPage = 0;
+        int totalCount = 0;
         JSONArray photoJsonArray = new JSONArray();
 
         try {
@@ -126,6 +127,7 @@ public class FlickrUtil {
 
             JSONObject photosJsonObject = searchPhotosJsonObject.getJSONObject("photos");
             totalPage = photosJsonObject.getIntValue("pages");
+            totalCount = photosJsonObject.getIntValue("total");
             photoJsonArray = photosJsonObject.getJSONArray("photo");
 
             //2.处理该页内的照片
@@ -149,7 +151,7 @@ public class FlickrUtil {
         }
 
         long elapsed = System.currentTimeMillis() - start;
-        logger.info("[end_searchPhotoInfos_page]page={},size={},totalPage={},elapsed={}", page, photoJsonArray.size(), totalPage, elapsed);
+        logger.info("[end_searchPhotoInfos_page]page={},size={},totalPage={},totalCount={},elapsed={}", page, photoJsonArray.size(), totalPage, totalCount, elapsed);
         return builder.toString();
     }
 
