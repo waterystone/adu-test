@@ -151,7 +151,7 @@ public class FlickrUtil {
         }
 
         long elapsed = System.currentTimeMillis() - start;
-        logger.info("[end_searchPhotoInfos_page]page={},size={},totalPage={},totalCount={},elapsed={}", page, photoJsonArray.size(), totalPage, totalCount, elapsed);
+        logger.info("[end_searchPhotoInfos_page]page={},size={},totalPage={},totalCount={},elapsed={},params={}", page, photoJsonArray.size(), totalPage, totalCount, elapsed, params);
         return builder.toString();
     }
 

@@ -43,17 +43,17 @@ public class FlickrUtilTest extends BaseTest {
 
     @Test
     public void searchPhotoInfos() throws Exception {
-        HttpClientUtil.init(20, 5);
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
-        SearchPhotoInfoTask searchPhotoInfoTask1 = new SearchPhotoInfoTask(LocalDate.parse("2012-01-01"), LocalDate.parse("2013-12-31"));
-        SearchPhotoInfoTask searchPhotoInfoTask2 = new SearchPhotoInfoTask(LocalDate.parse("2014-01-01"), LocalDate.parse("2015-12-31"));
-        SearchPhotoInfoTask searchPhotoInfoTask3 = new SearchPhotoInfoTask(LocalDate.parse("2016-01-01"), LocalDate.parse("2017-12-31"));
-        SearchPhotoInfoTask searchPhotoInfoTask4 = new SearchPhotoInfoTask(LocalDate.parse("2018-01-01"), LocalDate.parse("2019-10-31"));
+        HttpClientUtil.init(20, 8);
+        ExecutorService executorService = Executors.newFixedThreadPool(8);
+        //executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-05-01"), LocalDate.parse("2013-05-30")));
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-04-01"), LocalDate.parse("2013-04-11")));
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-04-11"), LocalDate.parse("2013-04-21")));
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-04-21"), LocalDate.parse("2013-05-01")));
 
-        executorService.submit(searchPhotoInfoTask1);
-        executorService.submit(searchPhotoInfoTask2);
-        executorService.submit(searchPhotoInfoTask3);
-        executorService.submit(searchPhotoInfoTask4);
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2014-04-01"), LocalDate.parse("2014-04-11")));
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2014-04-11"), LocalDate.parse("2014-04-21")));
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2014-04-21"), LocalDate.parse("2014-05-01")));
+
 
         Uninterruptibles.sleepUninterruptibly(3, TimeUnit.DAYS);
     }
@@ -61,17 +61,32 @@ public class FlickrUtilTest extends BaseTest {
     class SearchPhotoInfoTask implements Runnable {
         private LocalDate minDate;
         private LocalDate maxDate;
+        private boolean isBatch = false; //是否分批次
 
         public SearchPhotoInfoTask(LocalDate minDate, LocalDate maxDate) {
             this.minDate = minDate;
             this.maxDate = maxDate;
         }
 
+
+        public SearchPhotoInfoTask(LocalDate minDate, LocalDate maxDate, boolean isBatch) {
+            this.minDate = minDate;
+            this.maxDate = maxDate;
+            this.isBatch = isBatch;
+        }
+
+
         @Override
         public void run() {
+            logger.info("op=start_SearchPhotoInfoTask,minDate={},maxDate={}", minDate, maxDate);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             Thread.currentThread().setName(String.format("search-%s", formatter.format(minDate)));
             LocalDate startDate = minDate;
+
+            if (minDate.isAfter(maxDate)) {
+                logger.warn("[WARN_minDate_after_maxDate]minDate={},maxDate={}", minDate, maxDate);
+                return;
+            }
 
             Map<String, String> params = Maps.newHashMap();
             params.put("bbox", "116.06,39.80,116.65,40.16");
@@ -81,7 +96,7 @@ public class FlickrUtilTest extends BaseTest {
 
             while (true) {
                 try {
-                    LocalDate endDate = startDate.plusMonths(1);
+                    LocalDate endDate = isBatch ? startDate.plusMonths(1) : maxDate;
                     params.put("min_taken_date", formatter.format(startDate));
                     params.put("max_taken_date", formatter.format(endDate));
                     String res = FlickrUtil.searchPhotoInfos(params, 1, 30);
@@ -96,13 +111,15 @@ public class FlickrUtilTest extends BaseTest {
                     logger.info("[success_write_file]startDate={}", startDate);
 
                     startDate = endDate;
-                    if (startDate.isAfter(maxDate)) {
+                    if (!isBatch || startDate.isAfter(maxDate)) {
                         break;
                     }
                 } catch (IOException e) {
                     logger.error("[ERROR_run]startDate={},endDate={}", startDate, e);
                 }
             }
+
+            logger.info("op=end_SearchPhotoInfoTask,minDate={},maxDate={}", minDate, maxDate);
         }
     }
 
