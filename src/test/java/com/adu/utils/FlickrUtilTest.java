@@ -46,13 +46,18 @@ public class FlickrUtilTest extends BaseTest {
         HttpClientUtil.init(20, 8);
         ExecutorService executorService = Executors.newFixedThreadPool(8);
         //executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-05-01"), LocalDate.parse("2013-05-30")));
-        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-04-01"), LocalDate.parse("2013-04-11")));
-        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-04-11"), LocalDate.parse("2013-04-21")));
-        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-04-21"), LocalDate.parse("2013-05-01")));
-
-        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2014-04-01"), LocalDate.parse("2014-04-11")));
-        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2014-04-11"), LocalDate.parse("2014-04-21")));
-        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2014-04-21"), LocalDate.parse("2014-05-01")));
+//        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-04-01"), LocalDate.parse("2013-04-11")));
+//        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-04-11"), LocalDate.parse("2013-04-21")));
+//        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2013-04-21"), LocalDate.parse("2013-05-01")));
+//
+//        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2014-04-01"), LocalDate.parse("2014-04-11")));
+//        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2014-04-11"), LocalDate.parse("2014-04-21")));
+//        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2014-04-21"), LocalDate.parse("2014-05-01")));
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2010-01-01"), LocalDate.parse("2012-01-01")));
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2012-01-01"), LocalDate.parse("2014-01-01")));
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2014-01-01"), LocalDate.parse("2016-01-01")));
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2016-01-01"), LocalDate.parse("2018-01-01")));
+        executorService.submit(new SearchPhotoInfoTask(LocalDate.parse("2018-01-01"), LocalDate.parse("2020-01-01")));
 
 
         Uninterruptibles.sleepUninterruptibly(3, TimeUnit.DAYS);
@@ -89,7 +94,7 @@ public class FlickrUtilTest extends BaseTest {
             }
 
             Map<String, String> params = Maps.newHashMap();
-            params.put("bbox", "116.06,39.80,116.65,40.16");
+            params.put("bbox", "116.06,39.70,116.65,39.8");
             params.put("geo_context", "2");
             params.put("content_type", "1");
             params.put("per_page", "200");

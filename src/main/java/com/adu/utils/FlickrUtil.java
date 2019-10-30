@@ -181,6 +181,8 @@ public class FlickrUtil {
             String title = photoJsonObject.getJSONObject("title").getString("_content");
             if (StringUtils.isEmpty(title)) {
                 title = null;
+            } else if (StringUtils.contains(title, '&')) {
+                title = StringUtils.replaceChars(title, '&', ' ');
             }
 
             String takenDate = photoJsonObject.getJSONObject("dates").getString("taken");
