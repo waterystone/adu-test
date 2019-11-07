@@ -1,13 +1,12 @@
 package com.adu.jdk.lang;
 
-import org.junit.Test;
-
 import com.adu.BaseTest;
+import org.junit.Test;
 
 public class ThreadTest extends BaseTest {
 
     @Test
-    public void newTest() throws InterruptedException {
+    public void testInterrupt() throws InterruptedException {
         Thread thread = new Thread() {
 
             @Override
@@ -19,13 +18,13 @@ public class ThreadTest extends BaseTest {
                         for (int j = 0; j < 1000000000; j++) {
                             Math.sin(0.34334);
                         }
-                        logger.info("i={}", i);
+                        logger.info("i={},interrupted={}", i, Thread.currentThread().isInterrupted());
                     }
-                    logger.info("thread-end");
+                    logger.info("thread-end,interrupted={}", Thread.currentThread().isInterrupted());
                 } catch (Exception e) {
-                    logger.info("Exception,interrupted={}", Thread.interrupted(), e);
+                    logger.info("Exception,interrupted={}", Thread.currentThread().isInterrupted(), e);
                 } finally {
-                    logger.info("finally~~,interrupted={}", Thread.interrupted());
+                    logger.info("finally~~,interrupted={}", Thread.currentThread().isInterrupted());
                 }
             }
         };
@@ -33,11 +32,13 @@ public class ThreadTest extends BaseTest {
         Thread.sleep(1000);
         logger.info("start interrupt thread!");
         thread.interrupt();
+        logger.info("end interrupt thread!");
 
         thread.join();
         logger.debug("end");
 
     }
+
 
     @Test
     public void priority() {
