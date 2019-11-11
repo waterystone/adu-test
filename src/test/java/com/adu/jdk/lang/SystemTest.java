@@ -36,4 +36,10 @@ public class SystemTest extends BaseTest {
         }
 
     }
+
+    @Test
+    public void getProperty() {
+        String res = System.getProperty("serviceName");
+        logRes(res);
+    }
 }

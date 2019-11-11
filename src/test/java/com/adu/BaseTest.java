@@ -1,17 +1,14 @@
 package com.adu;
 
+import com.google.common.util.concurrent.Uninterruptibles;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.BaseStream;
-
-import com.adu.utils.JsonUtil;
-import com.google.common.util.concurrent.Uninterruptibles;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.adu.utils.StringUtil;
 
 /**
  * @author yunjie.du
@@ -26,7 +23,7 @@ public class BaseTest {
         Iterator<?> iterator = iterable.iterator();
         int i = 0;
         while (iterator.hasNext()) {
-            logger.debug("[{}]{}", ++i, stringfy(iterator.next()));
+            logger.info("[{}]{}", ++i, stringfy(iterator.next()));
         }
     }
 
@@ -34,25 +31,25 @@ public class BaseTest {
         Iterator iterator = stream.iterator();
         int i = 0;
         while (iterator.hasNext()) {
-            logger.debug("[{}]{}", ++i, stringfy(iterator.next()));
+            logger.info("[{}]{}", ++i, stringfy(iterator.next()));
         }
     }
 
     protected <T> void print(T[] arr) {
         for (int i = 0; i < arr.length; i++) {
-            logger.debug("[{}]{}", i + 1, stringfy(arr[i]));
+            logger.info("[{}]{}", i + 1, stringfy(arr[i]));
         }
     }
 
     protected void print(Map<?, ?> map) {
         int i = 0;
         for (Map.Entry entry : map.entrySet()) {
-            logger.debug("[{}]key={},value={}", ++i, stringfy(entry.getKey()), stringfy(entry.getValue()));
+            logger.info("[{}]key={},value={}", ++i, stringfy(entry.getKey()), stringfy(entry.getValue()));
         }
     }
 
     protected void logRes(Object res) {
-        logger.debug("res={}", stringfy(res));
+        logger.info("res={}", stringfy(res));
     }
 
     protected String stringfy(Object obj) {
