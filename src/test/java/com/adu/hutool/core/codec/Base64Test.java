@@ -18,6 +18,18 @@ public class Base64Test extends BaseTest {
     }
 
     @Test
+    public void encode1() {
+        String res1 = Base64.encode("1099511627776");
+        String res2 = Base64.encode("012345678913");
+        logger.info("res1={},res2={}", res1, res2);
+    }
+
+    @Test
+    public void name() {
+
+    }
+
+    @Test
     public void decodeStr() {
         String res = Base64.decodeStr("aGVsbG8=");
         logRes(res);
