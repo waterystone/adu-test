@@ -49,27 +49,19 @@ public class NumberConvertUtilTest extends BaseTest {
     }
 
     @Test
+    public void toBaseString() {
+        long value = Long.MAX_VALUE;
+        String res = NumericConvertUtil.toBaseString(value, NumericConvertUtil.BaseType.BASE_62);
+        logRes(res);
+    }
+
+    @Test
     public void toDecimal() {
         //1qAt3zcqZ:311973514397745
         //1qAt3zcqZ0Y
         long res1 = NumericConvertUtil.toDecimal("1qAt3zcqZ0Y", NumericConvertUtil.BaseType.BASE_62);
-        long res2 = decoding(StringUtils.reverse("1qAt3zcqZ0Y"));
-        logger.info("res1={},res2={}", res1, res2);
+        //long res2 = decoding(StringUtils.reverse("1qAt3zcqZ0Y"));
+        logger.info("res1={}", res1);
     }
 
-    @Test
-    public void test() {
-        long a = 19342357892656408L;
-        long res1 = a + 3782;
-        long res2 = (long) (a + 3782.0);
-
-        logger.info("res1={},res2={}", res1, res2);
-    }
-
-    @Test
-    public void toBaseString() {
-        long value = 1199226189344931840L;
-        String res = NumericConvertUtil.toBaseString(value, NumericConvertUtil.BaseType.BASE_62);
-        logRes(res);
-    }
 }

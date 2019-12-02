@@ -24,12 +24,41 @@ public class MathTest extends BaseTest {
 
     @Test
     public void test1() {
+        double min = Double.MIN_VALUE, max = Double.MAX_VALUE;
+        logger.info("min={},max={}", min, max);
+    }
+
+    @Test
+    public void test2() {
+        long base = 1234567890123456789L;
+        double a = base * 1.0;
+        long b = (long) a;
+        logger.info("base={},a={},b={}", base, a, b);
+    }
+
+    @Test
+    public void test21() {
+        long base = 148907952008899072L;
+        double a = base * 1.0;
+        long b = (long) a;
+        logger.info("base={},a={},b={}", base, a, b);
+    }
+
+    @Test
+    public void test3() {
+        double base = 123456789012345678901234567890.0;
+        long a = (long) base;
+        logger.info("base={},a={}", base, a);
+    }
+
+    @Test
+    public void test4() {
         double t1 = 0.58;
         double t2 = 1 - 0.42;
         double t3 = 0.79 - 0.21;
         double t4 = 0.5 + 0.08;
-        double t5 = 0.37 + 0.21;
-        logger.info("t1={},t2={},t3={},t4={},t5={}", t1, t2, t3, t4, t5);
+        double t5 = 0.2 + 0.38;
+        logger.info("t1={},t2={},t3={},t4={},t5={},t1==t4={}", t1, t2, t3, t4, t5,(t1==t4));
 
         double s1 = 0.08;
         double s2 = 0.4 * 0.2;
@@ -40,9 +69,7 @@ public class MathTest extends BaseTest {
     }
 
     @Test
-    public void name() {
-        double min = Double.MIN_VALUE, max = Double.MAX_VALUE;
-        logger.info("min={},max={}", min, max);
+    public void test5() {
 
         double m = 1.7976931348623157;
         double n = 1.79769313486231575;
@@ -67,5 +94,14 @@ public class MathTest extends BaseTest {
         long b = 1 + (long) Math.pow(62, 10);
         long c = 1 + ArithmeticUtils.pow(62L, 10);
         logger.info("base1={},base2={},a={},b={},c={}", base1, base2, a, b, c);
+    }
+
+    @Test
+    public void test6() {
+        long a = 19342357892656408L;
+        long res1 = a + 3782;
+        long res2 = (long) (a + 3782.0);
+
+        logger.info("res1={},res2={},res3={}", res1, res2, a + 3782.0);
     }
 }

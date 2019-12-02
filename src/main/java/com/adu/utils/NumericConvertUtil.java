@@ -70,7 +70,7 @@ public class NumericConvertUtil {
      * @param base 指定的进制
      * @return
      */
-    private static long toDecimal1(String str, int base) {
+    private static long toDecimal(String str, int base) {
         char[] buf = new char[str.length()];
         str.getChars(0, str.length(), buf, 0);
         long num = 0;
@@ -85,7 +85,7 @@ public class NumericConvertUtil {
         return num;
     }
 
-    private static long toDecimal(String str, int base) {
+    private static long toDecimal1(String str, int base) {
         char[] buf = new char[str.length()];
         str.getChars(0, str.length(), buf, 0);
         long num = 0;
