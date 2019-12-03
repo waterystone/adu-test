@@ -1,8 +1,9 @@
 package com.adu.jdk.lang;
 
-import com.adu.BaseTest;
 import org.apache.commons.math3.util.ArithmeticUtils;
 import org.junit.Test;
+
+import com.adu.BaseTest;
 
 public class MathTest extends BaseTest {
 
@@ -58,7 +59,7 @@ public class MathTest extends BaseTest {
         double t3 = 0.79 - 0.21;
         double t4 = 0.5 + 0.08;
         double t5 = 0.2 + 0.38;
-        logger.info("t1={},t2={},t3={},t4={},t5={},t1==t4={}", t1, t2, t3, t4, t5,(t1==t4));
+        logger.info("t1={},t2={},t3={},t4={},t5={},t1==t4={}", t1, t2, t3, t4, t5, (t1 == t4));
 
         double s1 = 0.08;
         double s2 = 0.4 * 0.2;
@@ -81,7 +82,6 @@ public class MathTest extends BaseTest {
         long q2 = (long) q1;
         logger.info("p1={},q1={},p2={},q2={}", p1, q1, p2, q2);
 
-
         double base = 839299365868340224.0;
         double base1 = Math.pow(62L, 10);
         long base2 = ArithmeticUtils.pow(62L, 10);
@@ -103,5 +103,25 @@ public class MathTest extends BaseTest {
         long res2 = (long) (a + 3782.0);
 
         logger.info("res1={},res2={},res3={}", res1, res2, a + 3782.0);
+    }
+
+    @Test
+    public void test7() {
+        long base = 1934235789265640L;
+        for (long i = 0; i < 1000000000; i++) {
+            long a = base + i;
+            double b = a * 1.0;
+            long c = (long) (1 + b);
+
+            a += 1;
+            if (a != c) {
+                logger.info("[not_equals]i={},a={},b={},c={}", i, a, b, c);
+            }
+
+            if (i % 100000000 == 0) {
+                logger.info("[sometime]i={},a={},b={},c={}", i, a, b, c);
+            }
+
+        }
     }
 }

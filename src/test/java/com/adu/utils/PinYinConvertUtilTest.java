@@ -10,6 +10,13 @@ import com.adu.BaseTest;
  */
 public class PinYinConvertUtilTest extends BaseTest {
     @Test
+    public void toPingYin() {
+        char chineseChar = '你';
+        String res = PinYinConvertUtil.toPinYin(chineseChar);
+        logRes(res);
+    }
+
+    @Test
     public void toPingYins() {
         String chines = "你好";
         String res = PinYinConvertUtil.toPingYins(chines);

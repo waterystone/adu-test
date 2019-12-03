@@ -13,6 +13,8 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 /**
+ * 汉字转拼音工具
+ * 
  * @author duyunjie
  * @date 2019-12-03 11:09
  */
@@ -50,16 +52,8 @@ public class PinYinConvertUtil {
         StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < chines.length(); i++) {
-            char chineseChar = chines.charAt(i);
-            if (chineseChar > 128) {
-                try {
-                    builder.append(PinyinHelper.toHanyuPinyinStringArray(chineseChar, DEFAULT_FORMAT)[0].charAt(0));
-                } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    logger.error("[ERROR_getAlpha]chines={},chineseChar={}", chines, chineseChar, e);
-                }
-            } else {
-                builder.append(chineseChar);
-            }
+            String pinyin = toPinYin(chines.charAt(i));
+            builder.append(pinyin.charAt(0));
         }
 
         return builder.toString();
@@ -75,21 +69,32 @@ public class PinYinConvertUtil {
         if (Objects.isNull(chines)) {
             return null;
         }
-        StringBuilder builder = new StringBuilder();
 
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < chines.length(); i++) {
-            char chineseChar = chines.charAt(i);
-            if (String.valueOf(chineseChar).matches("[\\u4E00-\\u9FA5]")) {
-                try {
-                    builder.append(PinyinHelper.toHanyuPinyinStringArray(chineseChar, DEFAULT_FORMAT)[0]);
-                } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    logger.error("[ERROR_getAlpha]chines={},chineseChar={}", chines, chineseChar, e);
-                }
-            } else {
-                builder.append(chineseChar);
-            }
+            builder.append(toPinYin(chines.charAt(i)));
         }
 
         return builder.toString();
+    }
+
+    /**
+     * 将字符串中的中文转化为拼音,英文字符不变
+     * 
+     * @param chineseChar
+     * @return
+     */
+    public static String toPinYin(char chineseChar) {
+        if (!String.valueOf(chineseChar).matches("[\\u4E00-\\u9FA5]")) {
+            return String.valueOf(chineseChar);
+        }
+
+        try {
+            return PinyinHelper.toHanyuPinyinStringArray(chineseChar, DEFAULT_FORMAT)[0];
+        } catch (BadHanyuPinyinOutputFormatCombination e) {
+            logger.error("[ERROR_toPinyin]chineseChar={}", chineseChar, e);
+
+            throw new IllegalArgumentException(String.format("非法字符[%s]", chineseChar));
+        }
     }
 }
