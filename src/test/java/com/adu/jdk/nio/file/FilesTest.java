@@ -11,11 +11,15 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class FilesTest {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+import com.adu.BaseTest;
+
+public class FilesTest extends BaseTest {
+    @Test
+    public void exists() {
+        boolean res = Files.exists(Paths.get("/opt/system.env"));
+        logRes(res);
+    }
 
     @Test
     public void isDirectory() {
