@@ -76,7 +76,7 @@
     </Appenders>
 
     <Loggers>
-        <logger name="com.adu.HelloTest" level="DEBUG" />
+        <logger name="com.adu" level="DEBUG" />
         <!--    asyncRoot    -->
         <Root level="INFO" includeLocation="true">
             <AppenderRef ref="CONSOLE" />

@@ -10,13 +10,13 @@ import org.junit.Test;
 public class VersionUtilTest extends BaseTest {
     @Test
     public void compareVersion() {
-        int res = VersionUtil.compareVersion("guava-23.0.jar", "guava-27.0.1-jre.jar");
+        int res = VersionUtil.compareVersion("guava-12.3.5-SN.jar", "guava-27.0.1.jar");
         logRes(res);
     }
 
     @Test
     public void extractVersion() {
-        String fullJarName = "guava-27.0.1-jre.jar";
+        String fullJarName = "guava-23.1.jar";
         String res = VersionUtil.extractVersion(fullJarName);
         logRes(res);
     }

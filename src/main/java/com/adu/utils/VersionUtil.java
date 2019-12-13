@@ -39,11 +39,11 @@ public class VersionUtil {
         }
 
         logger.debug("op=end_compareVersion,jarName1={},jarName2={},version1={},version2={},res={}", jarName1, jarName2, version1, version2, res);
-        return 0;
+        return res;
     }
 
     //要求jar名称必须是*-x.y.z(.|-)*的形式，x、y、z代表任意数字，且可以有多个。如abc-1.jar、abc-1.2.jar、abc-1.2.3.jar、abc-1.2.3.4.jar、abc-1.2.3-jre.jar.
-    private static final String VERSION_REGEX = "-((\\d+.)+\\d)(\\.|-)";
+    private static final String VERSION_REGEX = "-((\\d+.)*\\d+)(\\.|-)";
     private static Pattern VERSION_PATTERN = Pattern.compile(VERSION_REGEX);
 
     /**
@@ -58,7 +58,7 @@ public class VersionUtil {
             return matcher.group(1);
         }
 
-        logger.error("[ERROR_extractVersion_illegal_param]fullJarName={}", jarName);
-        throw new IllegalArgumentException(String.format("非法参数[%s]，无法提取版本，请检查！", jarName));
+        logger.error("[ERROR_extractVersion_illegal_param]jarName={}", jarName);
+        throw new IllegalArgumentException(String.format("非法参数[%s]，无法用正则表达式\"%s\"提取版本，请检查！", jarName, VERSION_PATTERN));
     }
 }
