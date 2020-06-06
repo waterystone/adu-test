@@ -11,6 +11,15 @@ import com.adu.BaseTest;
 import com.adu.api.common.Stringfy;
 
 public class MapTest extends BaseTest {
+    @Test
+    public void resize() {
+        Map<Integer, String> map = new HashMap<>(1000);
+        for (int i = 1; i <= 1000; i++) {
+            map.put(i, String.valueOf(i));
+        }
+
+        logger.info("op=end_resize");
+    }
 
     @Test
     public void traverse() {
