@@ -2,7 +2,9 @@ package com.adu.alibaba.fastjson;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import com.google.gson.internal.LinkedTreeMap;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -77,4 +79,14 @@ public class JsonObjectTest {
 		logger.debug("res={}", res);
 	}
 
+    @Test
+    public void gson2fastJson() {
+        Map<Integer, String> map = new LinkedTreeMap<>();
+        map.put(1, "a");
+        map.put(2, "b");
+        map.put(3, "c");
+
+        JSONObject res = (JSONObject) ((Object) map);
+        logger.info("op=end_gson2fastJson,res={}", res);
+    }
 }
