@@ -42,5 +42,18 @@ public class IntegerTest {
 		Integer int1 = Integer.valueOf(-129);
 		Integer int2 = Integer.valueOf(-129);
 		logger.debug("res={}", int1 == int2);
+
+		Integer int3 = Integer.valueOf(-128);
+		Integer int4 = Integer.valueOf(-128);
+		logger.debug("res={}", int3 == int4);
+
+		Integer int5 = Integer.valueOf(127);
+		Integer int6 = Integer.valueOf(127);
+		logger.debug("res={}", int5 == int6);
+
+
+		Integer int7 = Integer.valueOf(128);
+		Integer int8 = Integer.valueOf(128);
+		logger.debug("res={}", int7 == int8);
 	}
 }

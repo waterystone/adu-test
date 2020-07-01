@@ -3,13 +3,11 @@ package com.adu.jdk.lang;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-public class StringTest {
+import com.adu.BaseTest;
 
-    private final Log logger = LogFactory.getLog(StringTest.class);
+public class StringTest extends BaseTest {
 
     @Test
     public void test() {
@@ -25,6 +23,25 @@ public class StringTest {
         logger.debug(Integer.toHexString(System.identityHashCode(str3)));
     }
 
+    @Test
+    public void test1() {
+        String str1 = "ab";
+        String str2 = "ab";
+        logger.info("(str1==str2)={},str1.hashCode={},str2.hashCode={}", (str1 == str2), str1.hashCode(),
+                str2.hashCode());
+
+        String str3 = "ab";
+        String str4 = "a" + "b";
+        logger.info("(str3==str4)={},str3.hashCode={},str4.hashCode={}", (str3 == str4), str3.hashCode(),
+                str4.hashCode());
+
+        String a = "a", b = "b";
+        String str5 = "ab";
+        String str6 = a + b;
+        logger.info("(str5==str6)={},str5.hashCode={},str6.hashCode={}", (str5 == str6), str5.hashCode(),
+                str6.hashCode());
+    }
+
     /**
      * https://blog.csdn.net/lonely_fireworks/article/details/7962171/
      */
@@ -37,13 +54,13 @@ public class StringTest {
     @Test
     public void equals() {
         String str = "1";
-        logger.debug(str.equals("1"));
+        logger.debug("{}", str.equals("1"));
     }
 
     @Test
     public void startsWith() {
         String str = "视频：少女醉酒打车遭司机性侵 醒来不见内裤";
-        logger.debug(str.startsWith("视频："));
+        logger.debug("{}", str.startsWith("视频："));
         logger.debug(str.substring(3));
     }
 
@@ -52,7 +69,7 @@ public class StringTest {
         String str = "yunjie_test";
         String regex = "(sh600|sh601|sz000|sz300|sz002|sz112)\\d{3}";
         regex = "[A-Za-z]+[A-Za-z0-9_]{0,99}";
-        logger.debug(str.matches(regex));
+        logger.debug("{}", str.matches(regex));
     }
 
     @Test
