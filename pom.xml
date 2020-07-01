@@ -22,7 +22,7 @@
         <junit.version>4.11</junit.version>
 
         <slf4j.version>1.7.26</slf4j.version>
-        <log4j.version>2.11.2</log4j.version>
+        <log4j.version>2.13.3</log4j.version>
         <disruptor.version>3.4.2</disruptor.version>
 
         <lucene.version>7.1.0</lucene.version>
