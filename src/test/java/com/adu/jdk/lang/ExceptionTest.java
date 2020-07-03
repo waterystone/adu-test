@@ -20,7 +20,7 @@ public class ExceptionTest extends BaseTest {
 
     public int fun() {
         try {
-            int res = 1 / 0;
+            int res = 1 / 2;
             return res;
         } catch (Exception e) {
             logger.info("[ERROR-exception]", e);

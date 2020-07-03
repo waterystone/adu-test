@@ -27,19 +27,16 @@ public class StringTest extends BaseTest {
     public void test1() {
         String str1 = "ab";
         String str2 = "ab";
-        logger.info("(str1==str2)={},str1.hashCode={},str2.hashCode={}", (str1 == str2), str1.hashCode(),
-                str2.hashCode());
+        logger.info("(str1==str2)={}", str1 == str2);
 
         String str3 = "ab";
         String str4 = "a" + "b";
-        logger.info("(str3==str4)={},str3.hashCode={},str4.hashCode={}", (str3 == str4), str3.hashCode(),
-                str4.hashCode());
+        logger.info("(str3==str4)={}", str3 == str4);
 
         String a = "a", b = "b";
         String str5 = "ab";
         String str6 = a + b;
-        logger.info("(str5==str6)={},str5.hashCode={},str6.hashCode={}", (str5 == str6), str5.hashCode(),
-                str6.hashCode());
+        logger.info("(str5==str6)={}", str5 == str6);
     }
 
     /**
