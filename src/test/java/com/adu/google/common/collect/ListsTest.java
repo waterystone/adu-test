@@ -11,16 +11,20 @@ import com.adu.model.Person;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
-/**
- * Created by yunjie.du on 2015/7/9.
- */
+/** 
+ *
+ * 
+ * @author duyunjie
+ * @date 2020-07-06 19:38:17
+*/
 public class ListsTest {
 
     private List<String> list;
+    
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
-    public void newArrayList() {
+    public void newArrayList(int a,int b) {
         logger.debug("list={}", list);
     }
 

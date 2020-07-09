@@ -1,7 +1,8 @@
 package com.adu.other;
 
-import com.adu.BaseTest;
 import org.junit.Test;
+
+import com.adu.BaseTest;
 
 /**
  * @author duyunjie
@@ -10,14 +11,21 @@ import org.junit.Test;
 public class TryTest extends BaseTest {
     @Test
     public void test() {
+        int res = fun();
+        logger.info("op=end_test,res={}", res);
+    }
+
+    public int fun() {
         try {
-            try {
-                int i = 1 / 0;
-            } finally {
-                logger.info("finnally");
-            }
-        } catch (Throwable t) {
-            logger.error("[ERROR_test]", t);
+            int res = 1 / 0;
+            return res;
+        } catch (Exception e) {
+            logger.info("[ERROR-exception]", e);
+            return 1;
+        } finally {
+            logger.info("finally");
+            return 2;
         }
     }
+
 }
