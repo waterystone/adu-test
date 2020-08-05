@@ -28,6 +28,7 @@
         <lucene.version>7.1.0</lucene.version>
 
         <hystrix-version>1.5.13</hystrix-version>
+        <jmh.version>1.23</jmh.version>
     </properties>
 
     <dependencies>
@@ -531,6 +532,19 @@
             <artifactId>gson</artifactId>
             <version>2.8.0</version>
         </dependency>
+
+        <!-- JMH-->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
