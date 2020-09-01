@@ -3,6 +3,8 @@ package com.adu.net.coobird.thumbnailator;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
@@ -21,7 +23,7 @@ import net.coobird.thumbnailator.geometry.Positions;
 public class ThumbnailsTest extends BaseTest {
     private InputStream PICTURE_INPUT_STREAM;
     private BufferedImage WATERMARK_IMAGE;
-    private String OUT_FILE_PATH = "/Users/yunjie.du/Desktop/pic/thumbnail";
+    private String OUT_FILE_PATH = "/Users/yunjie.du/Desktop/pic/ttt";
 
     /**
      * 尺寸百分比，宽和高同比缩放
@@ -30,7 +32,8 @@ public class ThumbnailsTest extends BaseTest {
      */
     @Test
     public void scale() throws IOException {
-        Thumbnails.of(PICTURE_INPUT_STREAM).scale(1).outputFormat("jpg").toFile(OUT_FILE_PATH);
+        // Thumbnails.of(PICTURE_INPUT_STREAM).scale(1).outputFormat("jpg").toFile(OUT_FILE_PATH);
+        Thumbnails.of(PICTURE_INPUT_STREAM).scale(1).imageType(BufferedImage.TYPE_INT_ARGB).toFile(OUT_FILE_PATH);
     }
 
     /**
@@ -86,7 +89,8 @@ public class ThumbnailsTest extends BaseTest {
 
     @Before
     public void init() throws IOException {
-        PICTURE_INPUT_STREAM = this.getClass().getClassLoader().getResourceAsStream("picture/original.jpg");
+        // PICTURE_INPUT_STREAM = this.getClass().getClassLoader().getResourceAsStream("picture/original.jpg");
+        PICTURE_INPUT_STREAM = Files.newInputStream(Paths.get("/Users/yunjie.du/Desktop/pic/test.png"));
         WATERMARK_IMAGE = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("picture/watermark.png"));
     }
 }
