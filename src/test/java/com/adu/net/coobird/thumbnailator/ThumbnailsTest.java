@@ -33,7 +33,7 @@ public class ThumbnailsTest extends BaseTest {
     @Test
     public void scale() throws IOException {
         // Thumbnails.of(PICTURE_INPUT_STREAM).scale(1).outputFormat("jpg").toFile(OUT_FILE_PATH);
-        Thumbnails.of(PICTURE_INPUT_STREAM).scale(1).imageType(BufferedImage.TYPE_INT_ARGB).toFile(OUT_FILE_PATH);
+        Thumbnails.of(PICTURE_INPUT_STREAM).scale(0.1).imageType(BufferedImage.TYPE_INT_ARGB).toFile(OUT_FILE_PATH);
     }
 
     /**
