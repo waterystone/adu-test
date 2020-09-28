@@ -1,7 +1,9 @@
 package com.adu.utils;
 
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.UnknownHostException;
+import java.util.Enumeration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,20 +19,27 @@ public class IpUtil {
 	private static Log logger = LogFactory.getLog(IpUtil.class);
 
 	/**
-	 * 根据本地ip.linux环境下注意在/etc/hosts下设置x.x.x.x hostname(与hostname命令结果一致)。
+	 * 获取本地ip
 	 * 
-	 * @param areaId
 	 * @return
 	 */
 	public static String getLocalIp() {
-		String res = null;
 		try {
-			res = InetAddress.getLocalHost().getHostAddress();
-		} catch (UnknownHostException e) {
-			logger.error("[ERROR-getLocalIp]", e);
-			throw new RuntimeException("[ERROR-getLocalIp]", e);
+			Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+			while (interfaces.hasMoreElements()) {
+				NetworkInterface networkInterface = interfaces.nextElement();
+				Enumeration addresses = networkInterface.getInetAddresses();
+				while (addresses.hasMoreElements()) {
+					InetAddress address = (InetAddress) addresses.nextElement();
+					if (!address.isLoopbackAddress() && address.getHostAddress().indexOf(":") == -1) {
+						return address.getHostAddress();
+					}
+				}
+			}
+		} catch (Exception e) {
+			logger.error("[ERROR_getLocalIp]", e);
 		}
 
-		return res;
+		return null;
 	}
 }
