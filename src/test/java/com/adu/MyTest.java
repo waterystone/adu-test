@@ -1,25 +1,20 @@
 package com.adu;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.concurrent.TimeUnit;
 
-public class MyTest {
-    private static final Logger logger = LoggerFactory.getLogger(MyTest.class);
+import org.junit.Test;
 
-    public synchronized void t1() {
-        logger.info("op=start_t1");
-    }
+import com.google.common.util.concurrent.Uninterruptibles;
 
-    public static synchronized void t2() {
-        logger.info("op=start_t2");
+public class MyTest extends BaseTest {
 
-    }
-
-    public synchronized void t3() {
-        synchronized (this) {
-            logger.info("op=start_t3");
+    @Test
+    public void log() {
+        boolean flag = true;
+        long i = 0;
+        while (flag) {
+            logger.info("i={}", i++);
+            Uninterruptibles.sleepUninterruptibly(5, TimeUnit.SECONDS);
         }
-
     }
-
 }

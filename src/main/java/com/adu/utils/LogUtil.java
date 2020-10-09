@@ -39,12 +39,14 @@ public class LogUtil {
                     .withConfiguration(config).withPattern("%d{yyyy-MM-dd HH:mm:ss.SSS} %t %p %c{1.}:%L - %m%n")
                     .build();
 
-            final TriggeringPolicy policy = TimeBasedTriggeringPolicy.newBuilder().withModulate(true).withInterval(1)
-                    .build();
-            appender = RollingRandomAccessFileAppender.newBuilder().withName(appenderName).withImmediateFlush(true)
-                    .withFileName("/opt/log/adu-test/custom.log")
-                    .withFilePattern("/opt/log/adu-test/custom.log.%d{yyyy-MM-dd}").withLayout(layout)
-                    .withPolicy(policy).build();
+            final TriggeringPolicy policy = TimeBasedTriggeringPolicy.createPolicy("1","true");
+            appender = RollingRandomAccessFileAppender.createAppender("/opt/log/adu-test/custom.log",
+                    "/opt/log/adu-test/custom.log.%d{yyyy-MM-dd}", null, appenderName, "true", null, policy, null,
+                    layout, null, null, null, null, null);
+//            appender = RollingRandomAccessFileAppender.newBuilder().withName(appenderName).withImmediateFlush(true)
+//                    .withFileName("/opt/log/adu-test/custom.log")
+//                    .withFilePattern("/opt/log/adu-test/custom.log.%d{yyyy-MM-dd}").withLayout(layout)
+//                    .withPolicy(policy).build();
             appender.start();
             config.addAppender(appender);
         }
