@@ -550,6 +550,13 @@
             <artifactId>metrics-core</artifactId>
             <version>4.1.14</version>
         </dependency>
+
+        <!-- hessian-->
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>4.0.63</version>
+        </dependency>
     </dependencies>
 
     <build>
